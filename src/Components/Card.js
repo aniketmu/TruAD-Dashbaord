@@ -9,17 +9,20 @@ function MCard({Name, Duration, Category, NOE, Seasons, RD, AdClips}) {
       {Array.from({ length: 8 }).map((_, idx) => (
         <Col key={idx}>
           <Card>
-            <Card.Img variant="top" src="$" />
+            <Card.Img variant="top" src="https://cdn.gro.care/e38cd1828c95_1683380516526.jpeg"
+            style={{ height: '160px' }}
+            />
             <Card.Body>
-              <Card.Title>Movie Name: {Name}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">Duration: {Duration}</Card.Subtitle>
-              <Card.Text>
-              Genre: {Category.map((cat) => cat + ", ")}<br/>
+              <Card.Title className='fs-4'>{Name}</Card.Title>
+              <Card.Subtitle className="mt-1 fw-light text-start ps-2">{Duration}</Card.Subtitle>
+              <Card.Text className='text-start my-1 p-2 fw-normal'>
+              {Category.map((cat) => cat + ", ")}<br/>
               No of Episode : {NOE}<br/> 
-              Available Ad Clips: {AdClips}
+              Available Clips: {AdClips || 0}<br/>
+              Season: {Seasons}  
               </Card.Text>
-              <footer className="footer">
-              Season {Seasons}<cite title="Source Title"><br/>Release Date {RD}</cite>
+              <footer className="footer text-start">
+              <cite title="Source Title" >Release Date: {RD}</cite>
           </footer>
             </Card.Body>
           </Card>

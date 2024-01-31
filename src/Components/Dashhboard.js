@@ -245,7 +245,7 @@ const Dashhboard = () => {
   };
 
   return (
-    <div style={{width:"80%", height: "100vh"}}>
+    <div style={{ width: "80%", height: "100vh" }}>
       <div
         style={{
           display: "flex",
@@ -257,7 +257,11 @@ const Dashhboard = () => {
           paddingLeft: "50px",
         }}
       >
-        <img src={menu} style={{ height: "40px", width: "40px" }} alt="menu-btn"/>
+        <img
+          src={menu}
+          style={{ height: "40px", width: "40px" }}
+          alt="menu-btn"
+        />
       </div>
 
       <div
@@ -280,7 +284,11 @@ const Dashhboard = () => {
         </div>
         <div className={styles.dashboard}>
           <div className={styles.resource}>
-            <img src={menu} style={{ height: "20px", width: "20px" }} alt="menu-btn"/>
+            <img
+              src={menu}
+              style={{ height: "20px", width: "20px" }}
+              alt="menu-btn"
+            />
             <h4 style={{ margin: "0px" }}>Resource</h4>
           </div>
           <div className={styles.dropdowns}>
@@ -335,7 +343,16 @@ const Dashhboard = () => {
           </div>
           <div>
             {media.map((media) => {
-              return <MCard Name={media.Name} Category={media.Category} Duration={media.Duration} NOE={media[`No of Episodes`]} Seasons={media.Season} RD={media["Release Date"]}/>;
+              return (
+                <MCard
+                  Name={media.Name}
+                  Category={media.Category}
+                  Duration={media.Duration}
+                  NOE={media[`No of Episodes`]}
+                  Seasons={media.Season}
+                  RD={media["Release Date"]}
+                />
+              );
             })}
           </div>
         </div>
