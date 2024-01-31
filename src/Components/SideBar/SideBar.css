@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+}  
+.sidebarContainer {
+    width: 20%;
+    height: 100vh;
+    background-color: black;
+    color: white;
+  }
+  .headingContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   height: 60px;
+    /* margin-bottom: 5px; */
+    background-color: rgb(64, 60, 60);
+
+  }
+  
+  .heading {
+    /* background-color: rgb(72, 68, 68); */
+   text-align: center;
+    
+  }
+
+  .buttonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    cursor: pointer;
+  }
+  .buttonContainer:hover{
+    background-color: aqua;
+  }
