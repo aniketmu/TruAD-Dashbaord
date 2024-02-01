@@ -1,0 +1,46 @@
+/* Auth.css */
+.auth-container {
+    width: 50%;
+    /* max-width: 400px; */
+    margin: 50px auto;
+    padding: 20px;
+    border: 0.5px solid #2c2b2b;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgb(0, 0, 0);
+  }
+  
+  form {
+    
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 5px;
+  }
+  
+  input {
+    margin-bottom: 15px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  button {
+    padding: 10px;
+    /* background-image: linear-gradient();
+    background-color: #007bff; */
+    background: rgb(19, 15, 99);
+background: linear-gradient(90deg, rgb(25, 18, 160) 0%, rgb(40, 40, 121) 37%, rgb(21, 123, 143) 100%);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
