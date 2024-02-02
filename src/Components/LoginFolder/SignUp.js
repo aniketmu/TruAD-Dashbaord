@@ -18,7 +18,7 @@ function SignUp({ handleSwichPage }) {
 
         <div className="auth-container">
             <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-            <img src={logo} alt="" style={{width:"80px",height:"80px" , borderRadius:"50%", border:"1px solid white"}} />
+            <img src={logo} alt="" style={{width:"80px",height:"80px" , borderRadius:"50%"}} />
             </div>
             <h2 style={{textAlign:"center"}}>SIGN UP</h2>
             <form>
@@ -32,7 +32,7 @@ function SignUp({ handleSwichPage }) {
                 <label>Password:</label>
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
-                <button type="button" onClick={handleSignup}>Sign Up</button>
+                <button type="button" onClick={handleSignup} style={{marginTop:"20px", borderRadius:"5px"}}>Sign Up</button>
                 <span onClick={handleSwichPage} style={{margin:"20px 0" ,cursor:"pointer"}}>Already Have an Account</span>
             </form>
         </div>
