@@ -6,11 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 export default function SignIn({ handleSwichPage }) {
-  const [cookies, setCookie] = useCookies(["user"])
+  const [cookies, setCookie] = useCookies(["user"]);
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
 
   const handleLogin = async () => {
     try {
@@ -21,21 +21,22 @@ export default function SignIn({ handleSwichPage }) {
           'Content-Type': 'application/json',
         },
       });
+
       if (response.status === 401) {
-        return setError("Invalid Password")
+        return setError("Invalid Password");
       }
 
       if(response.status === 404){
-        return setError("User not found")
+        return setError("User not found");
       }
 
       if(response.status === 200){
         const data = await response.json();
         // Cookies.set("token", data.token, {
-        //     secure: true,
-        //     sameSite: "strict",
-        //     httpOnly: true,
-        //   });
+        //   secure: true,
+        //   sameSite: "strict",
+        //   httpOnly: true,
+        // });
         setCookie("user", data.token);
         navigate('/dashboard');
       }
@@ -43,7 +44,6 @@ export default function SignIn({ handleSwichPage }) {
       console.log(error);
     }
   };
-
 
   return (
     <div className="auth-container">
@@ -62,7 +62,7 @@ export default function SignIn({ handleSwichPage }) {
         <label>Password:</label>
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
-        <button type="button" onClick={handleLogin}>
+        <button type="button" onClick={handleLogin} style={{ marginTop: "20px", borderRadius: "5px" }}>
           Login
         </button>
         {error && <p style={{ color: 'red' }}>{error}</p>}

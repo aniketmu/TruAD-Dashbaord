@@ -51,7 +51,10 @@ function SignUp({ handleSwichPage, setPopUp }) {
   
     return (
       <div className="auth-container">
-        {/* ... (logo and title) */}
+         <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+           <img src={logo} alt="" style={{width:"80px",height:"80px" , borderRadius:"50%"}} />
+           </div>
+           <h2 style={{textAlign:"center"}}>SIGN UP</h2>
         <form>
           <label>Name:</label>
           <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
@@ -62,7 +65,7 @@ function SignUp({ handleSwichPage, setPopUp }) {
           <label>Password:</label>
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
   
-          <button type="button" onClick={handleSignup}>
+          <button type="button" onClick={handleSignup} style={{marginTop:"20px", borderRadius:"5px"}}>
             Sign Up
           </button>
           {error && <p style={{ color: 'red' }}>{error}</p>}
