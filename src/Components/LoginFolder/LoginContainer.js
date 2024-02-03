@@ -1,16 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import PopUp from "./Popup";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import logo from '../img/logo.png'
+import { useNavigate } from 'react-router-dom'
+import { CookiesProvider, useCookies } from "react-cookie";
+import './Checkout.css'
 
 function LoginContainer() {
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [popUp, setPopUp] = useState(false)
+  const navigate = useNavigate();
   const [toggle, setToggle] = useState(true);
   const handleSwichPage = () => {
     setToggle(!toggle);
   };
-  return (
-    <div style={{ display: "flex", width: "100%", height: "100vh", }}>
 
+  const duringPopUp = popUp ? " during-popup" : ""
+
+  useEffect(() => {
+    if(cookies.user){
+      navigate('/dashboard')
+    }
+    // removeCookie("user", {path:'/'})
+  }, [cookies])
+  
+  return (
+    <div style={{ display: "flex", width: "100%", height: "100vh", }} className={"Checkout" + duringPopUp}>
+      {popUp && <PopUp setPopUp={setPopUp}/>}
       <div style={{ width: "40%", backgroundColor: "black", display: "flex", justifyContent: "center", alignItems: "center"  }}>
         <div
           style={{
@@ -58,7 +75,7 @@ function LoginContainer() {
         {toggle ? (
           <SignIn handleSwichPage={handleSwichPage} toggle={handleSwichPage} />
         ) : (
-          <SignUp handleSwichPage={handleSwichPage} toggle={handleSwichPage} />
+          <SignUp handleSwichPage={handleSwichPage} toggle={handleSwichPage} setPopUp={setPopUp}/>
         )}
       </div>
     </div>
