@@ -11,9 +11,8 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <LoginContainer />,
-    
   },
-  
+
   {
     path: "/dashboard",
     element: <DashBoardContainer />,
@@ -65,7 +64,7 @@ const router = createBrowserRouter([
 function App() {
   
   return (
-<RouterProvider router={router}></RouterProvider>
+    <RouterProvider router={router}></RouterProvider>
   );
 }
 
