@@ -3,13 +3,13 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 
-function MCard({Name, Duration, Category, NOE, Seasons, RD, AdClips}) {
+function MCard({Name, Duration, Category, NOE, Seasons, RD, AdClips, Poster}) {
   return (
     <Row xs={1} md={4} className="g-4 p-4">
       {Array.from({ length: 8 }).map((_, idx) => (
         <Col key={idx}>
           <Card>
-            <Card.Img variant="top" src="https://cdn.gro.care/e38cd1828c95_1683380516526.jpeg"
+            <Card.Img variant="top" src={Poster}
             style={{ height: '160px' }}
             />
             <Card.Body>

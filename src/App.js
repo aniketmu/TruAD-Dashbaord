@@ -7,14 +7,13 @@ import LoginContainer from '../src/Components/LoginFolder/LoginContainer'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 
-
-
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LoginContainer />,
     
   },
+  
   {
     path: "/dashboard",
     element: <DashBoardContainer />,

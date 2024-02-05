@@ -13,6 +13,8 @@ const Dashhboard = () => {
     {
       Name: "Stranger Things",
       Type: "TV Show",
+      poster:
+        "https://media.themoviedb.org/t/p/w300_and_h450_bestv2/49WJfeN0moxb9IPfGn8AIqMGskD.jpg",
       Duration: "Varies",
       "Available Ad Clips": 8,
       Starring: ["Millie Bobby Brown", "Finn Wolfhard"],
@@ -25,6 +27,8 @@ const Dashhboard = () => {
     {
       Name: "Tanu Weds Manu",
       Type: "Movie",
+      poster:
+        "https://image.tmdb.org/t/p/original/cY1lEQu6sgofrKAVUigtXpOvZQZ.jpg",
       Duration: "3hr 21min",
       "Available Ad Clips": 5,
       Starring: ["Kangana Ranaut", "R Madhavan"],
@@ -37,6 +41,8 @@ const Dashhboard = () => {
     {
       Name: "Inception",
       Type: "Movie",
+      poster:
+        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg",
       Duration: "2hr 28min",
       "Available Ad Clips": 3,
       Starring: ["Leonardo DiCaprio", "Joseph Gordon-Levitt"],
@@ -49,6 +55,8 @@ const Dashhboard = () => {
     {
       Name: "The Crown",
       Type: "TV Show",
+      poster:
+        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/1DDE0Z2Y805rqfkEjPbZsMLyPwa.jpg",
       Duration: "Varies",
       "Available Ad Clips": 10,
       Starring: ["Claire Foy", "Matt Smith"],
@@ -61,6 +69,8 @@ const Dashhboard = () => {
     {
       Name: "The Dark Knight",
       Type: "Movie",
+      poster:
+        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
       Duration: "2hr 32min",
       "Available Ad Clips": 4,
       Starring: ["Christian Bale", "Heath Ledger"],
@@ -73,6 +83,8 @@ const Dashhboard = () => {
     {
       Name: "Friends",
       Type: "TV Show",
+      poster:
+        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/2koX1xLkpTQM4IZebYvKysFW1Nh.jpg",
       Duration: "Varies",
       "Available Ad Clips": 6,
       Starring: ["Jennifer Aniston", "Courteney Cox"],
@@ -85,6 +97,8 @@ const Dashhboard = () => {
     {
       Name: "The Shawshank Redemption",
       Type: "Movie",
+      poster:
+        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
       Duration: "2hr 22min",
       "Available Ad Clips": 3,
       Starring: ["Tim Robbins", "Morgan Freeman"],
@@ -97,6 +111,8 @@ const Dashhboard = () => {
     {
       Name: "Breaking Bad",
       Type: "TV Show",
+      poster:
+        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/ztkUQFLlC19CCMYHW9o1zWhJRNq.jpg",
       Duration: "Varies",
       "Available Ad Clips": 9,
       Starring: ["Bryan Cranston", "Aaron Paul"],
@@ -109,6 +125,8 @@ const Dashhboard = () => {
     {
       Name: "The Matrix",
       Type: "Movie",
+      poster:
+        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
       Duration: "2hr 16min",
       "Available Ad Clips": 4,
       Starring: ["Keanu Reeves", "Carrie-Anne Moss"],
@@ -351,6 +369,7 @@ const Dashhboard = () => {
                   NOE={media[`No of Episodes`]}
                   Seasons={media.Season}
                   RD={media["Release Date"]}
+                  Poster={media.poster}
                 />
               );
             })}
