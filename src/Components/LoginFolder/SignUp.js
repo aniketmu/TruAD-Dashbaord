@@ -45,7 +45,7 @@ function SignUp({ handleSwichPage, setPopUp }) {
     };
   
     function isValidEmail(email) {
-      const emailRegex = /^[^\s@]+@(?:(?!gmail\.com)[^\s@]+\.)?truad\.com$/;
+      const emailRegex = /^[^\s@]+@(?:(?!gmail\.com)[^\s@]+\.)?truad\.co$/;
       return emailRegex.test(email);
   }
   
