@@ -62,7 +62,7 @@ export default function SignIn({ handleSwichPage }) {
         <label>Password:</label>
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
-        <button type="button" onClick={handleLogin} style={{ marginTop: "20px", borderRadius: "5px" }}>
+        <button type="button" onClick={handleLogin}  style={{ marginTop: "20px", borderRadius: "5px" }}>
           Login
         </button>
         {error && <p style={{ color: 'red' }}>{error}</p>}
