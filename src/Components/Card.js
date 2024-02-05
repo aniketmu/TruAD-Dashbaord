@@ -79,13 +79,10 @@ function MCard({
         open={openDialog}
         PaperComponent={StyledPaper}
       >
+        
         <DialogTitle> {Name} </DialogTitle>
-        <div style={{ width: "100%", height: "100%" }}>
-          <video
-            controls
-            src="https://chatter-c-project.s3.ap-south-1.amazonaws.com/31.01.2024_14.33.24_REC.mp4"
-            style={{ width: "100%", height: "100%", objectFit: "contain" }}
-          />
+        <div style={{ width: "100%", height: "100%", display: "flex", justifyContent:"center" }}>
+        <iframe style={{ objectFit: "contain" }} width="800" height="400" src="https://www.youtube.com/embed/ermJ-iPg9xA?si=TvTA9sm4kr-fp3tz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
       </Dialog>
     </>
