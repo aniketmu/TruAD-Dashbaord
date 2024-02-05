@@ -16,7 +16,7 @@ function SignUp({ handleSwichPage, setPopUp }) {
   
       if (valid) {
         try {
-          const response = await fetch('https://truad-dashboard-backend.onrender.com/register', {
+          const response = await fetch('https://truad-dashboard-backend.onrender.com/api/register', {
             method: 'POST',
             body: JSON.stringify({ name, email, password }),
             headers: {
@@ -45,9 +45,9 @@ function SignUp({ handleSwichPage, setPopUp }) {
     };
   
     function isValidEmail(email) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailRegex.test(email) && !email.includes('gmail.com');
-    }
+      const emailRegex = /^[^\s@]+@(?:(?!gmail\.com)[^\s@]+\.)?truad\.com$/;
+      return emailRegex.test(email);
+  }
   
     return (
       <div className="auth-container">
