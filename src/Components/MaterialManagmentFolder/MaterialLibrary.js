@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Grid from '@mui/material/Grid';
 import MaterialMCard from './MaterialMCard'
 
+
 const arr = [1, 2, 3, 4, 5, 6, 7, 8];
-function MaterialLibrary() {
+function MaterialLibrary({data}) {
+    
     return (
         <>
             <div className='firstContainer '>
@@ -39,9 +41,9 @@ function MaterialLibrary() {
             {/* card render  */}
             <div style={{width:"99%",border:'1px solid red'}} >
             <Grid  container spacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                {arr.map((val) => {
+                {data.map((media) => {
                     return <Grid item xs={3}>
-                        <MaterialMCard />
+                        <MaterialMCard name={media.name} size={media.size} group={media.group} file={media.file || null}/>
                     </Grid>
                 })}
             </Grid>

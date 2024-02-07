@@ -8,24 +8,24 @@ import Typography from '@mui/material/Typography';
 
 
 
-export default function MaterialMCard() {
+export default function MaterialMCard({name, group, file, size}) {
     return (
         <Card sx={{ maxWidth: 300 }}>
             <CardMedia
                 component="img"
                 alt="green iguana"
                 height="140"
-                image="https://imgs.search.brave.com/S5rG7x8u-fRxY9zOQB3hYyMaZO1zD__77q-BBnV9-zU/rs:fit:500:0:0/g:ce/aHR0cHM6Ly93d3cu/cG1pbmRpYS5nb3Yu/aW4vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjIvMTIvTW9kaS1K/aS1QaG90by0wMi1l/MTY0NzMyNTkzNjgy/MS5qcGc"
+                image={file || "https://imgs.search.brave.com/S5rG7x8u-fRxY9zOQB3hYyMaZO1zD__77q-BBnV9-zU/rs:fit:500:0:0/g:ce/aHR0cHM6Ly93d3cu/cG1pbmRpYS5nb3Yu/aW4vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjIvMTIvTW9kaS1K/aS1QaG90by0wMi1l/MTY0NzMyNTkzNjgy/MS5qcGc"} 
             />
             <CardContent>
                 <Typography gutterBottom variant="body2" component="div">
-                    Material Name :
+                    Material Name : {name}
                 </Typography>
                 <Typography variant="body2" color="div">
-                    Material Group :
+                    Material Group : {group}
                 </Typography>
                 <Typography variant="body2" color="div">
-                    Material Size :
+                    Material Size : {size}
                 </Typography>
             </CardContent>
             <CardActions>

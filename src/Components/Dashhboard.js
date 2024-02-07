@@ -1,144 +1,285 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Dashboard.module.css";
 import menu from "../Assets/menu.png";
 import CustomButton from "./CustomButton";
 import MCard from "./Card";
-
+import DialogTitle from "@mui/material/DialogTitle";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/Dialog";
+import DialogActions from "@mui/material/Dialog";
+import Button from "@mui/material/Dialog";
+import Paper from "@mui/material/Paper";
 
 const Dashhboard = () => {
   const [selectedType, setSelectedType] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedCerti, setSelectedCerti] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const mediaArray = [
-    {
-      Name: "Stranger Things",
-      Type: "TV Show",
-      poster:
-        "https://media.themoviedb.org/t/p/w300_and_h450_bestv2/49WJfeN0moxb9IPfGn8AIqMGskD.jpg",
-      Duration: "Varies",
-      "Available Ad Clips": 8,
-      Starring: ["Millie Bobby Brown", "Finn Wolfhard"],
-      "Release Date": 2016,
-      "No of Episodes": 25,
-      Season: 3,
-      Category: ["Drama", "Fantasy", "Horror"],
-      Certification: "PG-13",
-    },
-    {
-      Name: "Tanu Weds Manu",
-      Type: "Movie",
-      poster:
-        "https://image.tmdb.org/t/p/original/cY1lEQu6sgofrKAVUigtXpOvZQZ.jpg",
-      Duration: "3hr 21min",
-      "Available Ad Clips": 5,
-      Starring: ["Kangana Ranaut", "R Madhavan"],
-      "Release Date": 2016,
-      "No of Episodes": "NA",
-      Season: "NA",
-      Category: ["Comedy", "Drama", "Romance"],
-      Certification: "S+",
-    },
-    {
-      Name: "Inception",
-      Type: "Movie",
-      poster:
-        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg",
-      Duration: "2hr 28min",
-      "Available Ad Clips": 3,
-      Starring: ["Leonardo DiCaprio", "Joseph Gordon-Levitt"],
-      "Release Date": 2010,
-      "No of Episodes": "NA",
-      Season: "NA",
-      Category: ["Action", "Adventure", "Sci-Fi"],
-      Certification: "PG-13",
-    },
-    {
-      Name: "The Crown",
-      Type: "TV Show",
-      poster:
-        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/1DDE0Z2Y805rqfkEjPbZsMLyPwa.jpg",
-      Duration: "Varies",
-      "Available Ad Clips": 10,
-      Starring: ["Claire Foy", "Matt Smith"],
-      "Release Date": 2016,
-      "No of Episodes": 40,
-      Season: 4,
-      Category: ["Biography", "Drama", "History"],
-      Certification: "TV-MA",
-    },
-    {
-      Name: "The Dark Knight",
-      Type: "Movie",
-      poster:
-        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
-      Duration: "2hr 32min",
-      "Available Ad Clips": 4,
-      Starring: ["Christian Bale", "Heath Ledger"],
-      "Release Date": 2008,
-      "No of Episodes": "NA",
-      Season: "NA",
-      Category: ["Action", "Crime", "Drama"],
-      Certification: "PG-13",
-    },
-    {
-      Name: "Friends",
-      Type: "TV Show",
-      poster:
-        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/2koX1xLkpTQM4IZebYvKysFW1Nh.jpg",
-      Duration: "Varies",
-      "Available Ad Clips": 6,
-      Starring: ["Jennifer Aniston", "Courteney Cox"],
-      "Release Date": 1994,
-      "No of Episodes": 236,
-      Season: 10,
-      Category: ["Comedy", "Romance"],
-      Certification: "TV-14",
-    },
-    {
-      Name: "The Shawshank Redemption",
-      Type: "Movie",
-      poster:
-        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
-      Duration: "2hr 22min",
-      "Available Ad Clips": 3,
-      Starring: ["Tim Robbins", "Morgan Freeman"],
-      "Release Date": 1994,
-      "No of Episodes": "NA",
-      Season: "NA",
-      Category: ["Drama"],
-      Certification: "R",
-    },
-    {
-      Name: "Breaking Bad",
-      Type: "TV Show",
-      poster:
-        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/ztkUQFLlC19CCMYHW9o1zWhJRNq.jpg",
-      Duration: "Varies",
-      "Available Ad Clips": 9,
-      Starring: ["Bryan Cranston", "Aaron Paul"],
-      "Release Date": 2008,
-      "No of Episodes": 62,
-      Season: 5,
-      Category: ["Crime", "Drama", "Thriller"],
-      Certification: "TV-MA",
-    },
-    {
-      Name: "The Matrix",
-      Type: "Movie",
-      poster:
-        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
-      Duration: "2hr 16min",
-      "Available Ad Clips": 4,
-      Starring: ["Keanu Reeves", "Carrie-Anne Moss"],
-      "Release Date": 1999,
-      "No of Episodes": "NA",
-      Season: "NA",
-      Category: ["Action", "Sci-Fi"],
-      Certification: "R",
-    },
-  ];
+  const [openDialog, handleDisplay] = useState(false);
+  const [add, setAdd] = useState({});
 
+  const [mediaArray, setMediaArray] = useState([{
+    Name: "Stranger Things",
+    Type: "TV Show",
+    poster:
+      "https://media.themoviedb.org/t/p/w300_and_h450_bestv2/49WJfeN0moxb9IPfGn8AIqMGskD.jpg",
+    Duration: "Varies",
+    "Available Ad Clips": 8,
+    Starring: ["Millie Bobby Brown", "Finn Wolfhard"],
+    "Release Date": 2016,
+    "No of Episodes": 25,
+    Season: 3,
+    Category: ["Drama", "Fantasy", "Horror"],
+    Certification: "PG-13",
+  },
+  {
+    Name: "Tanu Weds Manu",
+    Type: "Movie",
+    poster:
+      "https://image.tmdb.org/t/p/original/cY1lEQu6sgofrKAVUigtXpOvZQZ.jpg",
+    Duration: "3hr 21min",
+    "Available Ad Clips": 5,
+    Starring: ["Kangana Ranaut", "R Madhavan"],
+    "Release Date": 2016,
+    "No of Episodes": "NA",
+    Season: "NA",
+    Category: ["Comedy", "Drama", "Romance"],
+    Certification: "S+",
+  },
+  {
+    Name: "Inception",
+    Type: "Movie",
+    poster:
+      "https://image.tmdb.org/t/p/w600_and_h900_bestv2/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg",
+    Duration: "2hr 28min",
+    "Available Ad Clips": 3,
+    Starring: ["Leonardo DiCaprio", "Joseph Gordon-Levitt"],
+    "Release Date": 2010,
+    "No of Episodes": "NA",
+    Season: "NA",
+    Category: ["Action", "Adventure", "Sci-Fi"],
+    Certification: "PG-13",
+  },
+  {
+    Name: "The Crown",
+    Type: "TV Show",
+    poster:
+      "https://image.tmdb.org/t/p/w600_and_h900_bestv2/1DDE0Z2Y805rqfkEjPbZsMLyPwa.jpg",
+    Duration: "Varies",
+    "Available Ad Clips": 10,
+    Starring: ["Claire Foy", "Matt Smith"],
+    "Release Date": 2016,
+    "No of Episodes": 40,
+    Season: 4,
+    Category: ["Biography", "Drama", "History"],
+    Certification: "TV-MA",
+  },
+  {
+    Name: "The Dark Knight",
+    Type: "Movie",
+    poster:
+      "https://image.tmdb.org/t/p/w600_and_h900_bestv2/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+    Duration: "2hr 32min",
+    "Available Ad Clips": 4,
+    Starring: ["Christian Bale", "Heath Ledger"],
+    "Release Date": 2008,
+    "No of Episodes": "NA",
+    Season: "NA",
+    Category: ["Action", "Crime", "Drama"],
+    Certification: "PG-13",
+  },
+  {
+    Name: "Friends",
+    Type: "TV Show",
+    poster:
+      "https://image.tmdb.org/t/p/w600_and_h900_bestv2/2koX1xLkpTQM4IZebYvKysFW1Nh.jpg",
+    Duration: "Varies",
+    "Available Ad Clips": 6,
+    Starring: ["Jennifer Aniston", "Courteney Cox"],
+    "Release Date": 1994,
+    "No of Episodes": 236,
+    Season: 10,
+    Category: ["Comedy", "Romance"],
+    Certification: "TV-14",
+  },
+  {
+    Name: "The Shawshank Redemption",
+    Type: "Movie",
+    poster:
+      "https://image.tmdb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
+    Duration: "2hr 22min",
+    "Available Ad Clips": 3,
+    Starring: ["Tim Robbins", "Morgan Freeman"],
+    "Release Date": 1994,
+    "No of Episodes": "NA",
+    Season: "NA",
+    Category: ["Drama"],
+    Certification: "R",
+  },
+  {
+    Name: "Breaking Bad",
+    Type: "TV Show",
+    poster:
+      "https://image.tmdb.org/t/p/w600_and_h900_bestv2/ztkUQFLlC19CCMYHW9o1zWhJRNq.jpg",
+    Duration: "Varies",
+    "Available Ad Clips": 9,
+    Starring: ["Bryan Cranston", "Aaron Paul"],
+    "Release Date": 2008,
+    "No of Episodes": 62,
+    Season: 5,
+    Category: ["Crime", "Drama", "Thriller"],
+    Certification: "TV-MA",
+  },
+  {
+    Name: "The Matrix",
+    Type: "Movie",
+    poster:
+      "https://image.tmdb.org/t/p/w600_and_h900_bestv2/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
+    Duration: "2hr 16min",
+    "Available Ad Clips": 4,
+    Starring: ["Keanu Reeves", "Carrie-Anne Moss"],
+    "Release Date": 1999,
+    "No of Episodes": "NA",
+    Season: "NA",
+    Category: ["Action", "Sci-Fi"],
+    Certification: "R",
+  },])
+  // const mediaArray = [
+  //   {
+  //     Name: "Stranger Things",
+  //     Type: "TV Show",
+  //     poster:
+  //       "https://media.themoviedb.org/t/p/w300_and_h450_bestv2/49WJfeN0moxb9IPfGn8AIqMGskD.jpg",
+  //     Duration: "Varies",
+  //     "Available Ad Clips": 8,
+  //     Starring: ["Millie Bobby Brown", "Finn Wolfhard"],
+  //     "Release Date": 2016,
+  //     "No of Episodes": 25,
+  //     Season: 3,
+  //     Category: ["Drama", "Fantasy", "Horror"],
+  //     Certification: "PG-13",
+  //   },
+  //   {
+  //     Name: "Tanu Weds Manu",
+  //     Type: "Movie",
+  //     poster:
+  //       "https://image.tmdb.org/t/p/original/cY1lEQu6sgofrKAVUigtXpOvZQZ.jpg",
+  //     Duration: "3hr 21min",
+  //     "Available Ad Clips": 5,
+  //     Starring: ["Kangana Ranaut", "R Madhavan"],
+  //     "Release Date": 2016,
+  //     "No of Episodes": "NA",
+  //     Season: "NA",
+  //     Category: ["Comedy", "Drama", "Romance"],
+  //     Certification: "S+",
+  //   },
+  //   {
+  //     Name: "Inception",
+  //     Type: "Movie",
+  //     poster:
+  //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg",
+  //     Duration: "2hr 28min",
+  //     "Available Ad Clips": 3,
+  //     Starring: ["Leonardo DiCaprio", "Joseph Gordon-Levitt"],
+  //     "Release Date": 2010,
+  //     "No of Episodes": "NA",
+  //     Season: "NA",
+  //     Category: ["Action", "Adventure", "Sci-Fi"],
+  //     Certification: "PG-13",
+  //   },
+  //   {
+  //     Name: "The Crown",
+  //     Type: "TV Show",
+  //     poster:
+  //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/1DDE0Z2Y805rqfkEjPbZsMLyPwa.jpg",
+  //     Duration: "Varies",
+  //     "Available Ad Clips": 10,
+  //     Starring: ["Claire Foy", "Matt Smith"],
+  //     "Release Date": 2016,
+  //     "No of Episodes": 40,
+  //     Season: 4,
+  //     Category: ["Biography", "Drama", "History"],
+  //     Certification: "TV-MA",
+  //   },
+  //   {
+  //     Name: "The Dark Knight",
+  //     Type: "Movie",
+  //     poster:
+  //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+  //     Duration: "2hr 32min",
+  //     "Available Ad Clips": 4,
+  //     Starring: ["Christian Bale", "Heath Ledger"],
+  //     "Release Date": 2008,
+  //     "No of Episodes": "NA",
+  //     Season: "NA",
+  //     Category: ["Action", "Crime", "Drama"],
+  //     Certification: "PG-13",
+  //   },
+  //   {
+  //     Name: "Friends",
+  //     Type: "TV Show",
+  //     poster:
+  //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/2koX1xLkpTQM4IZebYvKysFW1Nh.jpg",
+  //     Duration: "Varies",
+  //     "Available Ad Clips": 6,
+  //     Starring: ["Jennifer Aniston", "Courteney Cox"],
+  //     "Release Date": 1994,
+  //     "No of Episodes": 236,
+  //     Season: 10,
+  //     Category: ["Comedy", "Romance"],
+  //     Certification: "TV-14",
+  //   },
+  //   {
+  //     Name: "The Shawshank Redemption",
+  //     Type: "Movie",
+  //     poster:
+  //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
+  //     Duration: "2hr 22min",
+  //     "Available Ad Clips": 3,
+  //     Starring: ["Tim Robbins", "Morgan Freeman"],
+  //     "Release Date": 1994,
+  //     "No of Episodes": "NA",
+  //     Season: "NA",
+  //     Category: ["Drama"],
+  //     Certification: "R",
+  //   },
+  //   {
+  //     Name: "Breaking Bad",
+  //     Type: "TV Show",
+  //     poster:
+  //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/ztkUQFLlC19CCMYHW9o1zWhJRNq.jpg",
+  //     Duration: "Varies",
+  //     "Available Ad Clips": 9,
+  //     Starring: ["Bryan Cranston", "Aaron Paul"],
+  //     "Release Date": 2008,
+  //     "No of Episodes": 62,
+  //     Season: 5,
+  //     Category: ["Crime", "Drama", "Thriller"],
+  //     Certification: "TV-MA",
+  //   },
+  //   {
+  //     Name: "The Matrix",
+  //     Type: "Movie",
+  //     poster:
+  //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
+  //     Duration: "2hr 16min",
+  //     "Available Ad Clips": 4,
+  //     Starring: ["Keanu Reeves", "Carrie-Anne Moss"],
+  //     "Release Date": 1999,
+  //     "No of Episodes": "NA",
+  //     Season: "NA",
+  //     Category: ["Action", "Sci-Fi"],
+  //     Certification: "R",
+  //   },
+  // ];
+
+  const handleClose = () => {
+    handleDisplay(false);
+  };
+
+  const openDialogBox = () => {
+    handleDisplay(true);
+  };
   const typeOptions = ["All", "TV Show", "Movie"];
 
   const categories = [];
@@ -181,6 +322,11 @@ const Dashhboard = () => {
       setSelectedCerti("");
     }
   };
+
+  useEffect(() => {
+
+  }, [mediaArray])
+  
 
   const handleCategorySelect = (option) => {
     setSelectedCategory(option);
@@ -263,6 +409,34 @@ const Dashhboard = () => {
     setSearchTerm("");
   };
 
+  const handleAddChange = (e) => {
+      setAdd((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+  
+  const handleAdd = () => {
+    console.log(add)
+    const newMedia = {
+      Name: add.mediaName,
+      Type: add.mediaType || "TV",
+      poster: add.posterUrl,
+      Duration: `${add.hours} hrs ${add.minutes} minutes`,
+      "Available Ad Clips": 8,
+      Starring: [add.star1, add.star2],
+      "Release Date": add.releaseDate,
+      "No of Episodes": add.noOfEpisodes || "NA",
+      Season: add.seasons || "NA",
+      Category: [add.category1, add.category2, add.category3],
+      Certification: add.certification,
+    };
+    console.log(newMedia);
+
+    setMediaArray((prev) => [...prev, newMedia])
+    
+    setMedia((prev) => [...prev, newMedia])
+    
+    handleClose()
+  };
+
   return (
     <div style={{ width: "80%", height: "100vh" }}>
       <div
@@ -303,12 +477,15 @@ const Dashhboard = () => {
         </div>
         <div className={styles.dashboard}>
           <div className={styles.resource}>
-            <img
-              src={menu}
-              style={{ height: "20px", width: "20px" }}
-              alt="menu-btn"
-            />
-            <h4 style={{ margin: "0px" }}>Resource</h4>
+            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+              <img
+                src={menu}
+                style={{ height: "20px", width: "20px" }}
+                alt="menu-btn"
+              />
+              <h4 style={{ margin: "0px" }}>Resource</h4>
+            </div>
+            <button onClick={openDialogBox}>Add</button>
           </div>
           <div className={styles.dropdowns}>
             <div className={styles.dropdown}>
@@ -371,14 +548,161 @@ const Dashhboard = () => {
                   Seasons={media.Season}
                   RD={media["Release Date"]}
                   Poster={media.poster}
+                  key={media.Name}
                 />
               );
             })}
           </div>
         </div>
       </div>
+      <Dialog
+        onClose={handleClose}
+        open={openDialog}
+        PaperComponent={StyledPaper}
+      >
+        <DialogTitle>Title</DialogTitle>
+
+        <form>
+          <div style={{ marginBottom: "1rem" }}>
+            <label htmlFor="mediaName">Media Name:</label>
+            <input
+              onChange={(e) => handleAddChange(e)}
+              id="mediaName"
+              type="text"
+              placeholder="Enter Media Name"
+            />
+          </div>
+          <div style={{ marginBottom: "1rem" }}>
+            <label htmlFor="mediaType">Media Type:</label>
+            <select id="mediaType" onChange={(e) => handleAddChange(e)}>
+              <option value="TV">TV</option>
+              <option value="Movie">Movie</option>
+            </select>
+          </div>
+          <div style={{ marginBottom: "1rem" }}>
+            <label htmlFor="posterUrl">Poster URL:</label>
+            <input
+              onChange={(e) => handleAddChange(e)}
+              id="posterUrl"
+              type="text"
+              placeholder="Enter Poster URL"
+            />
+          </div>
+          <div style={{ marginBottom: "1rem" }}>
+            <label htmlFor="duration">Duration:</label>
+            <input
+              onChange={(e) => handleAddChange(e)}
+              id="hours"
+              type="number"
+              placeholder="Hours"
+              style={{ width: "4rem", marginRight: "0.5rem" }}
+            />
+            <input
+              onChange={(e) => handleAddChange(e)}
+              id="minutes"
+              type="number"
+              placeholder="Minutes"
+              style={{ width: "4rem" }}
+            />
+          </div>
+          <div style={{ marginBottom: "1rem" }}>
+            <label htmlFor="stars">Stars:</label>
+            <input
+              onChange={(e) => handleAddChange(e)}
+              id="star1"
+              type="text"
+              placeholder="Enter Star 1"
+            />
+            <input
+              onChange={(e) => handleAddChange(e)}
+              id="star2"
+              type="text"
+              placeholder="Enter Star 2"
+            />
+          </div>
+          <label htmlFor="duration">Release Date:</label>
+          <input
+            onChange={(e) => handleAddChange(e)}
+            id="releaseDate"
+            type="number"
+            placeholder="Release Date"
+            style={{
+              width: "20rem",
+              marginRight: "0.5rem",
+              marginBottom: "1rem",
+            }}
+          />
+          <label htmlFor="duration">No. of Episodes</label>
+          <input
+            onChange={(e) => handleAddChange(e)}
+            id="noOfEpisodes"
+            type="number"
+            placeholder="No. of Episodes"
+            style={{
+              width: "20rem",
+              marginRight: "0.5rem",
+              marginBottom: "1rem",
+            }}
+          />
+
+          <div style={{ marginBottom: "1rem" }}>
+            <label htmlFor="seasons">Seasons:</label>
+            <input
+              onChange={(e) => handleAddChange(e)}
+              id="seasons"
+              type="number"
+              placeholder="Enter Seasons"
+            />
+          </div>
+          <div style={{ marginBottom: "1rem" }}>
+            <label htmlFor="categories">Categories:</label>
+            <input
+              onChange={(e) => handleAddChange(e)}
+              id="category1"
+              type="text"
+              placeholder="Enter Category 1"
+            />
+            <input
+              onChange={(e) => handleAddChange(e)}
+              id="category2"
+              type="text"
+              placeholder="Enter Category 2"
+            />
+            <input
+              onChange={(e) => handleAddChange(e)}
+              id="category3"
+              type="text"
+              placeholder="Enter Category 3"
+            />
+          </div>
+          <div style={{ marginBottom: "1rem" }}>
+            <label htmlFor="certification">Certification:</label>
+            <input
+              onChange={(e) => handleAddChange(e)}
+              id="certification"
+              type="text"
+              placeholder="Enter Certification"
+            />
+          </div>
+        </form>
+
+        <button onClick={handleClose} color="primary">
+          Cancel
+        </button>
+        <button
+          onClick={handleAdd}
+          color="primary"
+          style={{ marginTop: "50px" }}
+        >
+          Save
+        </button>
+      </Dialog>
     </div>
   );
 };
 
 export default Dashhboard;
+
+const StyledPaper = (props) => (
+  <Paper {...props} style={{ padding: "20px", minWidth: "1000px" }} />
+);

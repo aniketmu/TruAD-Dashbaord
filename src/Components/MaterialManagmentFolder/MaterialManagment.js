@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./MaterialManagment.css"
 
 import MaterialLibrary from './MaterialLibrary';
@@ -6,6 +6,75 @@ import UploadMaterial from './UploadMaterial';
 
 
 function MaterialManagment() {
+  const [data, setData] = useState([{
+    name: "Mountains",
+    group: "TV",
+    size: "6:9",
+    type: "Image",
+    date: "2024-02-07",
+    submitBy : "Aniket",
+},
+
+{
+    name: "Rivers",
+    group: "TV",
+    size: "4:3",
+    type: "Image",
+    date: "2024-02-07",
+    submitBy : "Mukesh",
+},
+
+{
+    name: "Desert",
+    group: "TV",
+    size: "16∶9",
+    type: "Video",
+    date: "2024-02-07",
+    submitBy : "Ramesh",
+}, 
+{
+    name: "Mountains",
+    group: "TV",
+    size: "6:9",
+    type: "Image",
+    date: "2024-02-07",
+    submitBy : "Aniket",
+},
+
+{
+    name: "Rivers",
+    group: "TV",
+    size: "4:3",
+    type: "Image",
+    date: "2024-02-07",
+    submitBy : "Mukesh",
+},
+
+{
+    name: "Desert",
+    group: "TV",
+    size: "16∶9",
+    type: "Video",
+    date: "2024-02-07",
+    submitBy : "Ramesh",
+},
+{
+    name: "Mountains",
+    group: "TV",
+    size: "6:9",
+    type: "Image",
+    date: "2024-02-07",
+    submitBy : "Aniket",
+},
+
+{
+    name: "Rivers",
+    group: "TV",
+    size: "4:3",
+    type: "Image",
+    date: "2024-02-07",
+    submitBy : "Mukesh",
+}])
   const [swap, setSwap]=useState(true);
 
   const handleForLibrary=()=>{
@@ -15,6 +84,10 @@ function MaterialManagment() {
     setSwap(false);
   }
 
+  useEffect(() => {
+
+  }, [data])
+  
 
   return (
     <div className='container'>
@@ -23,7 +96,7 @@ function MaterialManagment() {
         <p className='row1' onClick={handleForUpload}><span>Upload Material</span></p>
       </div>
 
-      {swap?<MaterialLibrary/>:<UploadMaterial/>}
+      {swap?<MaterialLibrary data={data}/>:<UploadMaterial setData={setData}/>}
       {/* <MaterialLibrary/> */}
       
     </div>
