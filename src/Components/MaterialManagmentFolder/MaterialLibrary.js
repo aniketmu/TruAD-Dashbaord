@@ -4,32 +4,32 @@ import MaterialMCard from './MaterialMCard'
 
 const initialData = [{
     mImage: "https://imgs.search.brave.com/5YfDZ_BrNmW8ShDojzoMD8HgsVQ7SLM2tRWHWNbqQEE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFFMW44VCtJbkwu/anBn",
-    mName: "Levova i5",
-    mGroup: "Levova",
+    mName: "Lenova i5",
+    mGroup: "Lenova",
     mSize: "16:4"
 }, {
     mImage: "https://imgs.search.brave.com/5YfDZ_BrNmW8ShDojzoMD8HgsVQ7SLM2tRWHWNbqQEE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFFMW44VCtJbkwu/anBn",
-    mName: "Levova i3",
-    mGroup: "Levova",
+    mName: "Lenova i3",
+    mGroup: "Lenova",
     mSize: "16:9"
 }, {
     mImage: "https://imgs.search.brave.com/5YfDZ_BrNmW8ShDojzoMD8HgsVQ7SLM2tRWHWNbqQEE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFFMW44VCtJbkwu/anBn",
-    mName: "Levova i7",
-    mGroup: "Levova",
+    mName: "Lenova i7",
+    mGroup: "Lenova",
     mSize: "16:0"
 }, {
     mImage: "https://imgs.search.brave.com/rF4rlcGROPpsgZSDqF7idtQ-eyvLK4E8rdpdt_bxpbI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTI1/NTcwMzQ4Mi9waG90/by9hcHBsZS1tYWNi/b29rLXByby0xNS1y/ZXRpbmEtb24tdGFi/bGUuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPWswVFA0OHFk/bzVwMGlCMzMwNEh1/S1cwVWFkOEQteWlF/R2tuczhYOXJUelU9",
-    mName: "Mcabook air i5",
+    mName: "MacBook air i5",
     mGroup: "apple",
     mSize: "16:0"
 }, {
     mImage: "https://imgs.search.brave.com/rF4rlcGROPpsgZSDqF7idtQ-eyvLK4E8rdpdt_bxpbI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTI1/NTcwMzQ4Mi9waG90/by9hcHBsZS1tYWNi/b29rLXByby0xNS1y/ZXRpbmEtb24tdGFi/bGUuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPWswVFA0OHFk/bzVwMGlCMzMwNEh1/S1cwVWFkOEQteWlF/R2tuczhYOXJUelU9",
-    mName: "Mcabook air M1",
+    mName: "MacBook air M1",
     mGroup: "apple",
     mSize: "12:6"
 }, {
     mImage: "https://imgs.search.brave.com/rF4rlcGROPpsgZSDqF7idtQ-eyvLK4E8rdpdt_bxpbI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTI1/NTcwMzQ4Mi9waG90/by9hcHBsZS1tYWNi/b29rLXByby0xNS1y/ZXRpbmEtb24tdGFi/bGUuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPWswVFA0OHFk/bzVwMGlCMzMwNEh1/S1cwVWFkOEQteWlF/R2tuczhYOXJUelU9",
-    mName: "Mcabook air M2",
+    mName: "MacBook air M2",
     mGroup: "apple",
     mSize: "16:9"
 }, {
@@ -101,12 +101,42 @@ const initialData = [{
 ]
 function MaterialLibrary() {
     const [data, setData] = useState(initialData);
+    const [searchData,setSearchData]=useState(initialData);
+
+    const [productName, setproductName] = useState("");
+
+    function handleProductName(event) {
+
+        if(event.target.value.trim()!=""){
+            const arr=[...searchData];
+            const newArr=arr.filter((ele)=>{
+                return ele.mName.toLowerCase().includes(event.target.value.toLowerCase());
+            })
+            setData(newArr);
+        }
+        else if(event.target.value.trim()==""){
+            // setSearchData(initialData);
+            setData(initialData);
+        }
+        
+        setproductName(event.target.value);
+
+        
+    }
+
+    function searchByName() {
+
+        
+       
+
+    }
 
     function handleDelete(key) {
         const arr = [...data];
         arr.splice(key, 1);
         setData(arr);
     }
+
 
     return (
         <>
@@ -118,8 +148,7 @@ function MaterialLibrary() {
             <div className='inputContainer'>
                 <label className='inputLabelContainer'>
                     Material Name:
-
-                    <input type="text" name="name" className='inputBox' placeholder='Enter Material Name' />
+                    <input type="text" name="name" value={productName} onChange={handleProductName} className='inputBox' placeholder='Enter Material Name' />
                 </label>
                 <label className='inputLabelContainer'>
                     Material Group :
@@ -137,14 +166,14 @@ function MaterialLibrary() {
                     </select>
                     {/* <input type="text" name="name" className='inputBox' placeholder='Enter Material Size' /> */}
                 </label>
-                <button style={{ width: "100px", borderRadius: "5px" }} >Search</button>
+                {/* <button style={{ width: "100px", borderRadius: "5px" } } onClick={searchByName} >Search</button> */}
             </div>
 
             {/* card render  */}
             <div style={{ width: "99%", overflow: "auto", height: "75vh" }} >
                 <Grid container spacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     {data.map((val, i) => {
-                        
+
                         return <Grid item {...{ xs: 12, sm: 6, md: 4, lg: 3 }} key={i}>
                             <MaterialMCard data={val} index={i} handleDelete={handleDelete} />
                         </Grid>
