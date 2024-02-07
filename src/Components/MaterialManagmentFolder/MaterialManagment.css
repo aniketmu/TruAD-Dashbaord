@@ -39,21 +39,21 @@
     cursor: pointer;
     margin: 5px;
     border-radius: 7px;
-    padding: 7px;
+    padding: 7px 0px;
     /* border: 1px solid red; */
     background-color: white;
    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .inputContainer{
-    width: 99%;
+    width: 98%;
     display: flex;
     justify-content: space-around;
     margin: 5px 5px 15px 5px;
     /* border: 1px solid red; */
     background-color: white;
     border-radius: 7px;
-    padding: 7px;
+    padding: 7px 0px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     
 }
@@ -105,7 +105,7 @@ select{
 }
 .submitUpload:hover{
    
-    background: linear-gradient(45deg, red, blue);
+    background: linear-gradient(45deg, rgb(0, 4, 98), rgb(12, 150, 26));
     color: white;
 }
 
