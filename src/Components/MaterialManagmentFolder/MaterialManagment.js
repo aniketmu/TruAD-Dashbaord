@@ -6,12 +6,12 @@ import UploadMaterial from './UploadMaterial';
 
 
 function MaterialManagment() {
-  const [swap, setSwap]=useState(true);
+  const [swap, setSwap] = useState(true);
 
-  const handleForLibrary=()=>{
-      setSwap(true);
+  const handleForLibrary = () => {
+    setSwap(true);
   }
-  const handleForUpload=()=>{
+  const handleForUpload = () => {
     setSwap(false);
   }
 
@@ -23,9 +23,9 @@ function MaterialManagment() {
         <p className='row1' onClick={handleForUpload}><span>Upload Material</span></p>
       </div>
 
-      {swap?<MaterialLibrary/>:<UploadMaterial/>}
+      {swap ? <MaterialLibrary /> : <UploadMaterial />}
       {/* <MaterialLibrary/> */}
-      
+
     </div>
   )
 }

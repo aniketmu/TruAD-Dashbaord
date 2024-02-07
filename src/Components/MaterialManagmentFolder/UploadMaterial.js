@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 function UploadMaterial() {
-    const [name, setName] = useState("");
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -15,7 +15,7 @@ function UploadMaterial() {
                         <input
                             type="file"
 
-                            onChange={(e) => setName(e.target.value)}
+                            
                         />
                     </label>
                 </div>

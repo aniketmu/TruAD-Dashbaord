@@ -6,32 +6,37 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import AlertDialog from './DeleteDialoge';
 
 
-export default function MaterialMCard() {
+
+export default function MaterialMCard(props) {
     return (
-        <Card sx={{ maxWidth: 300 }}>
+        <Card sx={{ maxWidth: 300, borderRadius: "10px" }}>
             <CardMedia
                 component="img"
                 alt="green iguana"
                 height="140"
-                image="https://imgs.search.brave.com/S5rG7x8u-fRxY9zOQB3hYyMaZO1zD__77q-BBnV9-zU/rs:fit:500:0:0/g:ce/aHR0cHM6Ly93d3cu/cG1pbmRpYS5nb3Yu/aW4vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjIvMTIvTW9kaS1K/aS1QaG90by0wMi1l/MTY0NzMyNTkzNjgy/MS5qcGc"
+                image={props.data.mImage}
             />
             <CardContent>
                 <Typography gutterBottom variant="body2" component="div">
-                    Material Name :
+                    Material Name : {props.data.mName}
                 </Typography>
                 <Typography variant="body2" color="div">
-                    Material Group :
+                    Material Group : {props.data.mGroup}
                 </Typography>
                 <Typography variant="body2" color="div">
-                    Material Size :
+                    Material Size : {props.data.mSize}
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button variant="contained" disableElevation>
-                    Delete
+            
+                <AlertDialog index={props.index} handleDelete={props.handleDelete} >delete</AlertDialog>
+                <Button variant="contained" disableElevation style={{ width: "50%" }}>
+                    Oprate
                 </Button>
+
 
             </CardActions>
         </Card>
