@@ -115,9 +115,8 @@ function MaterialManagment() {
   const handleForUpload = () => {
     setSwap(false);
   }
-
+  
   useEffect(() => {
-
   }, [data])
   
 
