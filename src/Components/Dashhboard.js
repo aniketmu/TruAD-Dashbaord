@@ -20,7 +20,7 @@ const Dashhboard = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [files, setFiles] = useState([]);
   const [clipDuration, setClipDuration] = useState(10);
-  const [poster, setPoster] = useState("")
+  const [poster, setPoster] = useState("");
 
   const handleFileChange = (event) => {
     console.log(event.target.files[0]);
@@ -224,16 +224,15 @@ const Dashhboard = () => {
       });
 
       const data = await response.json();
-      console.log(data.data)
+      console.log(data.data);
       setMediaArray(data.data);
-      setMedia(data.data)
+      setMedia(data.data);
     };
 
     fetchData();
   }, []);
 
-  useEffect(() => {}, [mediaArray])
-  
+  useEffect(() => {}, [mediaArray]);
 
   const handleCategorySelect = (option) => {
     setSelectedCategory(option);
@@ -359,17 +358,17 @@ const Dashhboard = () => {
 
   const handleURLChange = (e) => {
     const file = e.target.files[0];
-  const reader = new FileReader();
+    const reader = new FileReader();
 
-  reader.onload = (e) => {
-    const url = e.target.result;
-    setPoster(url);
+    reader.onload = (e) => {
+      const url = e.target.result;
+      setPoster(url);
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   };
-
-  if (file) {
-    reader.readAsDataURL(file);
-  }
-  }
 
   return (
     <div style={{ width: "80%", height: "100vh" }}>
@@ -498,7 +497,7 @@ const Dashhboard = () => {
       >
         <DialogTitle>Title</DialogTitle>
 
-        <form>
+        <form style={{ maxWidth: "600px", margin: "0 auto" }}>
           <div style={{ marginBottom: "1rem" }}>
             <label htmlFor="mediaName">Media Name:</label>
             <input
@@ -506,11 +505,20 @@ const Dashhboard = () => {
               id="mediaName"
               type="text"
               placeholder="Enter Media Name"
+              style={{ width: "100%" }}
             />
           </div>
           <div style={{ marginBottom: "1rem" }}>
             <label htmlFor="mediaType">Media Type:</label>
-            <select id="mediaType" onChange={(e) => handleAddChange(e)}>
+            <select
+              id="mediaType"
+              onChange={(e) => handleAddChange(e)}
+              value={add.mediaType || ""}
+              style={{ width: "100%" }}
+            >
+              <option value="" disabled>
+                Select a Type
+              </option>
               <option value="TV">TV</option>
               <option value="Movie">Movie</option>
             </select>
@@ -525,6 +533,7 @@ const Dashhboard = () => {
               accept="video/*" // Restrict file input to video files
               onChange={handleFileChange}
               required
+              style={{ display: "block", marginBottom: "1rem" }}
             />
           </label>
           <label>
@@ -534,33 +543,39 @@ const Dashhboard = () => {
               type="text"
               value={clipDuration}
               onChange={(e) => setClipDuration(e.target.value)}
+              style={{ width: "100%", marginBottom: "1rem" }}
             />
           </label>
           <div style={{ marginBottom: "1rem" }}>
-  <label htmlFor="posterUrl">Poster URL:</label>
-  <input
-    onChange={(e) => handleURLChange(e)}
-    id="posterUrl"
-    type="file"
-    placeholder="Enter Poster URL"
-  />
-</div>
+            <label htmlFor="posterUrl">Poster URL:</label>
+            <input
+              onChange={(e) => handleURLChange(e)}
+              id="posterUrl"
+              type="file"
+              placeholder="Enter Poster URL"
+              style={{ width: "100%" }}
+            />
+          </div>
           <div style={{ marginBottom: "1rem" }}>
             <label htmlFor="duration">Duration:</label>
-            <input
-              onChange={(e) => handleAddChange(e)}
-              id="hours"
-              type="number"
-              placeholder="Hours"
-              style={{ width: "4rem", marginRight: "0.5rem" }}
-            />
-            <input
-              onChange={(e) => handleAddChange(e)}
-              id="minutes"
-              type="number"
-              placeholder="Minutes"
-              style={{ width: "4rem" }}
-            />
+            <div style={{ display: "flex", marginBottom: "0.5rem" }}>
+              <input
+                onChange={(e) => handleAddChange(e)}
+                id="hours"
+                type="number"
+                placeholder="Hours"
+                style={{ width: "50%", marginRight: "0.5rem" }}
+                disabled={add.mediaType === "TV"}
+              />
+              <input
+                onChange={(e) => handleAddChange(e)}
+                id="minutes"
+                type="number"
+                placeholder="Minutes"
+                style={{ width: "50%" }}
+                disabled={add.mediaType === "TV"}
+              />
+            </div>
           </div>
           <div style={{ marginBottom: "1rem" }}>
             <label htmlFor="stars">Stars:</label>
@@ -569,39 +584,33 @@ const Dashhboard = () => {
               id="star1"
               type="text"
               placeholder="Enter Star 1"
+              style={{ width: "100%", marginBottom: "0.5rem" }}
             />
             <input
               onChange={(e) => handleAddChange(e)}
               id="star2"
               type="text"
               placeholder="Enter Star 2"
+              style={{ width: "100%" }}
             />
           </div>
-          <label htmlFor="duration">Release Date:</label>
+          <label htmlFor="releaseDate">Release Date:</label>
           <input
             onChange={(e) => handleAddChange(e)}
             id="releaseDate"
             type="date"
             placeholder="Release Date"
-            style={{
-              width: "20rem",
-              marginRight: "0.5rem",
-              marginBottom: "1rem",
-            }}
+            style={{ width: "100%", marginBottom: "1rem" }}
           />
-          <label htmlFor="duration">No. of Episodes</label>
+          <label htmlFor="noOfEpisodes">No. of Episodes</label>
           <input
             onChange={(e) => handleAddChange(e)}
             id="noOfEpisodes"
             type="number"
             placeholder="No. of Episodes"
-            style={{
-              width: "20rem",
-              marginRight: "0.5rem",
-              marginBottom: "1rem",
-            }}
+            style={{ width: "100%", marginBottom: "1rem" }}
+            disabled={add.mediaType === "Movie"}
           />
-
           <div style={{ marginBottom: "1rem" }}>
             <label htmlFor="seasons">Seasons:</label>
             <input
@@ -609,37 +618,79 @@ const Dashhboard = () => {
               id="seasons"
               type="number"
               placeholder="Enter Seasons"
+              style={{ width: "100%" }}
+              disabled={add.mediaType === "Movie"}
             />
           </div>
           <div style={{ marginBottom: "1rem" }}>
-            <label htmlFor="categories">Categories:</label>
-            <input
-              onChange={(e) => handleAddChange(e)}
+            <label htmlFor="certification">Genre:</label>
+            <select
               id="category1"
-              type="text"
-              placeholder="Enter Category 1"
-            />
-            <input
+              value={add.category1 || ""}
               onChange={(e) => handleAddChange(e)}
+              style={{ width: "100%" }}
+            >
+              <option value="" disabled>
+                Select a Genre
+              </option>
+              <option value="Action">Action</option>
+              <option value="Comedy">Comedy</option>
+              <option value="Drama">Drama</option>
+              <option value="Horror">Horror</option>
+            </select>
+          </div>
+          <div style={{ marginBottom: "1rem" }}>
+            <label htmlFor="certification">Category:</label>
+            <select
               id="category2"
-              type="text"
-              placeholder="Enter Category 2"
-            />
-            <input
+              value={add.category2 || ""}
               onChange={(e) => handleAddChange(e)}
+              style={{ width: "100%" }}
+            >
+              <option value="" disabled>
+                Select a Category
+              </option>
+              <option value="Romance">Romance</option>
+              <option value="Adventure">Adventure</option>
+              <option value="Sci-Fi">Sci-Fi</option>
+              <option value="Thriller">Thriller</option>
+            </select>
+          </div>
+          <div style={{ marginBottom: "1rem" }}>
+            <label htmlFor="certification">Sub Category:</label>
+            <select
               id="category3"
-              type="text"
-              placeholder="Enter Category 3"
-            />
+              value={add.category3 || ""}
+              onChange={(e) => handleAddChange(e)}
+              style={{ width: "100%" }}
+            >
+              <option value="" disabled>
+                Select a Sub Category
+              </option>
+              <option value="Romantic Comedy">Romantic Comedy</option>
+              <option value="Action Comedy">Action Comedy</option>
+              <option value="Sci-Fi Thriller">Sci-Fi Thriller</option>
+              <option value="Horror Comedy">Horror Comedy</option>
+            </select>
           </div>
           <div style={{ marginBottom: "1rem" }}>
             <label htmlFor="certification">Certification:</label>
-            <input
-              onChange={(e) => handleAddChange(e)}
+            <select
               id="certification"
-              type="text"
-              placeholder="Enter Certification"
-            />
+              value={add.certification || ""}
+              onChange={(e) => handleAddChange(e)}
+              style={{ width: "100%" }}
+            >
+              <option value="" disabled>
+                Select a Certification
+              </option>
+              <option value="SA">SA</option>
+              <option value="PG-13">PG-13</option>
+              <option value="S+">S+</option>
+              <option value="TV-MA">TV-MA</option>
+              <option value="TV-14">TV-14</option>
+              <option value="R">R</option>
+            </select>
           </div>
         </form>
 
