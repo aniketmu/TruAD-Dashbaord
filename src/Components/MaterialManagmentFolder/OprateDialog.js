@@ -51,14 +51,13 @@ export default function OprateDialog(props) {
                 <DialogContent>
 
                     <div>
-                        <img src={props.thumbnail} style={{ width: "100%", borderRadius: "7px" }} alt="" />
+                        <img src={props.thumbnail} style={{ width: "100%", borderRadius: "7px" }} alt="Img Not Found" />
                         <DialogTitle id="alert-dialog-title">
                             {"Available Clips"}
                         </DialogTitle>
                         <div style={{ display: "flex", overflow: "auto" }}>
                             {video.map((vid) => {
-                                {/* return <video controls style={{ height: "140px", width: "220px", margin: "10px", borderRadius: "7px" }}  >
-                                    <source src={vid.video} type="video/mp4" /> */}
+
                                 return <iframe
                                     style={{ height: "140px", width: "220px", margin: "10px", borderRadius: "7px" }}
 
@@ -68,14 +67,14 @@ export default function OprateDialog(props) {
                                 // allowFullScreen
                                 />
 
-                                {/* </video> */ }
+
                             })}
                         </div>
                     </div>
                 </DialogContent>
                 <DialogActions>
 
-                    <Button onClick={handleClose} variant="contained" disableElevation style={{ width: "100%"  }}>Close</Button>
+                    <Button onClick={handleClose} variant="contained" disableElevation style={{ width: "100%" }}>Close</Button>
 
 
                 </DialogActions>
