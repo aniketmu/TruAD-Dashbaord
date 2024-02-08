@@ -17,261 +17,155 @@ const Dashhboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [openDialog, handleDisplay] = useState(false);
   const [add, setAdd] = useState({});
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [files, setFiles] = useState([]);
+  const [clipDuration, setClipDuration] = useState(10);
+  const [poster, setPoster] = useState("")
 
-  const [mediaArray, setMediaArray] = useState([{
-    Name: "Stranger Things",
-    Type: "TV Show",
-    poster:
-      "https://media.themoviedb.org/t/p/w300_and_h450_bestv2/49WJfeN0moxb9IPfGn8AIqMGskD.jpg",
-    Duration: "Varies",
-    "Available Ad Clips": 8,
-    Starring: ["Millie Bobby Brown", "Finn Wolfhard"],
-    "Release Date": 2016,
-    "No of Episodes": 25,
-    Season: 3,
-    Category: ["Drama", "Fantasy", "Horror"],
-    Certification: "PG-13",
-  },
-  {
-    Name: "Tanu Weds Manu",
-    Type: "Movie",
-    poster:
-      "https://image.tmdb.org/t/p/original/cY1lEQu6sgofrKAVUigtXpOvZQZ.jpg",
-    Duration: "3hr 21min",
-    "Available Ad Clips": 5,
-    Starring: ["Kangana Ranaut", "R Madhavan"],
-    "Release Date": 2016,
-    "No of Episodes": "NA",
-    Season: "NA",
-    Category: ["Comedy", "Drama", "Romance"],
-    Certification: "S+",
-  },
-  {
-    Name: "Inception",
-    Type: "Movie",
-    poster:
-      "https://image.tmdb.org/t/p/w600_and_h900_bestv2/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg",
-    Duration: "2hr 28min",
-    "Available Ad Clips": 3,
-    Starring: ["Leonardo DiCaprio", "Joseph Gordon-Levitt"],
-    "Release Date": 2010,
-    "No of Episodes": "NA",
-    Season: "NA",
-    Category: ["Action", "Adventure", "Sci-Fi"],
-    Certification: "PG-13",
-  },
-  {
-    Name: "The Crown",
-    Type: "TV Show",
-    poster:
-      "https://image.tmdb.org/t/p/w600_and_h900_bestv2/1DDE0Z2Y805rqfkEjPbZsMLyPwa.jpg",
-    Duration: "Varies",
-    "Available Ad Clips": 10,
-    Starring: ["Claire Foy", "Matt Smith"],
-    "Release Date": 2016,
-    "No of Episodes": 40,
-    Season: 4,
-    Category: ["Biography", "Drama", "History"],
-    Certification: "TV-MA",
-  },
-  {
-    Name: "The Dark Knight",
-    Type: "Movie",
-    poster:
-      "https://image.tmdb.org/t/p/w600_and_h900_bestv2/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
-    Duration: "2hr 32min",
-    "Available Ad Clips": 4,
-    Starring: ["Christian Bale", "Heath Ledger"],
-    "Release Date": 2008,
-    "No of Episodes": "NA",
-    Season: "NA",
-    Category: ["Action", "Crime", "Drama"],
-    Certification: "PG-13",
-  },
-  {
-    Name: "Friends",
-    Type: "TV Show",
-    poster:
-      "https://image.tmdb.org/t/p/w600_and_h900_bestv2/2koX1xLkpTQM4IZebYvKysFW1Nh.jpg",
-    Duration: "Varies",
-    "Available Ad Clips": 6,
-    Starring: ["Jennifer Aniston", "Courteney Cox"],
-    "Release Date": 1994,
-    "No of Episodes": 236,
-    Season: 10,
-    Category: ["Comedy", "Romance"],
-    Certification: "TV-14",
-  },
-  {
-    Name: "The Shawshank Redemption",
-    Type: "Movie",
-    poster:
-      "https://image.tmdb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
-    Duration: "2hr 22min",
-    "Available Ad Clips": 3,
-    Starring: ["Tim Robbins", "Morgan Freeman"],
-    "Release Date": 1994,
-    "No of Episodes": "NA",
-    Season: "NA",
-    Category: ["Drama"],
-    Certification: "R",
-  },
-  {
-    Name: "Breaking Bad",
-    Type: "TV Show",
-    poster:
-      "https://image.tmdb.org/t/p/w600_and_h900_bestv2/ztkUQFLlC19CCMYHW9o1zWhJRNq.jpg",
-    Duration: "Varies",
-    "Available Ad Clips": 9,
-    Starring: ["Bryan Cranston", "Aaron Paul"],
-    "Release Date": 2008,
-    "No of Episodes": 62,
-    Season: 5,
-    Category: ["Crime", "Drama", "Thriller"],
-    Certification: "TV-MA",
-  },
-  {
-    Name: "The Matrix",
-    Type: "Movie",
-    poster:
-      "https://image.tmdb.org/t/p/w600_and_h900_bestv2/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
-    Duration: "2hr 16min",
-    "Available Ad Clips": 4,
-    Starring: ["Keanu Reeves", "Carrie-Anne Moss"],
-    "Release Date": 1999,
-    "No of Episodes": "NA",
-    Season: "NA",
-    Category: ["Action", "Sci-Fi"],
-    Certification: "R",
-  },])
-  // const mediaArray = [
+  const handleFileChange = (event) => {
+    console.log(event.target.files[0]);
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const [mediaArray, setMediaArray] = useState([]);
+
+  // const [mediaArray, setMediaArray] = useState([
   //   {
-  //     Name: "Stranger Things",
-  //     Type: "TV Show",
+  //     _id: 1,
+  //     name: "Stranger Things",
+  //     type: "TV Show",
   //     poster:
   //       "https://media.themoviedb.org/t/p/w300_and_h450_bestv2/49WJfeN0moxb9IPfGn8AIqMGskD.jpg",
-  //     Duration: "Varies",
-  //     "Available Ad Clips": 8,
-  //     Starring: ["Millie Bobby Brown", "Finn Wolfhard"],
-  //     "Release Date": 2016,
-  //     "No of Episodes": 25,
-  //     Season: 3,
-  //     Category: ["Drama", "Fantasy", "Horror"],
-  //     Certification: "PG-13",
+  //     duration: "Varies",
+  //     availableAdClips: 8,
+  //     starring: ["Millie Bobby Brown", "Finn Wolfhard"],
+  //     releaseDate: 2016,
+  //     noOfEpisodes: 25,
+  //     season: 3,
+  //     category: ["Drama", "Fantasy", "Horror"],
+  //     certification: "PG-13",
   //   },
   //   {
-  //     Name: "Tanu Weds Manu",
-  //     Type: "Movie",
+  //     _id: 2,
+  //     name: "Tanu Weds Manu",
+  //     type: "Movie",
   //     poster:
   //       "https://image.tmdb.org/t/p/original/cY1lEQu6sgofrKAVUigtXpOvZQZ.jpg",
-  //     Duration: "3hr 21min",
-  //     "Available Ad Clips": 5,
-  //     Starring: ["Kangana Ranaut", "R Madhavan"],
-  //     "Release Date": 2016,
-  //     "No of Episodes": "NA",
-  //     Season: "NA",
-  //     Category: ["Comedy", "Drama", "Romance"],
-  //     Certification: "S+",
+  //     duration: "3hr 21min",
+  //     availableAdClips: 5,
+  //     starring: ["Kangana Ranaut", "R Madhavan"],
+  //     releaseDate: 2016,
+  //     noOfEpisodes: "NA",
+  //     season: "NA",
+  //     category: ["Comedy", "Drama", "Romance"],
+  //     certification: "S+",
   //   },
   //   {
-  //     Name: "Inception",
-  //     Type: "Movie",
+  //     _id: 3,
+  //     name: "Inception",
+  //     type: "Movie",
   //     poster:
   //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg",
-  //     Duration: "2hr 28min",
-  //     "Available Ad Clips": 3,
-  //     Starring: ["Leonardo DiCaprio", "Joseph Gordon-Levitt"],
-  //     "Release Date": 2010,
-  //     "No of Episodes": "NA",
-  //     Season: "NA",
-  //     Category: ["Action", "Adventure", "Sci-Fi"],
-  //     Certification: "PG-13",
+  //     duration: "2hr 28min",
+  //     availableAdClips: 3,
+  //     starring: ["Leonardo DiCaprio", "Joseph Gordon-Levitt"],
+  //     releaseDate: 2010,
+  //     noOfEpisodes: "NA",
+  //     season: "NA",
+  //     category: ["Action", "Adventure", "Sci-Fi"],
+  //     certification: "PG-13",
   //   },
   //   {
-  //     Name: "The Crown",
-  //     Type: "TV Show",
+  //     _id: 4,
+  //     name: "The Crown",
+  //     type: "TV Show",
   //     poster:
   //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/1DDE0Z2Y805rqfkEjPbZsMLyPwa.jpg",
-  //     Duration: "Varies",
-  //     "Available Ad Clips": 10,
-  //     Starring: ["Claire Foy", "Matt Smith"],
-  //     "Release Date": 2016,
-  //     "No of Episodes": 40,
-  //     Season: 4,
-  //     Category: ["Biography", "Drama", "History"],
-  //     Certification: "TV-MA",
+  //     duration: "Varies",
+  //     availableAdClips: 10,
+  //     starring: ["Claire Foy", "Matt Smith"],
+  //     releaseDate: 2016,
+  //     noOfEpisodes: 40,
+  //     season: 4,
+  //     category: ["Biography", "Drama", "History"],
+  //     certification: "TV-MA",
   //   },
   //   {
-  //     Name: "The Dark Knight",
-  //     Type: "Movie",
+  //     _id: 5,
+  //     name: "The Dark Knight",
+  //     type: "Movie",
   //     poster:
   //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
-  //     Duration: "2hr 32min",
-  //     "Available Ad Clips": 4,
-  //     Starring: ["Christian Bale", "Heath Ledger"],
-  //     "Release Date": 2008,
-  //     "No of Episodes": "NA",
-  //     Season: "NA",
-  //     Category: ["Action", "Crime", "Drama"],
-  //     Certification: "PG-13",
+  //     duration: "2hr 32min",
+  //     availableAdClips: 4,
+  //     starring: ["Christian Bale", "Heath Ledger"],
+  //     releaseDate: 2008,
+  //     noOfEpisodes: "NA",
+  //     season: "NA",
+  //     category: ["Action", "Crime", "Drama"],
+  //     certification: "PG-13",
   //   },
   //   {
-  //     Name: "Friends",
-  //     Type: "TV Show",
+  //     _id: 6,
+  //     name: "Friends",
+  //     type: "TV Show",
   //     poster:
   //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/2koX1xLkpTQM4IZebYvKysFW1Nh.jpg",
-  //     Duration: "Varies",
-  //     "Available Ad Clips": 6,
-  //     Starring: ["Jennifer Aniston", "Courteney Cox"],
-  //     "Release Date": 1994,
-  //     "No of Episodes": 236,
-  //     Season: 10,
-  //     Category: ["Comedy", "Romance"],
-  //     Certification: "TV-14",
+  //     duration: "Varies",
+  //     availableAdClips: 6,
+  //     starring: ["Jennifer Aniston", "Courteney Cox"],
+  //     releaseDate: 1994,
+  //     noOfEpisodes: 236,
+  //     season: 10,
+  //     category: ["Comedy", "Romance"],
+  //     certification: "TV-14",
   //   },
   //   {
-  //     Name: "The Shawshank Redemption",
-  //     Type: "Movie",
+  //     _id: 7,
+  //     name: "The Shawshank Redemption",
+  //     type: "Movie",
   //     poster:
   //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
-  //     Duration: "2hr 22min",
-  //     "Available Ad Clips": 3,
-  //     Starring: ["Tim Robbins", "Morgan Freeman"],
-  //     "Release Date": 1994,
-  //     "No of Episodes": "NA",
-  //     Season: "NA",
-  //     Category: ["Drama"],
-  //     Certification: "R",
+  //     duration: "2hr 22min",
+  //     availableAdClips: 3,
+  //     starring: ["Tim Robbins", "Morgan Freeman"],
+  //     releaseDate: 1994,
+  //     noOfEpisodes: "NA",
+  //     season: "NA",
+  //     category: ["Drama"],
+  //     certification: "R",
   //   },
   //   {
-  //     Name: "Breaking Bad",
-  //     Type: "TV Show",
+  //     _id: 8,
+  //     name: "Breaking Bad",
+  //     type: "TV Show",
   //     poster:
   //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/ztkUQFLlC19CCMYHW9o1zWhJRNq.jpg",
-  //     Duration: "Varies",
-  //     "Available Ad Clips": 9,
-  //     Starring: ["Bryan Cranston", "Aaron Paul"],
-  //     "Release Date": 2008,
-  //     "No of Episodes": 62,
-  //     Season: 5,
-  //     Category: ["Crime", "Drama", "Thriller"],
-  //     Certification: "TV-MA",
+  //     duration: "Varies",
+  //     availableAdClips: 9,
+  //     starring: ["Bryan Cranston", "Aaron Paul"],
+  //     releaseDate: 2008,
+  //     noOfEpisodes: 62,
+  //     season: 5,
+  //     category: ["Crime", "Drama", "Thriller"],
+  //     certification: "TV-MA",
   //   },
   //   {
-  //     Name: "The Matrix",
-  //     Type: "Movie",
+  //     _id: 9,
+  //     name: "The Matrix",
+  //     type: "Movie",
   //     poster:
   //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
-  //     Duration: "2hr 16min",
-  //     "Available Ad Clips": 4,
-  //     Starring: ["Keanu Reeves", "Carrie-Anne Moss"],
-  //     "Release Date": 1999,
-  //     "No of Episodes": "NA",
-  //     Season: "NA",
-  //     Category: ["Action", "Sci-Fi"],
-  //     Certification: "R",
+  //     duration: "2hr 16min",
+  //     availableAdClips: 4,
+  //     starring: ["Keanu Reeves", "Carrie-Anne Moss"],
+  //     releaseDate: 1999,
+  //     noOfEpisodes: "NA",
+  //     season: "NA",
+  //     category: ["Action", "Sci-Fi"],
+  //     certification: "R",
   //   },
-  // ];
+  // ]);
 
   const handleClose = () => {
     handleDisplay(false);
@@ -287,7 +181,7 @@ const Dashhboard = () => {
 
   const filterCategories = () => {
     mediaArray.forEach((media) => {
-      media.Category.forEach((category) => {
+      media.category.forEach((category) => {
         if (!categories.includes(category)) {
           categories.push(category);
         }
@@ -299,8 +193,8 @@ const Dashhboard = () => {
 
   const filterCertifications = () => {
     mediaArray.forEach((media) => {
-      if (!certifications.includes(media.Certification)) {
-        certifications.push(media.Certification);
+      if (!certifications.includes(media.certification)) {
+        certifications.push(media.certification);
       }
     });
   };
@@ -315,7 +209,7 @@ const Dashhboard = () => {
       setSelectedCategory("");
       return setSelectedCerti("");
     } else {
-      const filtered = mediaArray.filter((media) => media.Type === option);
+      const filtered = mediaArray.filter((media) => media.type === option);
       setMedia(filtered);
       setSelectedType(option);
       setSelectedCategory("");
@@ -324,8 +218,21 @@ const Dashhboard = () => {
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("http://localhost:4000/media", {
+        method: "GET",
+      });
 
-  }, [mediaArray])
+      const data = await response.json();
+      console.log(data.data)
+      setMediaArray(data.data);
+      setMedia(data.data)
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {}, [mediaArray])
   
 
   const handleCategorySelect = (option) => {
@@ -333,32 +240,32 @@ const Dashhboard = () => {
     if (selectedType.trim() !== "" && selectedCerti.trim() !== "") {
       const filtered = mediaArray.filter(
         (media) =>
-          media.Type === selectedType &&
-          media.Certification === selectedCerti &&
-          media.Category.includes(option)
+          media.type === selectedType &&
+          media.certification === selectedCerti &&
+          media.category.includes(option)
       );
       setMedia(filtered);
     } else if (selectedType === "All") {
       const filtered = mediaArray.filter((media) =>
-        media.Category.includes(option)
+        media.category.includes(option)
       );
       setMedia(filtered);
     } else if (selectedType.trim() !== "") {
       const filtered = mediaArray.filter(
         (media) =>
-          media.Type === selectedType && media.Category.includes(option)
+          media.type === selectedType && media.category.includes(option)
       );
       setMedia(filtered);
     } else if (selectedCerti.trim() !== "") {
       const filtered = mediaArray.filter(
         (media) =>
-          media.Certification === selectedCerti &&
-          media.Category.includes(option)
+          media.certification === selectedCerti &&
+          media.category.includes(option)
       );
       setMedia(filtered);
     } else {
       const filtered = mediaArray.filter((media) =>
-        media.Category.includes(option)
+        media.category.includes(option)
       );
       setMedia(filtered);
     }
@@ -369,31 +276,31 @@ const Dashhboard = () => {
     if (selectedType.trim() !== "" && selectedCategory.trim() !== "") {
       const filtered = mediaArray.filter(
         (media) =>
-          media.Type === selectedType &&
-          media.Category.includes(selectedCategory) &&
-          media.Certification === option
+          media.type === selectedType &&
+          media.category.includes(selectedCategory) &&
+          media.certification === option
       );
       setMedia(filtered);
     } else if (selectedType === "All") {
       const filtered = mediaArray.filter(
-        (media) => media.Certification === option
+        (media) => media.certification === option
       );
       setMedia(filtered);
     } else if (selectedType.trim() !== "") {
       const filtered = mediaArray.filter(
-        (media) => media.Type === selectedType && media.Certification === option
+        (media) => media.type === selectedType && media.certification === option
       );
       setMedia(filtered);
     } else if (selectedCategory.trim() !== "") {
       const filtered = mediaArray.filter(
         (media) =>
-          media.Category.includes(selectedCategory) &&
-          media.Certification === option
+          media.category.includes(selectedCategory) &&
+          media.certification === option
       );
       setMedia(filtered);
     } else {
       const filtered = mediaArray.filter(
-        (media) => media.Certification === option
+        (media) => media.certification === option
       );
       setMedia(filtered);
     }
@@ -402,23 +309,23 @@ const Dashhboard = () => {
   const handleSearch = () => {
     const filtered = mediaArray.filter(
       (media) =>
-        media.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        media.Type.toLowerCase().includes(searchTerm.toLowerCase())
+        media.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        media.type.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setMedia(filtered);
     setSearchTerm("");
   };
 
   const handleAddChange = (e) => {
-      setAdd((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    setAdd((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
-  
-  const handleAdd = () => {
-    console.log(add)
+
+  const handleAdd = async () => {
+    console.log(add);
     const newMedia = {
       Name: add.mediaName,
       Type: add.mediaType || "TV",
-      poster: add.posterUrl,
+      poster: poster,
       Duration: `${add.hours} hrs ${add.minutes} minutes`,
       "Available Ad Clips": 8,
       Starring: [add.star1, add.star2],
@@ -429,13 +336,40 @@ const Dashhboard = () => {
       Certification: add.certification,
     };
     console.log(newMedia);
+    const formData = new FormData();
+    formData.append("video", selectedFile);
+    formData.append("clipsDur", clipDuration);
+    formData.append("data", JSON.stringify(newMedia));
 
-    setMediaArray((prev) => [...prev, newMedia])
-    
-    setMedia((prev) => [newMedia, ...prev,])
-    
-    handleClose()
+    const response = await fetch("http://localhost:4000/add-media", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    console.log(data);
+
+    setMediaArray((prev) => [...prev, data.saveData]);
+
+    setMedia((prev) => [data.saveData, ...prev]);
+
+    handleClose();
   };
+
+  const handleURLChange = (e) => {
+    const file = e.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = (e) => {
+    const url = e.target.result;
+    setPoster(url);
+  };
+
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+  }
 
   return (
     <div style={{ width: "80%", height: "100vh" }}>
@@ -541,14 +475,16 @@ const Dashhboard = () => {
             {media.map((media) => {
               return (
                 <MCard
-                  Name={media.Name}
-                  Category={media.Category}
-                  Duration={media.Duration}
-                  NOE={media[`No of Episodes`]}
-                  Seasons={media.Season}
-                  RD={media["Release Date"]}
+                  id={media._id || media.id}
+                  Name={media.name}
+                  Category={media.category}
+                  Duration={media.duration}
+                  NOE={media.noOfEpisodes}
+                  Seasons={media.season}
+                  RD={media.releaseDate}
                   Poster={media.poster}
-                  key={media.Name}
+                  key={media.id}
+                  video={media.mediaLocation}
                 />
               );
             })}
@@ -579,15 +515,36 @@ const Dashhboard = () => {
               <option value="Movie">Movie</option>
             </select>
           </div>
-          <div style={{ marginBottom: "1rem" }}>
-            <label htmlFor="posterUrl">Poster URL:</label>
+          <label>
+            Import Video File:
             <input
-              onChange={(e) => handleAddChange(e)}
-              id="posterUrl"
-              type="text"
-              placeholder="Enter Poster URL"
+              // ref={fileInputRef}
+              type="file"
+              name="video"
+              id="videoFile"
+              accept="video/*" // Restrict file input to video files
+              onChange={handleFileChange}
+              required
             />
-          </div>
+          </label>
+          <label>
+            Clip Duration:
+            <input
+              required
+              type="text"
+              value={clipDuration}
+              onChange={(e) => setClipDuration(e.target.value)}
+            />
+          </label>
+          <div style={{ marginBottom: "1rem" }}>
+  <label htmlFor="posterUrl">Poster URL:</label>
+  <input
+    onChange={(e) => handleURLChange(e)}
+    id="posterUrl"
+    type="file"
+    placeholder="Enter Poster URL"
+  />
+</div>
           <div style={{ marginBottom: "1rem" }}>
             <label htmlFor="duration">Duration:</label>
             <input
@@ -624,7 +581,7 @@ const Dashhboard = () => {
           <input
             onChange={(e) => handleAddChange(e)}
             id="releaseDate"
-            type="number"
+            type="date"
             placeholder="Release Date"
             style={{
               width: "20rem",

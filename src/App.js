@@ -8,6 +8,7 @@ import DataReport from './Components/DataReport';
 import HomePage from './Components/HomePage';
 import PlacePromotion from './Components/PlacePromotion';
 import PopularPicks from './Components/PopularPicks';
+import VideoClip from './Components/VideoClip';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 
@@ -44,6 +45,11 @@ const router = createBrowserRouter([
       {
         path:"/dashboard/datareport/",
         element:<DataReport/>
+      },
+
+      {
+        path: "/dashboard/video",
+        element: <VideoClip />,
       },
 
     ]
