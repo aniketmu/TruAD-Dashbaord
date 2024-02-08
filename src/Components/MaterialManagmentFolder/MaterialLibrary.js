@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import MaterialMCard from './MaterialMCard';
 
@@ -6,6 +6,25 @@ function MaterialLibrary({ initData }) {
     const [data, setData] = useState(initData);
     const [searchData, setSearchData] = useState(initData);
     const [productName, setProductName] = useState("");
+    const [mGroup, setMGroup] = useState([])
+    const [mSize, setMSize] = useState([])
+
+    useEffect(() => {
+        const arr1 = []
+        const arr2 = []
+        initData.forEach(element => {
+            if (!arr1.includes(element.group)) {
+                arr1.push(element.group)
+            }
+            if (!arr2.includes(element.size)) {
+                arr2.push(element.size)
+            }
+        });
+        setMGroup(arr1)
+        setMSize(arr2);
+
+
+    }, [initData])
 
     function handleProductName(event) {
         if (event.target.value.trim() !== "") {
@@ -42,12 +61,18 @@ function MaterialLibrary({ initData }) {
                     Material Group :
                     <select name="material-group" id="material-group" className='inputBox'>
                         <option value="">Select Material Group</option>
+                        {mGroup.map((el) => {
+                            return <option value={el}>{el}</option>
+                        })}
                     </select>
                 </label>
                 <label className='inputLabelContainer'>
                     Material Size:
                     <select name="material-size" id="material-size" className='inputBox'>
                         <option value="">Select Material Size</option>
+                        {mSize.map((el) => {
+                            return <option value={el}>{el}</option>
+                        })}
                     </select>
                 </label>
             </div>
