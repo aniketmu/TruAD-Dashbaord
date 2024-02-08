@@ -6,7 +6,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-import AlertDialog from './DeleteDialoge';
+import AlertDialog from './DeleteDialog';
+import OprateDialog from './OprateDialog';
 
 
 // <<<<<<< HEAD
@@ -51,10 +52,8 @@ export default function MaterialMCard({ data, index, handleDelete }) {
             <CardActions>
 
                 <AlertDialog index={index} handleDelete={handleDelete} >delete</AlertDialog>
-                <Button variant="contained" disableElevation style={{ width: "50%" }}>
-                    Oprate
-                </Button>
 
+                <OprateDialog thumbnail={data.file}>Oprate</OprateDialog>
 
             </CardActions>
         </Card>
