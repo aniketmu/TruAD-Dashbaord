@@ -432,7 +432,7 @@ const Dashhboard = () => {
 
     setMediaArray((prev) => [...prev, newMedia])
     
-    setMedia((prev) => [...prev, newMedia])
+    setMedia((prev) => [newMedia, ...prev,])
     
     handleClose()
   };

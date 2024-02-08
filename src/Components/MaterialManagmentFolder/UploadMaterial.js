@@ -28,7 +28,7 @@ function UploadMaterial({ setData }) {
       file: imageUrl,
     };
 
-    setData((prev) => [...prev, fileObj]);
+    setData((prev) => [fileObj, ...prev]);
   };
 
 
