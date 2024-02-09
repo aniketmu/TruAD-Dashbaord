@@ -50,7 +50,7 @@ const router = createBrowserRouter([
 
       {
         path: "/dashboard/video",
-        element: <VideoClip />,
+        element: <ActionPage />,
       },
       {
         path:"/dashboard/actionpage",

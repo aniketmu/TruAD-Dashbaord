@@ -1,6 +1,8 @@
 import React from 'react'
+import { useLocation } from "react-router-dom";
 const data=[1,3,4,5,6,6,7,8]
 function ActionPage() {
+    const location = useLocation();
     return (
         <div style={{ width: "100%", backgroundColor: "red" }}>
             <nav
@@ -42,7 +44,7 @@ function ActionPage() {
             <div style={{ display: "flex", backgroundColor: "green", margin: "10px 20px", height: "90vh" }}>
                 <div style={{ width: "50%", backgroundColor: "aqua", margin: "10px", display: "flex", flexDirection: "column" }}>
                     <h3 style={{ textAlign: "center" }}>Resource</h3>
-                    <video src="" style={{ width: "95%", backgroundColor: "yellow", margin: "0 auto", height: "35%", borderRadius: "7px" }}></video>
+                    <video src={location?.state?.location || ""} style={{ width: "95%", backgroundColor: "yellow", margin: "0 auto", height: "35%", borderRadius: "7px" }} controls></video>
 
                     <h3 style={{ textAlign: "center", marginTop: "10px", borderRadius: "7px" }}>Material</h3>
                     <div style={{ width: "95%", backgroundColor: "gold", margin: "0 auto", height: "35%" }}>

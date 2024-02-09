@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -10,19 +11,19 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function OprateDialog(props) {
     const [open, setOpen] = React.useState(false);
-    const [video, setVideo] = React.useState([{ video: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
-    { video: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
-    { video: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
-    { video: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
-    { video: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
-    { video: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
-    { video: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
-    { video: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
-    { video: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
-    { video: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
-    { video: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
-    { video: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
-    { video: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" }
+    const [video, setVideo] = React.useState([{ location: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
+    { location: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
+    { location: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
+    { location: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
+    { location: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
+    { location: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
+    { location: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
+    { location: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
+    { location: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
+    { location: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
+    { location: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
+    { location: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
+    { location: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" }
     ])
 
     const handleClickOpen = () => {
@@ -33,6 +34,21 @@ export default function OprateDialog(props) {
         setOpen(false);
     };
 
+    useEffect(() => {
+      const fetchData = async() => {
+        const response = await fetch("https://truad-dashboard-backend.onrender.com/get-video", {
+            method: "GET"
+        })
+
+        const data = await response.json()
+        if(data.data.length > 0){
+        setVideo(data.data)
+        }
+      }
+
+      fetchData()
+    }, [])
+    
 
     return (
         <React.Fragment>
@@ -61,7 +77,7 @@ export default function OprateDialog(props) {
                                 return <iframe
                                     style={{ height: "140px", width: "220px", margin: "10px", borderRadius: "7px" }}
 
-                                    src={vid.video}
+                                    src={vid.location}
                                     title="Youtube Player"
                                     frameborder="0"
                                 // allowFullScreen
