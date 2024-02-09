@@ -10,6 +10,7 @@ import PlacePromotion from './Components/PlacePromotion';
 import PopularPicks from './Components/PopularPicks';
 import VideoClip from './Components/VideoClip';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ActionPage from './Components/MaterialManagmentFolder/ActionPage';
 
 
 const router = createBrowserRouter([
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
         path: "/dashboard/video",
         element: <VideoClip />,
       },
+      {
+        path:"/dashboard/actionpage",
+        element :<ActionPage/>
+      }
 
     ]
    
