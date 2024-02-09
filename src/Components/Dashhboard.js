@@ -219,7 +219,7 @@ const Dashhboard = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("http://localhost:4000/media", {
+      const response = await fetch("https://truad-dashboard-backend.onrender.com/media", {
         method: "GET",
       });
 
@@ -230,7 +230,7 @@ const Dashhboard = () => {
     };
 
     fetchData();
-  }, []);
+  }, [openDialog]);
 
   useEffect(() => {}, [mediaArray]);
 
@@ -349,7 +349,7 @@ const Dashhboard = () => {
 
     console.log(data);
 
-    setMediaArray((prev) => [...prev, data.saveData]);
+    setMediaArray((prev) => [data.saveData, ...prev]);
 
     setMedia((prev) => [data.saveData, ...prev]);
 
@@ -484,6 +484,7 @@ const Dashhboard = () => {
                   Poster={media.poster}
                   key={media.id}
                   video={media.mediaLocation}
+                  AdClips={media.availableAdClips}
                 />
               );
             })}
@@ -495,7 +496,7 @@ const Dashhboard = () => {
         open={openDialog}
         PaperComponent={StyledPaper}
       >
-        <DialogTitle>Title</DialogTitle>
+        <DialogTitle>Add a Media</DialogTitle>
 
         <form style={{ maxWidth: "600px", margin: "0 auto" }}>
           <div style={{ marginBottom: "1rem" }}>

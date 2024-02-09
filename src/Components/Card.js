@@ -42,7 +42,7 @@ function MCard({
 
   const fetchClips = async () => {
     try {
-      const response = await fetch("http://localhost:4000/get-clips", {
+      const response = await fetch("https://truad-dashboard-backend.onrender.com/get-clips", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
