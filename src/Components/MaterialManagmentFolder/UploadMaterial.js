@@ -35,7 +35,7 @@ function UploadMaterial({ setData }) {
       <form onSubmit={handleSubmit}>
         <div
           className="uploadFileContainer"
-          style={{ backgroundImage: `url(${imageUrl})` }}
+         
         >
           <div
             style={{
