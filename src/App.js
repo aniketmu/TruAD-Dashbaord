@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import Dashhboard from './Components/Dashhboard';
 import DashBoardContainer from './Components/DashBoardContainer';
@@ -11,6 +11,7 @@ import PopularPicks from './Components/PopularPicks';
 import VideoClip from './Components/VideoClip';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ActionPage from './Components/MaterialManagmentFolder/ActionPage';
+import Invoices from './Components/InvoicesFiles/Invoices';
 
 
 const router = createBrowserRouter([
@@ -55,41 +56,16 @@ const router = createBrowserRouter([
       {
         path:"/dashboard/actionpage",
         element :<ActionPage/>
+      },
+      {
+        path:"/dashboard/invoices",
+        element:<Invoices/>
       }
 
     ]
    
-  },
-  // {
-  //   path: "/dashboard",
-  //   element: <Dashboard/>,
-  //   children: [
-  //     {
-  //       path: "/dashboard/",
-  //       element: <DashboardData />
-  //     },
-  //     {
-  //       path :"/dashboard/orders/",
-  //       element:<ProductsCom/>
-  //     },
-  //     {
-  //       path :"/dashboard/customer/",
-  //       element:<UsersCom/>
-  //     },
-  //     {
-  //       path :"/dashboard/reports/",
-  //       element:<DashboardData/>
-  //     },
-  //     {
-  //       path:"/dashboard/productList/",
-  //       element:<ProductsList/>
-  //     }
-     
-      
-      
-  //   ]
-    
-  // }
+  }
+ 
 ])
 
 function App() {
