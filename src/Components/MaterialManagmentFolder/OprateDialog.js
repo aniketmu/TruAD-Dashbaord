@@ -4,26 +4,27 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 
+import DialogTitle from '@mui/material/DialogTitle';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function OprateDialog(props) {
     const [open, setOpen] = React.useState(false);
-    const [video, setVideo] = React.useState([{ location: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
-    { location: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
-    { location: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
-    { location: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
-    { location: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
-    { location: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
-    { location: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
-    { location: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
-    { location: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
-    { location: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
-    { location: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
-    { location: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
-    { location: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" }
+    const navigate=useNavigate()
+    const [video, setVideo] = React.useState([{ video: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
+    { video: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
+    { video: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
+    { video: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
+    { video: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
+    { video: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
+    { video: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
+    { video: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
+    { video: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
+    { video: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
+    { video: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" },
+    { video: "https://www.youtube.com/embed/Q8O3256y9wo?si=u5wqEOnaiYp3Tku-" },
+    { video: "https://www.youtube.com/embed/VDrO044VHpY?si=7b2Fx75a9ZTuamkx" }
     ])
 
     const handleClickOpen = () => {
@@ -74,14 +75,19 @@ export default function OprateDialog(props) {
                         <div style={{ display: "flex", overflow: "auto" }}>
                             {video.map((vid) => {
 
-                                return <iframe
-                                    style={{ height: "140px", width: "220px", margin: "10px", borderRadius: "7px" }}
+                                return <div> <iframe
+                                    style={{ height: "140px", width: "220px", margin: "0px 10px", borderRadius: "7px" }}
 
                                     src={vid.location}
                                     title="Youtube Player"
                                     frameborder="0"
                                 // allowFullScreen
                                 />
+                                    <button style={{ height: "40px", width: "220px", margin: "0px 10px", borderRadius: "7px" }} onClick={()=>{
+                                        console.log(props.thumbnail);
+                                        navigate('/dashboard/actionpage/',{state:{video: vid.location,img:props.thumbnail}})
+                                    }} >Use it</button>
+                                </div>
 
 
                             })}

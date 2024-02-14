@@ -1,102 +1,273 @@
-import React from 'react'
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-const data=[1,3,4,5,6,6,7,8]
+
 function ActionPage() {
     const location = useLocation();
+    // console.log(location.state.video);
+    const [data, setData] = useState([
+        {
+            file: "https://imgs.search.brave.com/5YfDZ_BrNmW8ShDojzoMD8HgsVQ7SLM2tRWHWNbqQEE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFFMW44VCtJbkwu/anBn",
+            name: "Lenova i5",
+            group: "Lenova",
+            size: "16:4",
+        },
+        {
+            file: "https://imgs.search.brave.com/5YfDZ_BrNmW8ShDojzoMD8HgsVQ7SLM2tRWHWNbqQEE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFFMW44VCtJbkwu/anBn",
+            name: "Lenova i3",
+            group: "Lenova",
+            size: "16:9",
+        },
+        {
+            file: "https://imgs.search.brave.com/5YfDZ_BrNmW8ShDojzoMD8HgsVQ7SLM2tRWHWNbqQEE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFFMW44VCtJbkwu/anBn",
+            name: "Lenova i7",
+            group: "Lenova",
+            size: "16:0",
+        },
+        {
+            file: "https://imgs.search.brave.com/rF4rlcGROPpsgZSDqF7idtQ-eyvLK4E8rdpdt_bxpbI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTI1/NTcwMzQ4Mi9waG90/by9hcHBsZS1tYWNi/b29rLXByby0xNS1y/ZXRpbmEtb24tdGFi/bGUuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPWswVFA0OHFk/bzVwMGlCMzMwNEh1/S1cwVWFkOEQteWlF/R2tuczhYOXJUelU9",
+            name: "MacBook air i5",
+            group: "apple",
+            size: "16:0",
+        },
+        {
+            file: "https://imgs.search.brave.com/rF4rlcGROPpsgZSDqF7idtQ-eyvLK4E8rdpdt_bxpbI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTI1/NTcwMzQ4Mi9waG90/by9hcHBsZS1tYWNi/b29rLXByby0xNS1y/ZXRpbmEtb24tdGFi/bGUuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPWswVFA0OHFk/bzVwMGlCMzMwNEh1/S1cwVWFkOEQteWlF/R2tuczhYOXJUelU9",
+            name: "MacBook air M1",
+            group: "apple",
+            size: "12:6",
+        },
+        {
+            file: "https://imgs.search.brave.com/rF4rlcGROPpsgZSDqF7idtQ-eyvLK4E8rdpdt_bxpbI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTI1/NTcwMzQ4Mi9waG90/by9hcHBsZS1tYWNi/b29rLXByby0xNS1y/ZXRpbmEtb24tdGFi/bGUuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPWswVFA0OHFk/bzVwMGlCMzMwNEh1/S1cwVWFkOEQteWlF/R2tuczhYOXJUelU9",
+            name: "MacBook air M2",
+            group: "apple",
+            size: "16:9",
+        },
+        {
+            file: "https://imgs.search.brave.com/qtKZlY5eedORHBMZWxXzHgZe7gd8AX8Wy7t9DbxIajs/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9mZG4u/Z3NtYXJlbmEuY29t/L2ltZ3Jvb3QvcmV2/aWV3cy8xOS9zYW1z/dW5nLWdhbGF4eS1h/NTAvZ2FsLy0xMDI0/dzIvZ3NtYXJlbmFf/MDA2LmpwZw",
+            name: "Samsung S1 ",
+            group: "samsung",
+            size: "10:0",
+        },
+        {
+            file: "https://imgs.search.brave.com/qtKZlY5eedORHBMZWxXzHgZe7gd8AX8Wy7t9DbxIajs/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9mZG4u/Z3NtYXJlbmEuY29t/L2ltZ3Jvb3QvcmV2/aWV3cy8xOS9zYW1z/dW5nLWdhbGF4eS1h/NTAvZ2FsLy0xMDI0/dzIvZ3NtYXJlbmFf/MDA2LmpwZw",
+            name: "Samsung S2",
+            group: "samsung",
+            size: "10:2",
+        },
+        {
+            file: "https://imgs.search.brave.com/qtKZlY5eedORHBMZWxXzHgZe7gd8AX8Wy7t9DbxIajs/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9mZG4u/Z3NtYXJlbmEuY29t/L2ltZ3Jvb3QvcmV2/aWV3cy8xOS9zYW1z/dW5nLWdhbGF4eS1h/NTAvZ2FsLy0xMDI0/dzIvZ3NtYXJlbmFf/MDA2LmpwZw",
+            name: "Samsung S3",
+            group: "samsung",
+            size: "4:9",
+        },
+        {
+            file: "https://imgs.search.brave.com/qtKZlY5eedORHBMZWxXzHgZe7gd8AX8Wy7t9DbxIajs/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9mZG4u/Z3NtYXJlbmEuY29t/L2ltZ3Jvb3QvcmV2/aWV3cy8xOS9zYW1z/dW5nLWdhbGF4eS1h/NTAvZ2FsLy0xMDI0/dzIvZ3NtYXJlbmFf/MDA2LmpwZw",
+            name: "Samsung S4",
+            group: "samsung",
+            size: "12:0",
+        },
+        {
+            file: "https://imgs.search.brave.com/qtKZlY5eedORHBMZWxXzHgZe7gd8AX8Wy7t9DbxIajs/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9mZG4u/Z3NtYXJlbmEuY29t/L2ltZ3Jvb3QvcmV2/aWV3cy8xOS9zYW1z/dW5nLWdhbGF4eS1h/NTAvZ2FsLy0xMDI0/dzIvZ3NtYXJlbmFf/MDA2LmpwZw",
+            name: "Samsung S5",
+            group: "samsung",
+            size: "16:9",
+        },
+        {
+            file: "https://imgs.search.brave.com/Q-HWKQSSUFIvuXTOHYW3Jh8phPsxk9x30wcp_Y-WYRA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE1/Njg3MDY0MDcxNDIt/Y2FmZTBjOTFlNWE2/P3E9ODAmdz0xMDAw/JmF1dG89Zm9ybWF0/JmZpdD1jcm9wJml4/bGliPXJiLTQuMC4z/Jml4aWQ9TTN3eE1q/QTNmREI4TUh4elpX/RnlZMmg4T0h4OGJt/OXJhV0Y4Wlc1OE1I/eDhNSHg4ZkRBPQ",
+            name: "Nokia A1",
+            group: "nokia",
+            size: "15:9",
+        },
+        {
+            file: "https://imgs.search.brave.com/Q-HWKQSSUFIvuXTOHYW3Jh8phPsxk9x30wcp_Y-WYRA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE1/Njg3MDY0MDcxNDIt/Y2FmZTBjOTFlNWE2/P3E9ODAmdz0xMDAw/JmF1dG89Zm9ybWF0/JmZpdD1jcm9wJml4/bGliPXJiLTQuMC4z/Jml4aWQ9TTN3eE1q/QTNmREI4TUh4elpX/RnlZMmg4T0h4OGJt/OXJhV0Y4Wlc1OE1I/eDhNSHg4ZkRBPQ",
+            name: "Nokia A2",
+            group: "nokia",
+            size: "12:9",
+        },
+        {
+            file: "https://imgs.search.brave.com/Q-HWKQSSUFIvuXTOHYW3Jh8phPsxk9x30wcp_Y-WYRA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE1/Njg3MDY0MDcxNDIt/Y2FmZTBjOTFlNWE2/P3E9ODAmdz0xMDAw/JmF1dG89Zm9ybWF0/JmZpdD1jcm9wJml4/bGliPXJiLTQuMC4z/Jml4aWQ9TTN3eE1q/QTNmREI4TUh4elpX/RnlZMmg4T0h4OGJt/OXJhV0Y4Wlc1OE1I/eDhNSHg4ZkRBPQ",
+            name: "Nokia A1",
+            group: "nokia",
+            size: "16:0",
+        },
+        {
+            file: "https://imgs.search.brave.com/NsrfMBC2jrDnyLwTe4InCbSa6hM5IgvCR-Lon3Nm13g/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4u/d2NjZnRlY2guY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDE3/LzExL1hpYW9taS1N/aS1Ob3RlYm9vay1Q/cm8tMTUtNzQweDQ3/Ny5qcGc",
+            name: "Mi i5",
+            group: "mi",
+            size: "16:9",
+        },
+        {
+            file: "https://imgs.search.brave.com/NsrfMBC2jrDnyLwTe4InCbSa6hM5IgvCR-Lon3Nm13g/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4u/d2NjZnRlY2guY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDE3/LzExL1hpYW9taS1N/aS1Ob3RlYm9vay1Q/cm8tMTUtNzQweDQ3/Ny5qcGc",
+            name: "Mi i3",
+            group: "mi",
+            size: "14.5",
+        },
+        {
+            file: "https://imgs.search.brave.com/NsrfMBC2jrDnyLwTe4InCbSa6hM5IgvCR-Lon3Nm13g/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4u/d2NjZnRlY2guY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDE3/LzExL1hpYW9taS1N/aS1Ob3RlYm9vay1Q/cm8tMTUtNzQweDQ3/Ny5qcGc",
+            name: "mi ultra",
+            group: "mi",
+            size: "18:0",
+        },
+        {
+            file: "https://imgs.search.brave.com/BjP66chO1Y-yfdkupsFJRN71YfNg9pm_GlQLdwdgWS0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4u/bW9zLmNtcy5mdXR1/cmVjZG4ubmV0L3NX/VWd0aU05bXA4UU5B/YWRpOGFtd1otNDgw/LTgwLmpwZw",
+            name: "Reame 7",
+            group: "realme",
+            size: "10:0",
+        },
+        {
+            file: "https://imgs.search.brave.com/BjP66chO1Y-yfdkupsFJRN71YfNg9pm_GlQLdwdgWS0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4u/bW9zLmNtcy5mdXR1/cmVjZG4ubmV0L3NX/VWd0aU05bXA4UU5B/YWRpOGFtd1otNDgw/LTgwLmpwZw",
+            name: "Realme 5",
+            group: "realme",
+            size: "12:0",
+        },
+    ]);
+    const [image, setimage] = useState(location.state.img);
+
     return (
-        <div style={{ width: "100%", backgroundColor: "red" }}>
-            <nav
-                style={{ width: "100%", display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: "10px 20px" }}
-            >
-                {" "}
-                {/* Added gap */}
-                <div style={{ width: "calc(50% - 10px)" }}>
-                    {" "}
-                    {/* Adjust width to account for gap */}
-                    <button
-                        style={{
-                            width: "100%",
-                            borderTopLeftRadius: "20px" /* Border radius on top-left */,
-                            borderBottomLeftRadius: "20px" /* Border radius on bottom-left */,
-                            backgroundColor: "gray",
-                        }}
-                    >
-                        Operate
-                    </button>
+        <div style={{ width: "100%", backgroundColor: "rgb(220, 220, 220)" }}>
+
+            {/* // head container */}
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", height: "60px", padding: '12px 20px 10px 20px' }} >
+                <div style={{ backgroundColor: "white", width: "50%", height: "50px", margin: "0 10px", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "7px", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
+                    <h4>Oprate</h4>
                 </div>
-                <div style={{ width: "calc(50% - 10px)" }}>
-                    {" "}
-                    {/* Adjust width to account for gap */}
-                    <button
-                        style={{
-                            width: "100%",
-                            borderTopRightRadius: "20px" /* Border radius on top-right */,
-                            borderBottomRightRadius:
-                                "20px" /* Border radius on bottom-right */,
-                            backgroundColor: "grey",
-                        }}
-                    >
-                        Raise Ticket
-                    </button>
-                </div>
-            </nav>
-
-            <div style={{ display: "flex", backgroundColor: "green", margin: "10px 20px", height: "90vh" }}>
-                <div style={{ width: "50%", backgroundColor: "aqua", margin: "10px", display: "flex", flexDirection: "column" }}>
-                    <h3 style={{ textAlign: "center" }}>Resource</h3>
-                    <video src={location?.state?.location || ""} style={{ width: "95%", backgroundColor: "yellow", margin: "0 auto", height: "35%", borderRadius: "7px" }} controls></video>
-
-                    <h3 style={{ textAlign: "center", marginTop: "10px", borderRadius: "7px" }}>Material</h3>
-                    <div style={{ width: "95%", backgroundColor: "gold", margin: "0 auto", height: "35%" }}>
-                        <img src="https://imgs.search.brave.com/4krF387zcl9-cCMiBQtYjMI3uXauO2lghwG-RAkr8Ic/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pcS5v/cGVuZ2VudXMub3Jn/L2NvbnRlbnQvaW1h/Z2VzLzIwMjEvMDgv/Ym9yZGVyLnBuZw" alt="" style={{ objectFit: "cover", width: "100%", height: "100%", borderRadius: "7px" }} />
-                    </div>
-
-                    <button style={{ margin: "20px 10px", borderRadius: "7px" }}>Blend</button>
-
-
-
-                </div>
-
-
-                {/* rigthSide */}
-                <div style={{ width: "50%", backgroundColor: "blue", margin: "10px" }}>
-                    <h3 style={{ textAlign: "center", marginTop: "10px", borderRadius: "7px" }}>Material</h3>
-                    <div style={{display:"flex" ,flexWrap:"wrap", width:"100%", overflow:'auto'}}>
-                    <div
-            style={{
-              padding: "20px",
-              display: "grid",
-              gridTemplateColumns: "repeat(2, 1fr)",
-              gap: "20px",
-              justifyItems: "center",
-              alignItems: "center",
-              overflow: "hidden",
-           
-              
-            }}
-          >
-            {data.map(({ file }, index) => {
-              return (
-                <img
-                  key={index}
-                  src="https://imgs.search.brave.com/4krF387zcl9-cCMiBQtYjMI3uXauO2lghwG-RAkr8Ic/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pcS5v/cGVuZ2VudXMub3Jn/L2NvbnRlbnQvaW1h/Z2VzLzIwMjEvMDgv/Ym9yZGVyLnBuZw"
-                //   onClick={({ target: { src } }) => setimage(src)}
-                  style={{
-                    maxHeight: "300px",
-                    maxWidth: "100%",
-                    height: "auto",
-                  }}
-                />
-              );
-            })}
-          </div>
-
-                    </div>
+                <div style={{ backgroundColor: "white", width: "50%", height: "50px", margin: "0 10px", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "7px", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
+                    <h4>Raise Ticket</h4>
                 </div>
             </div>
 
+            <div
+                style={{
+                    display: "flex",
+                    margin: "10px 20px",
+                    height: "90vh",
+
+                }}
+            >
+                <div
+                    style={{
+                        width: "50%",
+                        margin: "10px",
+                        display: "flex",
+                        flexDirection: "column",
+                        backgroundColor: "white",
+                        borderRadius: '7px',
+                        boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"
+                    }}
+                >
+                    <h6 style={{ textAlign: "center", paddingTop:"15px", paddingBottom:"5px" }}>Resource</h6>
+                    <iframe
+                        style={{ width: "95%", margin: "0 auto", height: "40%", borderRadius: "7px", boxShadow: "rgba(0, 0, 1, 0.74) 0px 3px 8px" }}
+
+                        src={location.state.video}
+                        title="Youtube Player"
+                        frameborder="0"
+                        allowFullScreen
+                    />
+
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "7px" ,height:"40px", position:"relative"  }}>
+                        <h6
+                            style={{
+                                textAlign: "center",
+                                position:"absolute",
+                                bottom:"0px"
+
+                                // boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"
+                            }}
+                        >
+                            Material
+                        </h6>
+                    </div>
+
+                    <div
+                        style={{
+                            width: "95%",
+                            margin: "0 auto",
+                            height: "40%",
+                        }}
+                    >
+                        <img
+                            src={image}
+                            alt=""
+                            style={{
+                                objectFit: "cover",
+                                width: "100%",
+                                height: "100%",
+                                borderRadius: "7px",
+                                boxShadow: "rgba(0, 0, 0.5, 0.74) 0px 3px 8px"
+                            }}
+                        />
+                    </div>
+
+                    <button style={{ margin: "20px 10px", borderRadius: "7px", backgroundColor: 'red' }}>
+                        Blend
+                    </button>
+                </div>
+
+                {/* rigthSide */}
+                <div style={{ width: "50%", backgroundColor: "white", margin: "10px", border: '1px solid white', borderRadius: '7px' }}>
+                    <h6
+                        style={{
+                            textAlign: "center",
+                            marginTop: "10px",
+                            borderRadius: "7px",
+                            
+                        }}
+                    >
+                        All Material
+                    </h6>
+                    <div
+                        style={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            width: "100%",
+                            height: '95%', // Ensure this is effectively limiting the height
+                            padding: '10px',
+                            overflow: 'hidden', // Added to manage overflow
+                        }}
+                    >
+                        <div
+                            style={{
+                                padding: "10px",
+                                display: "grid",
+                                gridTemplateColumns: "repeat(2, 1fr)",
+                                gap: "20px",
+                                overflowY: 'auto', // This allows scrolling within the grid if it overflows vertically
+                                maxHeight: 'calc(100% - 20px)', // Adjusted to account for padding and prevent overflow
+                            }}
+                        >
+
+                            {data.map(({ file }, index) => {
+                                return (
+                                    <div
+                                        key={index} // Moved the key here for proper list rendering
+                                        style={{
+                                            width: "100%", // Ensure this controls the size as intended
+                                            height: 'auto', // Adjusted for responsive height based on the content
+                                        }}
+                                    >
+                                        <img
+                                            src={file}
+                                            onClick={({ target: { src } }) => setimage(src)}
+                                            style={{
+                                                objectFit: "cover",
+                                                width: "100%",
+                                                height: "auto", // Adjusted to maintain aspect ratio
+                                                borderRadius: "7px",
+                                                maxHeight: '200px', // Optional: limit image height if desired
+                                                boxShadow: "rgba(0, 0, 1, 0.74) 0px 3px 8px"
+                                            }}
+                                        />
+                                    </div>
+                                );
+                            })}
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
-    )
+    );
 }
 
-export default ActionPage
+export default ActionPage;
