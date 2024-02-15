@@ -108,41 +108,41 @@ const data = [
 
 
 function Invoices() {
-  
-  const [catagory, setCatagory] = useState("All")
-  const [list,setList]=useState(data);
 
-  const [headings,setHeading]=useState([
-    {name:"All",isActive:true},
-    {name:"Paid",isActive:false},
-    {name:"Pending",isActive:false},
-    {name:"Refunded",isActive:false},
-    {name:"Overdue",isActive:false},
+  const [catagory, setCatagory] = useState("All")
+  const [list, setList] = useState(data);
+
+  const [headings, setHeading] = useState([
+    { name: "All", isActive: true },
+    { name: "Paid", isActive: false },
+    { name: "Pending", isActive: false },
+    { name: "Refunded", isActive: false },
+    { name: "Overdue", isActive: false },
   ])
 
-  function handleActive(i){
-    const newHead=[...headings];
-    newHead.forEach((e,ind)=>{
-        if(i===ind){
-          e.isActive=true;
-        }else{
-          e.isActive=false;
-        }
+  function handleActive(i) {
+    const newHead = [...headings];
+    newHead.forEach((e, ind) => {
+      if (i === ind) {
+        e.isActive = true;
+      } else {
+        e.isActive = false;
+      }
     })
 
   }
-  useEffect(()=>{
-    if(catagory==="All"){
+  useEffect(() => {
+    if (catagory === "All") {
       setList(data);
     }
-    else{
-      const d=[...data];
-      const newArr=d.filter((e)=>{
-        return e.status===catagory;
+    else {
+      const d = [...data];
+      const newArr = d.filter((e) => {
+        return e.status === catagory;
       })
       setList(newArr);
     }
-  },[catagory])
+  }, [catagory])
 
 
   return (
@@ -153,41 +153,15 @@ function Invoices() {
       <div style={{ display: "flex", margin: "10px", justifyContent: "space-between", backgroundColor: "white", alignItems: 'center', boxShadow: "rgba(0, 0, 0, 0.4) 0px 3px 8px", borderRadius: "7px" }}>
         <div className='ch1p'>
 
-          {headings.map((e,i)=>{
-            return <div key={i} className='ch1' style={e.isActive?{backgroundColor:"blue",color:"white"}:{backgroundColor:"white"}}   onClick={() => {
-            setCatagory(e.name)
-            handleActive(i);
-          }} >
-            <span>{e.name}</span>
-          </div>
+          {headings.map((e, i) => {
+            return <div key={i} className='ch1' style={e.isActive ? { backgroundColor: "blue", color: "white" } : { backgroundColor: "white" }} onClick={() => {
+              setCatagory(e.name)
+              handleActive(i);
+            }} >
+              <span>{e.name}</span>
+            </div>
           })}
 
-
-          {/* <div className='ch1'   onClick={() => {
-            setCatagory("All")
-          }} >
-            <span>All</span>
-          </div>
-          <div className='ch1' onClick={() => {
-            setCatagory("Paid")
-          }}>
-            <span>Paid</span>
-          </div>
-          <div className='ch1' onClick={() => {
-            setCatagory("Pending")
-          }}>
-            <span>Pending</span>
-          </div>
-          <div className='ch1' onClick={() => {
-            setCatagory("Refunded")
-          }}>
-            <span>Refunded</span>
-          </div>
-          <div className='ch1' onClick={() => {
-            setCatagory("Overdue")
-          }}>
-            <span>Overdue</span>
-          </div> */}
         </div>
         <div style={{ width: "49%" }}>
           <div className='ch2'>
