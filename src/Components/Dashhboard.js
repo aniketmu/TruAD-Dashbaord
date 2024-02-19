@@ -342,6 +342,9 @@ const Dashhboard = () => {
 
     const response = await fetch("http://localhost:4000/add-media", {
       method: "POST",
+      // headers: {
+      //   ...formHeaders,
+      // },
       body: formData,
     });
 
@@ -371,7 +374,7 @@ const Dashhboard = () => {
   };
 
   return (
-    <div style={{ width: "80%", height: "100vh" }}>
+    <div style={{ width: "80%", height: "100vh", overflow: "auto"}}>
       <div
         style={{
           display: "flex",
@@ -409,8 +412,8 @@ const Dashhboard = () => {
           <button onClick={handleSearch}>Search</button>
         </div>
         <div className={styles.dashboard}>
-          <div className={styles.resource}>
-            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+          <div className={styles.resource} style={{}}>
+            <div style={{ display: "flex", alignItems: "center", gap: "20px"}}>
               <img
                 src={menu}
                 style={{ height: "20px", width: "20px" }}
@@ -524,7 +527,7 @@ const Dashhboard = () => {
               <option value="Movie">Movie</option>
             </select>
           </div>
-          <label>
+          {/* <label>
             Import Video File:
             <input
               // ref={fileInputRef}
@@ -546,7 +549,7 @@ const Dashhboard = () => {
               onChange={(e) => setClipDuration(e.target.value)}
               style={{ width: "100%", marginBottom: "1rem" }}
             />
-          </label>
+          </label> */}
           <div style={{ marginBottom: "1rem" }}>
             <label htmlFor="posterUrl">Poster URL:</label>
             <input

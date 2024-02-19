@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 function MCard({
   id,
@@ -20,20 +20,20 @@ function MCard({
   RD,
   AdClips,
   Poster,
-  video
+  video,
 }) {
   const [openDialog, setOpenDialog] = useState(false);
+  const [adVideo, setAdVideo] = useState(null);
   const [clips, setClips] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-
-      fetchClips();
-
-  }, [openDialog, id]);
+  // useEffect(() => {
+  //   fetchClips();
+  // }, [openDialog, id]);
 
   const handleClose = () => {
     setOpenDialog(false);
+    setAdVideo(null);
   };
 
   const openDialogBox = () => {
@@ -42,24 +42,34 @@ function MCard({
 
   const fetchClips = async () => {
     try {
-      const response = await fetch("https://truad-dashboard-backend.onrender.com/get-clips", {
+      const form = new FormData();
+      form.append("file", adVideo);
+      form.append("filename", adVideo.name);
+
+      const response = await fetch("http://192.168.0.105:5000/stitch", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id }), // Body should be stringified
+        body: form,
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
       const data = await response.json();
-      setClips(data.locations);
+      console.log(data);
+      setClips(data.clips);
     } catch (error) {
-      console.error("Error fetching clips:", error);
+      console.error("Error: ", error);
     }
   };
 
   const handleClipClick = (location) => {
-    navigate("/dashboard/video", {state: {location}})
-  }
+    navigate("/dashboard/video", { state: { location } });
+  };
+
+  const handleAdVideoChange = (e) => {
+    setAdVideo(e.target.files[0]);
+  };
 
   return (
     <>
@@ -67,7 +77,11 @@ function MCard({
         {Array.from({ length: 8 }).map((_, idx) => (
           <Col key={idx}>
             <Card onClick={openDialogBox}>
-              <Card.Img variant="top" src={Poster} style={{ height: "160px" }} />
+              <Card.Img
+                variant="top"
+                src={Poster}
+                style={{ height: "160px" }}
+              />
               <Card.Body>
                 <Card.Title className="fs-4">{Name}</Card.Title>
                 <Card.Subtitle className="mt-1 fw-light text-start ps-2">
@@ -114,55 +128,82 @@ function MCard({
         </div>
       </Dialog> */}
       <Dialog
-                open={openDialog}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">
-                    {Name}
-                </DialogTitle>
-                <DialogContent>
+        open={openDialog}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{Name}</DialogTitle>
+        <DialogContent>
+          <div>
+            {/* <img src={"https://upload.wikimedia.org/wikipedia/en/3/3f/Tanu_weds_Manu_poster.jpg"} style={{ width: "100%", borderRadius: "7px" }} alt="Img Not Found" /> */}
 
-                    <div>
-                        {/* <img src={"https://upload.wikimedia.org/wikipedia/en/3/3f/Tanu_weds_Manu_poster.jpg"} style={{ width: "100%", borderRadius: "7px" }} alt="Img Not Found" /> */}
-                        {video ? <video src={video} style={{width: "100%"}} controls/> :  <iframe
+            {/* Origial */}
+            {/* {video ? <video src={video} style={{width: "100%"}} controls/> :  <iframe
             style={{  width: "100%" }}
             src="https://www.youtube.com/embed/ermJ-iPg9xA?si=TvTA9sm4kr-fp3tz"
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
-          ></iframe>}
-                        
-                        <DialogTitle id="alert-dialog-title">
-                            {"Available Clips"}
-                        </DialogTitle>
-                        <div style={{ display: "flex", overflow: "auto" }}>
-                            {clips.map((vid) => {
-
-                                return <video
-                                    style={{ height: "140px", width: "220px", margin: "10px", borderRadius: "7px" }}
-
-                                    src={vid.location}
-                                    title="Youtube Player"
-                                    frameborder="0"
-                                // allowFullScreen
-                                onClick={(e) => handleClipClick(vid.location)}
-                                />
-
-
-                            })}
-                        </div>
-                    </div>
-                </DialogContent>
-                <DialogActions>
-
-                    <button onClick={handleClose} variant="contained" disableElevation style={{ width: "100%" }}>Close</button>
-
-
-                </DialogActions>
-            </Dialog>
+          ></iframe>} */}
+            {adVideo !== null ? (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "20px",
+                }}
+              >
+                <video
+                  src={URL.createObjectURL(adVideo)}
+                  style={{ width: "100%" }}
+                  controls
+                />
+                <button onClick={fetchClips}>Generate Clips</button>
+              </div>
+            ) : (
+              <div>
+                <label>Add a Video</label>
+                <input type="file" onChange={handleAdVideoChange} />
+              </div>
+            )}
+            { clips.length > 0 && (<><DialogTitle id="alert-dialog-title">
+              {"Available Clips"}
+            </DialogTitle>
+            <div style={{ display: "flex", overflow: "auto" }}>
+              {clips.map((vid) => {
+                return (
+                  <video
+                    style={{
+                      height: "140px",
+                      width: "220px",
+                      margin: "10px",
+                      borderRadius: "7px",
+                    }}
+                    controls
+                    src={vid}
+                    title="Youtube Player"
+                    frameborder="0"
+                    // allowFullScreen
+                    onClick={(e) => handleClipClick(vid.location)}
+                  />
+                );
+              })}
+            </div></>)}
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <button
+            onClick={handleClose}
+            variant="contained"
+            disableElevation
+            style={{ width: "100%" }}
+          >
+            Close
+          </button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
@@ -172,4 +213,3 @@ function MCard({
 // );
 
 export default MCard;
-
