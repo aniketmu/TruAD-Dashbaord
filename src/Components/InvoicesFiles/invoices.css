@@ -1,0 +1,103 @@
+
+.ch1p{
+    width: 49%;
+    /* background-color: aqua; */
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+
+}
+.ch1{
+    background-color: white;
+    width:20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 7px;
+    margin: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+
+}
+
+
+
+
+.ch2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
+.ch2 input{
+    width: 90%;
+    height: 40px;
+    margin: 0 5px 0 0;
+    
+}
+.ch2 button{
+    width: 20%;
+    height: 40px;
+    border-radius: 7px; 
+     margin-right: 10px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     
+}
+
+
+.InvoiceItemContainer{
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 0.5px solid rgb(189, 180, 180);
+    height: 50px;
+    background-color: rgba(234, 231, 231, 0.776);
+    border-radius: 7px;
+    margin-bottom: 5px;
+
+    /* box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px; */
+
+}
+
+.patreview{
+    display: inline-block;
+    border: 1px solid black;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin: 0px 2.5px;
+    background-color: white;
+    height: 100%;
+    font-weight: bold;
+   text-align: center;
+
+   border-radius: 7px;
+   padding: auto;
+}
+.Pending{
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+}
+.Paid{
+    background-color: green;
+    color: white;
+    font-weight: bold;
+}
+.Overdue{
+    background-color: red;
+    color: white;
+    font-weight: bold;
+
+}
+.Refunded{
+    background-color: rgb(178, 2, 213);
+    color: white;
+    font-weight: bold;
+
+}

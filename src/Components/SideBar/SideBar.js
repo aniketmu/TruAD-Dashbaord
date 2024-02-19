@@ -18,7 +18,17 @@ export default function SideBar({ removeCookie, navigate }) {
                 <div className='buttonContainer'><span> Material Management</span> </div>
             </Link>
 
-            <Link to={"/dashboard/placepromotion"} style={{ textDecoration: "none", color: "white" }}><div className='buttonContainer'><span>Place Promotion</span> </div></Link>
+            <Link to={"/dashboard/invoices/"} style={{ textDecoration: "none", color: "white" }}>
+                <div className='buttonContainer'>
+                    <span>Invoices</span>
+                </div>
+            </Link>
+
+            <Link to={"/dashboard/placepromotion"} style={{ textDecoration: "none", color: "white" }}>
+                <div className='buttonContainer'>
+                    <span>Place Promotion</span>
+                </div>
+            </Link>
 
             <Link to={"/dashboard/datareport/"} style={{ textDecoration: "none", color: "white" }}><div className='buttonContainer'><span>Data Report</span> </div></Link>
             <button onClick={(e) => { removeCookie("user", { path: "/" }); navigate("/") }} style={{ position: "absolute", bottom: "0", width: "100%" }}>Signout</button>
