@@ -121,6 +121,7 @@ function ActionPage() {
         },
     ]);
     const [image, setimage] = useState(location.state.img);
+
     return (
         <div style={{ width: "100%", backgroundColor: "rgb(220, 220, 220)" }}>
 

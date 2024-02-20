@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -34,6 +35,21 @@ export default function OprateDialog(props) {
         setOpen(false);
     };
 
+    useEffect(() => {
+      const fetchData = async() => {
+        const response = await fetch("https://truad-dashboard-backend.onrender.com/get-video", {
+            method: "GET"
+        })
+
+        const data = await response.json()
+        if(data.data.length > 0){
+        setVideo(data.data)
+        }
+      }
+
+      fetchData()
+    }, [])
+    
 
     return (
         <React.Fragment>
@@ -62,14 +78,14 @@ export default function OprateDialog(props) {
                                 return <div> <iframe
                                     style={{ height: "140px", width: "220px", margin: "0px 10px", borderRadius: "7px" }}
 
-                                    src={vid.video}
+                                    src={vid.location}
                                     title="Youtube Player"
                                     frameborder="0"
                                 // allowFullScreen
                                 />
                                     <button style={{ height: "40px", width: "220px", margin: "0px 10px", borderRadius: "7px" }} onClick={()=>{
                                         console.log(props.thumbnail);
-                                        navigate('/dashboard/actionpage/',{state:{video: vid.video,img:props.thumbnail}})
+                                        navigate('/dashboard/actionpage/',{state:{video: vid.location,img:props.thumbnail}})
                                     }} >Use it</button>
                                 </div>
 

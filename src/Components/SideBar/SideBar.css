@@ -1,37 +1,60 @@
-*{
-    margin: 0;
-    padding: 0;
-}  
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .sidebarContainer {
-    
-    width: 20%;
-    height: 100vh;
-    background-color: black;
-    color: white;
-  }
-  .headingContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-   height: 60px;
-    /* margin-bottom: 5px; */
-    background-color: rgb(64, 60, 60);
+  width: 20%;
+  height: 100vh;
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
 
-  }
-  
-  .heading {
-    /* background-color: rgb(72, 68, 68); */
-   text-align: center;
-    
-  }
+.headingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  background-color: rgb(64, 60, 60);
+}
 
-  .buttonContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    cursor: pointer;
-  }
-  .buttonContainer:hover{
-    background-color: aqua;
-  }
+.heading {
+  text-align: center;
+}
+
+.linksContainer {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.linksContainer .links {
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.buttonLink {
+  text-decoration: none;
+  color: white;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  cursor: pointer;
+}
+
+.buttonContainer:hover {
+  background-color: aqua;
+}
+
+.signoutButton {
+  width: 100%;
+}
