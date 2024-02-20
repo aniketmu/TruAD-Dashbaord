@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import MCard from "./Card";
 import styles from "./Dashboard.module.css";
 import Popular from "../Assets/popular.png";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import { useMyContext } from '../MyContext';
 
 function PopularPicks() {
+  const { value } = useMyContext();
   const [movies, setMovies] = useState([
     {
       Title: "Top Gear: At the Movies",
@@ -35,7 +39,7 @@ function PopularPicks() {
       try {
         const apiKey = "37f889dd"; // Replace with your OMDb API key
         const fetchedMedia = await Promise.all(
-          movies.map(async (movie) => {
+          value.map(async (movie) => {
             const response = await fetch(
               `https://www.omdbapi.com/?i=${movie.imdbID}&apikey=${apiKey}`
             );
@@ -44,7 +48,7 @@ function PopularPicks() {
           })
         );
         fetchedMedia.sort(
-          (media1, media2) => media2.imdbRating - media1.imdbRating
+          (media1, media2) => media2.imdbVotes - media1.imdbVotes
         );
 
         const filtered = fetchedMedia.map((mediaItem) => ({
@@ -63,18 +67,63 @@ function PopularPicks() {
   }, []);
 
   return (
+    // <div style={{ width: "80%", height: "100vh", overflow: "auto" }}>
+    //   <div
+    //     style={{
+    //       display: "flex",
+    //       background: "grey",
+    //       width: "100%",
+    //       height: "60px",
+    //       alignItems: "center",
+    //       justifyContent: "start",
+    //       paddingLeft: "50px",
+    //     }}
+    //   ></div>
+
+    //   <div
+    //     style={{
+    //       padding: "20px",
+    //       display: "flex",
+    //       flexDirection: "column",
+    //       gap: "20px",
+    //       background: "#DCDCDC",
+    //     }}
+    //   >
+    //     <div className={styles.dashboard}>
+    //       <div className={styles.resource} style={{}}>
+    //         <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+    //           <img
+    //             src={Popular}
+    //             style={{ height: "40px", width: "40px" }}
+    //             alt="menu-btn"
+    //           />
+    //           <h4 style={{ margin: "0px", fontSize: "40px" }}>Popular Picks</h4>
+    //         </div>
+    //       </div>
+    //       <div>
+    //         {media.map((elem) => (
+    //           <MCard
+    //             key={elem.imdbID}
+    //             id={elem.imdbID}
+    //             Name={elem.Title}
+    //             Duration={elem.Runtime}
+    //             Category={elem.Genre}
+    //             NOE={"NA"}
+    //             Seasons={"NA"}
+    //             RD={elem.Released}
+    //             AdClips={8}
+    //             Poster={elem.Poster}
+    //             IMDBRating={elem.imdbRating}
+    //           />
+    //         ))}
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
     <div style={{ width: "80%", height: "100vh", overflow: "auto" }}>
-      <div
-        style={{
-          display: "flex",
-          background: "grey",
-          width: "100%",
-          height: "60px",
-          alignItems: "center",
-          justifyContent: "start",
-          paddingLeft: "50px",
-        }}
-      ></div>
+      {/* =======
+    <div style={{ width: "80%", height: "100vh", overflowY: "auto" }}>
+>>>>>>> 34000198abf74c6293612118a09b7b4fa978cb2d */}
 
       <div
         style={{
@@ -86,32 +135,38 @@ function PopularPicks() {
         }}
       >
         <div className={styles.dashboard}>
-          <div className={styles.resource} style={{}}>
-            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-              <img
-                src={Popular}
-                style={{ height: "40px", width: "40px" }}
-                alt="menu-btn"
-              />
-              <h4 style={{ margin: "0px", fontSize: "40px" }}>Popular Picks</h4>
+          {/* <<<<<<< HEAD */}
+          {/* <div className={styles.resource} style={{}}> */}
+          <div className={styles.resource}>
+            {/* =======
+>>>>>>> 34000198abf74c6293612118a09b7b4fa978cb2d */}
+<div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+        <img
+          src={Popular}
+          style={{ height: "40px", width: "40px" }}
+          alt="menu-btn"
+        />
+        <h4 style={{ margin: "0px", fontSize: "40px" }}>Popular Picks</h4>
             </div>
           </div>
           <div>
-            {media.map((elem) => (
-              <MCard
-                key={elem.imdbID}
-                id={elem.imdbID}
-                Name={elem.Title}
-                Duration={elem.Runtime}
-                Category={elem.Genre}
-                NOE={"NA"}
-                Seasons={"NA"}
-                RD={elem.Released}
-                AdClips={8}
-                Poster={elem.Poster}
-                IMDBRating={elem.imdbRating}
-              />
-            ))}
+            {/* Card */}
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid
+                container
+                spacing={{ xs: 2, md: 3 }}
+                columns={{ xs: 4, sm: 8, md: 12 }}
+              >
+                {/* {Array.from(Array(20)).map((_, index) => (
+          <Grid item xs={2} sm={4} md={4} key={index}>
+            <Item>xs=2</Item>
+          </Grid>
+        ))} */}
+                {media.map(({ imdbID }) => {
+                  return <MCard key={imdbID} id={imdbID} />;
+                })}
+              </Grid>
+            </Box>
           </div>
         </div>
       </div>

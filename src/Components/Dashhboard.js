@@ -5,10 +5,12 @@ import CustomButton from "./CustomButton";
 import MCard from "./Card";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/Dialog";
-import DialogActions from "@mui/material/Dialog";
-import Button from "@mui/material/Dialog";
 import Paper from "@mui/material/Paper";
+import axios from "axios";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import { experimentalStyled as styled } from "@mui/material/styles";
+import { useMyContext } from '../MyContext';
 
 const Dashhboard = () => {
   const [selectedType, setSelectedType] = useState("");
@@ -21,6 +23,49 @@ const Dashhboard = () => {
   const [files, setFiles] = useState([]);
   const [clipDuration, setClipDuration] = useState(10);
   const [poster, setPoster] = useState("");
+  const [movies, setMovies] = useState([]);
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  }));
+  const { value, setValue } = useMyContext();
+
+  const searchMovies = async () => {
+    const apiKey = "37f889dd"; // Replace with your OMDb API key
+    try {
+      const response = await axios.get(
+        `https://www.omdbapi.com/?s=${
+          searchTerm ? searchTerm : "Comedy"
+        }&apikey=${apiKey}`
+      );
+      setMovies(response.data.Search);
+      setValue(response.data.Search)
+      setSearchTerm("");
+      // Log the array of movies
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  const selectedMovies = async () => {
+    const apiKey = "37f889dd"; // Replace with your OMDb API key
+    try {
+      const response = await axios.get(
+        `https://www.omdbapi.com/?s=${
+          selectedCategory ? selectedCategory : "Top Movie"
+        }&apikey=${apiKey}`
+      );
+      setMovies(response.data.Search);
+      // Log the array of movies
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  useEffect(() => {
+    searchMovies();
+  }, []);
 
   const handleFileChange = (event) => {
     console.log(event.target.files[0]);
@@ -28,144 +73,6 @@ const Dashhboard = () => {
   };
 
   const [mediaArray, setMediaArray] = useState([]);
-
-  // const [mediaArray, setMediaArray] = useState([
-  //   {
-  //     _id: 1,
-  //     name: "Stranger Things",
-  //     type: "TV Show",
-  //     poster:
-  //       "https://media.themoviedb.org/t/p/w300_and_h450_bestv2/49WJfeN0moxb9IPfGn8AIqMGskD.jpg",
-  //     duration: "Varies",
-  //     availableAdClips: 8,
-  //     starring: ["Millie Bobby Brown", "Finn Wolfhard"],
-  //     releaseDate: 2016,
-  //     noOfEpisodes: 25,
-  //     season: 3,
-  //     category: ["Drama", "Fantasy", "Horror"],
-  //     certification: "PG-13",
-  //   },
-  //   {
-  //     _id: 2,
-  //     name: "Tanu Weds Manu",
-  //     type: "Movie",
-  //     poster:
-  //       "https://image.tmdb.org/t/p/original/cY1lEQu6sgofrKAVUigtXpOvZQZ.jpg",
-  //     duration: "3hr 21min",
-  //     availableAdClips: 5,
-  //     starring: ["Kangana Ranaut", "R Madhavan"],
-  //     releaseDate: 2016,
-  //     noOfEpisodes: "NA",
-  //     season: "NA",
-  //     category: ["Comedy", "Drama", "Romance"],
-  //     certification: "S+",
-  //   },
-  //   {
-  //     _id: 3,
-  //     name: "Inception",
-  //     type: "Movie",
-  //     poster:
-  //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg",
-  //     duration: "2hr 28min",
-  //     availableAdClips: 3,
-  //     starring: ["Leonardo DiCaprio", "Joseph Gordon-Levitt"],
-  //     releaseDate: 2010,
-  //     noOfEpisodes: "NA",
-  //     season: "NA",
-  //     category: ["Action", "Adventure", "Sci-Fi"],
-  //     certification: "PG-13",
-  //   },
-  //   {
-  //     _id: 4,
-  //     name: "The Crown",
-  //     type: "TV Show",
-  //     poster:
-  //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/1DDE0Z2Y805rqfkEjPbZsMLyPwa.jpg",
-  //     duration: "Varies",
-  //     availableAdClips: 10,
-  //     starring: ["Claire Foy", "Matt Smith"],
-  //     releaseDate: 2016,
-  //     noOfEpisodes: 40,
-  //     season: 4,
-  //     category: ["Biography", "Drama", "History"],
-  //     certification: "TV-MA",
-  //   },
-  //   {
-  //     _id: 5,
-  //     name: "The Dark Knight",
-  //     type: "Movie",
-  //     poster:
-  //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
-  //     duration: "2hr 32min",
-  //     availableAdClips: 4,
-  //     starring: ["Christian Bale", "Heath Ledger"],
-  //     releaseDate: 2008,
-  //     noOfEpisodes: "NA",
-  //     season: "NA",
-  //     category: ["Action", "Crime", "Drama"],
-  //     certification: "PG-13",
-  //   },
-  //   {
-  //     _id: 6,
-  //     name: "Friends",
-  //     type: "TV Show",
-  //     poster:
-  //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/2koX1xLkpTQM4IZebYvKysFW1Nh.jpg",
-  //     duration: "Varies",
-  //     availableAdClips: 6,
-  //     starring: ["Jennifer Aniston", "Courteney Cox"],
-  //     releaseDate: 1994,
-  //     noOfEpisodes: 236,
-  //     season: 10,
-  //     category: ["Comedy", "Romance"],
-  //     certification: "TV-14",
-  //   },
-  //   {
-  //     _id: 7,
-  //     name: "The Shawshank Redemption",
-  //     type: "Movie",
-  //     poster:
-  //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
-  //     duration: "2hr 22min",
-  //     availableAdClips: 3,
-  //     starring: ["Tim Robbins", "Morgan Freeman"],
-  //     releaseDate: 1994,
-  //     noOfEpisodes: "NA",
-  //     season: "NA",
-  //     category: ["Drama"],
-  //     certification: "R",
-  //   },
-  //   {
-  //     _id: 8,
-  //     name: "Breaking Bad",
-  //     type: "TV Show",
-  //     poster:
-  //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/ztkUQFLlC19CCMYHW9o1zWhJRNq.jpg",
-  //     duration: "Varies",
-  //     availableAdClips: 9,
-  //     starring: ["Bryan Cranston", "Aaron Paul"],
-  //     releaseDate: 2008,
-  //     noOfEpisodes: 62,
-  //     season: 5,
-  //     category: ["Crime", "Drama", "Thriller"],
-  //     certification: "TV-MA",
-  //   },
-  //   {
-  //     _id: 9,
-  //     name: "The Matrix",
-  //     type: "Movie",
-  //     poster:
-  //       "https://image.tmdb.org/t/p/w600_and_h900_bestv2/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
-  //     duration: "2hr 16min",
-  //     availableAdClips: 4,
-  //     starring: ["Keanu Reeves", "Carrie-Anne Moss"],
-  //     releaseDate: 1999,
-  //     noOfEpisodes: "NA",
-  //     season: "NA",
-  //     category: ["Action", "Sci-Fi"],
-  //     certification: "R",
-  //   },
-  // ]);
 
   const handleClose = () => {
     handleDisplay(false);
@@ -227,7 +134,6 @@ const Dashhboard = () => {
       );
 
       const data = await response.json();
-      console.log(data.data);
       setMediaArray(data.data);
       setMedia(data.data);
     };
@@ -270,6 +176,7 @@ const Dashhboard = () => {
         media.category.includes(option)
       );
       setMedia(filtered);
+      selectedMovies();
     }
   };
 
@@ -314,6 +221,7 @@ const Dashhboard = () => {
         media.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         media.type.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    searchMovies();
     setMedia(filtered);
     setSearchTerm("");
   };
@@ -345,9 +253,6 @@ const Dashhboard = () => {
 
     const response = await fetch("http://localhost:4000/add-media", {
       method: "POST",
-      // headers: {
-      //   ...formHeaders,
-      // },
       body: formData,
     });
 
@@ -377,7 +282,11 @@ const Dashhboard = () => {
   };
 
   return (
+// <<<<<<< HEAD
     <div style={{ width: "80%", height: "100vh", overflow: "auto" }}>
+{/* =======
+    <div style={{ width: "80%", height: "100vh", overflowY: "auto" }}>
+>>>>>>> 34000198abf74c6293612118a09b7b4fa978cb2d */}
       <div
         style={{
           display: "flex",
@@ -387,6 +296,8 @@ const Dashhboard = () => {
           alignItems: "center",
           justifyContent: "start",
           paddingLeft: "50px",
+          position: "fixed",
+          zIndex: "2",
         }}
       >
         <img
@@ -411,11 +322,16 @@ const Dashhboard = () => {
             type="text"
             placeholder="Please enter the resource name, actors, production company and placement client"
             onChange={(e) => setSearchTerm(e.target.value)}
+            value={searchTerm}
           />
           <button onClick={handleSearch}>Search</button>
         </div>
         <div className={styles.dashboard}>
-          <div className={styles.resource} style={{}}>
+{/* <<<<<<< HEAD */}
+          {/* <div className={styles.resource} style={{}}> */}
+          <div className={styles.resource}>
+{/* =======
+>>>>>>> 34000198abf74c6293612118a09b7b4fa978cb2d */}
             <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
               <img
                 src={menu}
@@ -433,12 +349,14 @@ const Dashhboard = () => {
               <label>Type</label>
               <select
                 value={selectedType}
-                onChange={(e) => handleTypeSelect(e.target.value)}
+                onChange={(e) => {
+                  handleTypeSelect(e.target.value);
+                }}
               >
                 <option value="" disabled>
                   Select an option
                 </option>
-                {typeOptions.map((option) => (
+                {typeOptions?.map((option) => (
                   <option key={option} value={option}>
                     {option}
                   </option>
@@ -449,7 +367,9 @@ const Dashhboard = () => {
               <label>Category</label>
               <select
                 value={selectedCategory}
-                onChange={(e) => handleCategorySelect(e.target.value)}
+                onChange={(e) => {
+                  handleCategorySelect(e.target.value);
+                }}
               >
                 <option value="" disabled>
                   Select an option
@@ -479,23 +399,23 @@ const Dashhboard = () => {
             </div>
           </div>
           <div>
-            {media.map((media) => {
-              return (
-                <MCard
-                  id={media._id || media.id}
-                  Name={media.name}
-                  Category={media.category}
-                  Duration={media.duration}
-                  NOE={media.noOfEpisodes}
-                  Seasons={media.season}
-                  RD={media.releaseDate}
-                  Poster={media.poster}
-                  key={media.id}
-                  video={media.mediaLocation}
-                  AdClips={media.availableAdClips}
-                />
-              );
-            })}
+            {/* Card */}
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid
+                container
+                spacing={{ xs: 2, md: 3 }}
+                columns={{ xs: 4, sm: 8, md: 12 }}
+              >
+                {/* {Array.from(Array(20)).map((_, index) => (
+          <Grid item xs={2} sm={4} md={4} key={index}>
+            <Item>xs=2</Item>
+          </Grid>
+        ))} */}
+                {movies.map(({ imdbID }) => {
+                  return <MCard key={imdbID} id={imdbID} />;
+                })}
+              </Grid>
+            </Box>
           </div>
         </div>
       </div>
@@ -532,7 +452,7 @@ const Dashhboard = () => {
               <option value="Movie">Movie</option>
             </select>
           </div>
-          {/* <label>
+          <label>
             Import Video File:
             <input
               // ref={fileInputRef}
@@ -554,7 +474,7 @@ const Dashhboard = () => {
               onChange={(e) => setClipDuration(e.target.value)}
               style={{ width: "100%", marginBottom: "1rem" }}
             />
-          </label> */}
+          </label>
           <div style={{ marginBottom: "1rem" }}>
             <label htmlFor="posterUrl">Poster URL:</label>
             <input

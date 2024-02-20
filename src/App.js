@@ -12,6 +12,7 @@ import VideoClip from './Components/VideoClip';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ActionPage from './Components/MaterialManagmentFolder/ActionPage';
 import Invoices from './Components/InvoicesFiles/Invoices';
+import { MyContextProvider } from './MyContext';
 
 
 const router = createBrowserRouter([
@@ -71,7 +72,9 @@ const router = createBrowserRouter([
 function App() {
   
   return (
-    <RouterProvider router={router}></RouterProvider>
+    <MyContextProvider>
+      <RouterProvider router={router}></RouterProvider>
+  </MyContextProvider>
   );
 }
 
