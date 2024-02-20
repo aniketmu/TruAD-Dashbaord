@@ -219,9 +219,12 @@ const Dashhboard = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://truad-dashboard-backend.onrender.com/media", {
-        method: "GET",
-      });
+      const response = await fetch(
+        "https://truad-dashboard-backend.onrender.com/media",
+        {
+          method: "GET",
+        }
+      );
 
       const data = await response.json();
       console.log(data.data);
@@ -374,7 +377,7 @@ const Dashhboard = () => {
   };
 
   return (
-    <div style={{ width: "80%", height: "100vh", overflow: "auto"}}>
+    <div style={{ width: "80%", height: "100vh", overflow: "auto" }}>
       <div
         style={{
           display: "flex",
@@ -413,7 +416,7 @@ const Dashhboard = () => {
         </div>
         <div className={styles.dashboard}>
           <div className={styles.resource} style={{}}>
-            <div style={{ display: "flex", alignItems: "center", gap: "20px"}}>
+            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
               <img
                 src={menu}
                 style={{ height: "20px", width: "20px" }}
@@ -421,7 +424,9 @@ const Dashhboard = () => {
               />
               <h4 style={{ margin: "0px" }}>Resource</h4>
             </div>
-            <button onClick={openDialogBox}>Add</button>
+            <button onClick={openDialogBox} style={{ borderRadius: "8px" }}>
+              Add
+            </button>
           </div>
           <div className={styles.dropdowns}>
             <div className={styles.dropdown}>

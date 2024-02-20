@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MCard from "./Card";
 import styles from "./Dashboard.module.css";
-import Popular from '../Assets/popular.png'
+import Popular from "../Assets/popular.png";
 
 function PopularPicks() {
   const [movies, setMovies] = useState([
@@ -88,12 +88,12 @@ function PopularPicks() {
         <div className={styles.dashboard}>
           <div className={styles.resource} style={{}}>
             <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-            <img
+              <img
                 src={Popular}
-                style={{ height: "30px", width: "30px" }}
+                style={{ height: "40px", width: "40px" }}
                 alt="menu-btn"
               />
-              <h4 style={{ margin: "0px" }}>Popular Picks</h4>
+              <h4 style={{ margin: "0px", fontSize: "40px" }}>Popular Picks</h4>
             </div>
           </div>
           <div>

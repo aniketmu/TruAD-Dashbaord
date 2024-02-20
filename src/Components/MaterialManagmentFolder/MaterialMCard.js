@@ -17,7 +17,7 @@ import OprateDialog from './OprateDialog';
 export default function MaterialMCard({ data, index, handleDelete }) {
     // >>>>>>> 790dee5c0b629f4d47ec39a49c8d5a99b492be38
     return (
-        <Card sx={{ maxWidth: 300, borderRadius: "10px" }}>
+        <Card sx={{ maxWidth: 300, borderRadius: "10px", border: "solid 1px #DCDCDC" }}>
             <CardMedia
                 component="img"
                 alt="green iguana"

@@ -49,6 +49,9 @@
   align-items: center;
   height: 40px;
   cursor: pointer;
+  transition: all 0.3s ease;  
+  border-radius: 5em;
+  padding: 2px 5px;
 }
 
 .buttonContainer:hover {
