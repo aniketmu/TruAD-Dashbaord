@@ -23,7 +23,6 @@ const Dashhboard = () => {
   const [clipDuration, setClipDuration] = useState(10);
   const [poster, setPoster] = useState("");
   const [movies, setMovies] = useState([]);
-
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -174,6 +173,7 @@ const Dashhboard = () => {
         media.category.includes(option)
       );
       setMedia(filtered);
+      selectedMovies();
     }
   };
 
@@ -356,7 +356,6 @@ const Dashhboard = () => {
                 value={selectedCategory}
                 onChange={(e) => {
                   handleCategorySelect(e.target.value);
-                  selectedMovies();
                 }}
               >
                 <option value="" disabled>
