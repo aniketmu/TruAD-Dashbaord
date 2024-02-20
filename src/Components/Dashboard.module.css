@@ -15,7 +15,7 @@
     border: 1px solid #000;
     box-shadow: none;
     border-radius: 10px;
-    -webkit-appearance: none;
+    /* -webkit-appearance: none; */
 }
 
 .search_container button{
@@ -33,6 +33,7 @@
     gap: 20px;
     padding: 20px;
     border-radius: 10px;
+    overflow: hidden;
 }
 
 .dashboard .resource {

@@ -1,35 +1,46 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import axios from "axios";
+import { useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
 
-import {useNavigate} from "react-router-dom"
+import Typography from "@mui/material/Typography";
 
-function MCard({
-  id,
-  Name,
-  Duration,
-  Category,
-  NOE,
-  Seasons,
-  RD,
-  AdClips,
-  Poster,
-  video
-}) {
+import Grid from "@mui/material/Grid";
+
+import { useNavigate } from "react-router-dom";
+
+import { Chip, Stack } from "@mui/material";
+import img from '../image/imageofmovie.png'
+
+function MCard({ id }) {
   const [openDialog, setOpenDialog] = useState(false);
   const [clips, setClips] = useState([]);
+  const [movies, setMovies] = useState({
+    Poster: "",
+    Title: "null",
+  });
   const navigate = useNavigate();
+  const theme = useTheme();
+
+  const searchMovies = async () => {
+    const apiKey = "37f889dd"; // Replace with your OMDb API key
+    try {
+      const response = await axios.get(
+        `https://www.omdbapi.com/?i=${id}&apikey=${apiKey}`
+      );
+      setMovies(response.data);
+      // Log the array of movies
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   useEffect(() => {
-
-      fetchClips();
-
+    searchMovies();
+    fetchClips();
   }, [openDialog, id]);
 
   const handleClose = () => {
@@ -42,13 +53,16 @@ function MCard({
 
   const fetchClips = async () => {
     try {
-      const response = await fetch("https://truad-dashboard-backend.onrender.com/get-clips", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id }), // Body should be stringified
-      });
+      const response = await fetch(
+        "https://truad-dashboard-backend.onrender.com/get-clips",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id }), // Body should be stringified
+        }
+      );
 
       const data = await response.json();
       setClips(data.locations);
@@ -58,62 +72,101 @@ function MCard({
   };
 
   const handleClipClick = (location) => {
-    navigate("/dashboard/video", {state: {location}})
-  }
+    navigate("/dashboard/video", { state: { location } });
+  };
 
   return (
     <>
-      <Row xs={1} md={4} className="g-4 p-4">
-        {Array.from({ length: 8 }).map((_, idx) => (
-          <Col key={idx}>
+      <Grid item xs={2} sm={4} md={4} key={id}>
+        <Card
+          sx={{ display: "flex", flexWrap: "nowrap", borderRadius: "10px" }}
+        >
+          <Box sx={{ borderRadius: "10px" }}>
+            <CardMedia
+              component="img"
+              sx={{
+                width: "100%",
+                objectFit: "cover",
+                height: "200px",
+                borderRadius: "5px",
+              }}
+              image={(movies.Poster=='N/A')?img:movies.Poster}
+              alt="Live from space album cover"
+            />
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              maxHeight: "150px",
+            }}
+          >
+            <CardContent sx={{ flex: "1 0 auto" }}>
+              <Typography variant="h6">
+                {movies.Title.substring(0,20) || "null"}
+              </Typography>
+              <Stack direction="row" spacing={1}>
+                {movies?.Genre?.split(",").map(
+                  (label, index /* Check if Genre exists and then map */) => (
+                    <Chip key={index} label={label.trim()} size="small" /> // Added key prop for React list
+                  )
+                )}
+              </Stack>
+
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Typography
+                  variant="subtitle1"
+                  color="text.secondary"
+                  component="div"
+                >
+                  Votes: {movies.imdbVotes}
+                </Typography>
+                <Typography
+                  variant="subtitle1"
+                  color="text.secondary"
+                  component="div"
+                >
+                  Score: {movies.Metascore}
+                </Typography>
+              </Stack>
+            </CardContent>
+          </Box>
+        </Card>
+      </Grid>
+      {/* <Row xs={1} md={4} className="g-4 p-4">
+        {movies.map((movie,i) => (
+          <Col key={i}>
             <Card onClick={openDialogBox}>
-              <Card.Img variant="top" src={Poster} style={{ height: "160px" }} />
+              <Card.Img variant="top" src={movie.Poster} style={{ height: "160px" }} />
               <Card.Body>
-                <Card.Title className="fs-4">{Name}</Card.Title>
+                <Card.Title className="fs-4">{movie.Title}</Card.Title>
                 <Card.Subtitle className="mt-1 fw-light text-start ps-2">
-                  {Duration}
+                  {movie.Duration || 'test'}
                 </Card.Subtitle>
                 <Card.Text className="text-start my-1 p-2 fw-normal">
-                  {Category.map((cat) => cat + ", ")}
+                  
+                  {movie.Genre.map((cat) => cat + ", ")}
                   <br />
-                  No of Episode : {NOE}
+                  No of Episode : {movie.NOE || 0}
                   <br />
-                  Available Clips: {AdClips || 0}
+                  Available Clips: {movie.AdClips || 0}
                   <br />
-                  Season: {Seasons}
+                  Season: {movie.Seasons || null}
                 </Card.Text>
                 <footer className="footer text-start">
-                  <cite title="Source Title">Release Date: {RD}</cite>
+                  <cite title="Source Title">Release Date: {movie.Year}</cite>
                 </footer>
               </Card.Body>
             </Card>
           </Col>
         ))}
-      </Row>
-      {/* <Dialog onClose={handleClose} open={openDialog} PaperComponent={StyledPaper}>
-        <DialogTitle style={{ textAlign: "center", fontSize: "1.5rem", fontWeight: "bold" }}>
-          {Name}
-        </DialogTitle>
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <iframe
-            style={{ objectFit: "contain", width: "800px", height: "400px" }}
-            src="https://www.youtube.com/embed/ermJ-iPg9xA?si=TvTA9sm4kr-fp3tz"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            {clips.map((clip, index) => (
-              <div key={index} style={{ margin: "10px" }} onClick={(e) => handleClipClick(clip.location)}>
-                <video src={clip.location} style={{ width: "200px", height: "150px", objectFit: "cover", borderRadius: "5px" }}></video>
-                <span style={{ marginTop: "5px", fontSize: "0.8rem" }}>{clip.title}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Dialog> */}
-      <Dialog
+      </Row> */}
+
+      {/* <Dialog
                 open={openDialog}
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
@@ -125,7 +178,6 @@ function MCard({
                 <DialogContent>
 
                     <div>
-                        {/* <img src={"https://upload.wikimedia.org/wikipedia/en/3/3f/Tanu_weds_Manu_poster.jpg"} style={{ width: "100%", borderRadius: "7px" }} alt="Img Not Found" /> */}
                         {video ? <video src={video} style={{width: "100%"}} controls/> :  <iframe
             style={{  width: "100%" }}
             src="https://www.youtube.com/embed/ermJ-iPg9xA?si=TvTA9sm4kr-fp3tz"
@@ -162,7 +214,7 @@ function MCard({
 
 
                 </DialogActions>
-            </Dialog>
+            </Dialog> */}
     </>
   );
 }
@@ -172,4 +224,3 @@ function MCard({
 // );
 
 export default MCard;
-
