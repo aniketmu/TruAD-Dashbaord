@@ -1,6 +1,14 @@
 import React from "react";
 import "./SideBar.css";
-import { Link, useLocation } from "react-router-dom"; // Import useLocation
+import { Link, useLocation } from "react-router-dom";
+import HomeIcon from '@mui/icons-material/Home';
+import WhatshotIcon from '@mui/icons-material/Whatshot';
+import SourceIcon from '@mui/icons-material/Source';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import DataThresholdingIcon from '@mui/icons-material/DataThresholding';
+import CategoryIcon from '@mui/icons-material/Category';
+import CampaignIcon from '@mui/icons-material/Campaign';
+
 
 export default function SideBar({ removeCookie, navigate }) {
   const location = useLocation(); // Get current location
@@ -12,39 +20,40 @@ export default function SideBar({ removeCookie, navigate }) {
 
       <div className="linksContainer">
         <div className="links">
+{/* <<<<<<< HEAD */}
         <Link to={"/dashboard/homepage"} className='buttonLink'>
           <div className={`buttonContainer  ${location.pathname === "/dashboard/homepage" ? "active" : ""}`}>
-            <span>Home Page</span>{" "}
+            <span> <HomeIcon />Home Page</span>{" "}
           </div>
         </Link>
         <Link to={"/dashboard/popularpicks/"} className='buttonLink'>
           <div className={`buttonContainer  ${location.pathname === "/dashboard/popularpicks/" ? "active" : ""}`}>
-            <span>Popular Picks</span>{" "}
+            <span> <WhatshotIcon /> Popular Picks</span>{" "}
           </div>
         </Link>
         <Link to={"/dashboard/"} className='buttonLink'>
           <div className={`buttonContainer  ${location.pathname === "/dashboard/" ? "active" : ""}`}>
-            <span>Resource Management</span>{" "}
+            <span> <SourceIcon /> Resource Management</span>{" "}
           </div>
         </Link>
         <Link to={"/dashboard/material/"} className='buttonLink'>
           <div className={`buttonContainer  ${location.pathname === "/dashboard/material/" ? "active" : ""}`}>
-            <span> Material Management</span>{" "}
+            <span>  <CategoryIcon />Material Management</span>{" "}
           </div>
         </Link>
         <Link to={"/dashboard/invoices/"} className='buttonLink'>
           <div className={`buttonContainer  ${location.pathname === "/dashboard/invoices/" ? "active" : ""}`}>
-            <span>Invoices</span>
+            <span> <ReceiptIcon />Invoices</span>
           </div>
         </Link>
         <Link to={"/dashboard/placepromotion"} className='buttonLink' >
           <div className={`buttonContainer  ${location.pathname === "/dashboard/placepromotion" ? "active" : ""}`}>
-            <span>Place Promotion</span>
+            <span><CampaignIcon />Place Promotion</span>
           </div>
         </Link>
         <Link to={"/dashboard/datareport/"} className='buttonLink'>
           <div className={`buttonContainer  ${location.pathname === "/dashboard/datareport/" ? "active" : ""}`}>
-            <span>Data Report</span>{" "}
+            <span><DataThresholdingIcon />Data Report</span>{" "}
           </div>
         </Link>
         </div>
