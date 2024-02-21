@@ -131,3 +131,7 @@ select {
 .uploadFileContainer label input {
   border: none;
 }
+
+.card_container::-webkit-scrollbar {
+  width: 8px;               /* width of the entire scrollbar */
+}

@@ -56,6 +56,7 @@ export default function SideBar({ removeCookie, navigate }) {
             <span><DataThresholdingIcon />Data Report</span>{" "}
           </div>
         </Link>
+
         </div>
       </div>
 

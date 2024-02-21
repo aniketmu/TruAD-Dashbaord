@@ -44,21 +44,21 @@
   color: white;
   width: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
-  width: 80%;
 }
 
 .buttonContainer {
   display: flex;
   width: max-content;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   height: 40px;
   cursor: pointer;
   transition: all 0.3s ease;
   border-radius: 5em;
   padding: 2px 20px;
+  width: 70%;
 }
 
 .buttonContainer:hover {

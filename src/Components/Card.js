@@ -79,6 +79,7 @@ function MCard({ id }) {
       <Grid item xs={2} sm={4} md={4} key={id}>
         <Card
           sx={{ display: "flex", flexWrap: "nowrap", borderRadius: "10px" }}
+          style={{ boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)' }}
           onClick={openDialogBox}
           className="mcard"
         >
