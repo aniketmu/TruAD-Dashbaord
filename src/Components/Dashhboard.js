@@ -282,11 +282,7 @@ const Dashhboard = () => {
   };
 
   return (
-// <<<<<<< HEAD
     <div style={{ width: "80%", height: "100vh", overflow: "auto" }}>
-{/* =======
-    <div style={{ width: "80%", height: "100vh", overflowY: "auto" }}>
->>>>>>> 34000198abf74c6293612118a09b7b4fa978cb2d */}
       <div
         style={{
           display: "flex",
@@ -327,11 +323,7 @@ const Dashhboard = () => {
           <button onClick={handleSearch}>Search</button>
         </div>
         <div className={styles.dashboard}>
-{/* <<<<<<< HEAD */}
-          {/* <div className={styles.resource} style={{}}> */}
           <div className={styles.resource}>
-{/* =======
->>>>>>> 34000198abf74c6293612118a09b7b4fa978cb2d */}
             <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
               <img
                 src={menu}
@@ -398,7 +390,7 @@ const Dashhboard = () => {
               </select>
             </div>
           </div>
-          <div>
+          <div style={{padding: "5px"}}>
             {/* Card */}
             <Box sx={{ flexGrow: 1 }}>
               <Grid
@@ -406,11 +398,6 @@ const Dashhboard = () => {
                 spacing={{ xs: 2, md: 3 }}
                 columns={{ xs: 4, sm: 8, md: 12 }}
               >
-                {/* {Array.from(Array(20)).map((_, index) => (
-          <Grid item xs={2} sm={4} md={4} key={index}>
-            <Item>xs=2</Item>
-          </Grid>
-        ))} */}
                 {movies.map(({ imdbID }) => {
                   return <MCard key={imdbID} id={imdbID} />;
                 })}

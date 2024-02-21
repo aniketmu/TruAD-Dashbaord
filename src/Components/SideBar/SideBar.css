@@ -36,22 +36,27 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
 }
 
 .buttonLink {
   text-decoration: none;
   color: white;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .buttonContainer {
   display: flex;
+  width: max-content;
   justify-content: center;
   align-items: center;
   height: 40px;
   cursor: pointer;
   transition: all 0.3s ease;  
   border-radius: 5em;
-  padding: 2px 5px;
+  padding: 2px 20px;
 }
 
 .buttonContainer:hover {
@@ -59,5 +64,11 @@
 }
 
 .signoutButton {
+  width: 100%;
+}
+
+.active {
+  background-color: aqua; /* Set your desired background color */
+  border-radius: 0;
   width: 100%;
 }

@@ -1,5 +1,7 @@
-.container {
+.container1 {
   background-color: rgb(220, 220, 220);
+  width: 80%;
+  padding: 5px;
 }
 
 .firstContainer {
