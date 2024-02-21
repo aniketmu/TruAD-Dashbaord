@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import { useMyContext } from '../MyContext';
+import DataNotFound from "./DataNotFound";
 
 const Dashhboard = () => {
   const [selectedType, setSelectedType] = useState("");
@@ -411,9 +412,9 @@ const Dashhboard = () => {
             <Item>xs=2</Item>
           </Grid>
         ))} */}
-                {movies.map(({ imdbID }) => {
+                {movies?movies.map(({ imdbID }) => {
                   return <MCard key={imdbID} id={imdbID} />;
-                })}
+                }):<DataNotFound/>}
               </Grid>
             </Box>
           </div>
