@@ -3,6 +3,7 @@ import styles from "./Dashboard.module.css";
 import menu from "../Assets/menu.png";
 import CustomButton from "./CustomButton";
 import MCard from "./Card";
+import MCard1 from "./Card3";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import Paper from "@mui/material/Paper";
@@ -409,7 +410,7 @@ const Dashhboard = () => {
         ))} */}
                 {movies?movies.map(({ imdbID }) => {
 // >>>>>>> a84f766f5c8bd8bd01c515329839669f745bca10
-                  return <MCard key={imdbID} id={imdbID} />;
+                  return <MCard1 key={imdbID} id={imdbID} />;
                 }):<DataNotFound/>}
               </Grid>
             </Box>

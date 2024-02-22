@@ -11,12 +11,17 @@ import { DialogActions } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
-import { Chip, Stack,  Button,CardActionArea, CardActions, } from "@mui/material";
-import img from '../image/imageofmovie.png';
-import './MCard.css';
+import {
+  Chip,
+  Stack,
+  Button,
+  CardActionArea,
+  CardActions,
+} from "@mui/material";
+import img from "../image/imageofmovie.png";
+import "./MCard.css";
 
-
-function MCard({ id }) {
+const MCard1 = ({ id }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [clips, setClips] = useState([]);
   const [movies, setMovies] = useState({
@@ -79,64 +84,88 @@ function MCard({ id }) {
     <>
       <Grid item xs={2} sm={4} md={4} key={id}>
         <Card
-          sx={{ display: "flex", flexWrap: "nowrap", borderRadius: "10px" }}
-          style={{ boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)' }}
+          sx={{
+            maxWidth: 230,
+            minWidth: 150,
+            background: "#616161",
+            color: "white",
+            position: "relative",
+          }}
+          className="media"
           onClick={openDialogBox}
-          className="mcard"
+          style={{ boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)' }}
         >
-          <Box sx={{ borderRadius: "10px", display: "flex", justifyContent: "center" }}>
+          <CardActionArea>
             <CardMedia
               component="img"
-              sx={{
-                width: "70%",
-                objectFit: "fill",
-                height: "200px",
-                borderRadius: "5px",
-              }}
-              image={movies.Poster == 'N/A' ? img : movies.Poster}
-              alt="Live from space album cover"
+              height="260"
+              image={movies.Poster == "N/A" ? img : movies.Poster}
+              onMouseLeave={() => console.log(29)}
+              alt="green iguana"
             />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              maxHeight: "150px",
-            }}
-          >
-            <CardContent sx={{ flex: "1 0 auto" }}>
-              <Typography variant="h6">
-                {movies.Title.substring(0, 20) || "null"}
-              </Typography>
+            <CardContent
+              sx={{
+                position: "absolute",
+                top: "auto",
+                bottom: 0,
+                width: "100%",
+                backgroundColor: "rgb(94 92 92 / 94%)", // Semi-transparent overlay
+                visibility: "visible",
+                transition: "opacity 0.3s ease, visibility 0.3s ease",
+                opacity: 0,
+                "&:hover": {
+                  opacity: 1,
+                },
+                p: 1,
+              }}
+              className="media_child"
+            >
+<Typography gutterBottom sx={{ fontSize: "16px" }} component="div">
+  {movies?.Plot?.split(' ').slice(0, 15).join(' ')}{movies?.Plot?.split(' ').length > 15 ? ' ....' : ''}
+</Typography>
               <Stack direction="row" spacing={1}>
-                {movies?.Genre?.split(",").map(
-                  (label, index) => (
-                    <Chip key={index} label={label.trim()} size="small" />
-                  )
-                )}
+                {movies?.Genre?.split(",").map((label, index) => (
+                  <Chip
+                    key={index}
+                    label={label.trim()}
+                    size="small"
+                    sx={{ color: "#eeeeee", background: "rgb(58 58 58)" }}
+                  />
+                ))}
               </Stack>
               <Stack
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
+                marginTop={0.8}
+                color="#eeeeee"
               >
-                <Typography
-                  variant="subtitle1"
-                  color="text.secondary"
-                  component="div"
-                >
+                <Typography variant="subtitle1">
                   Votes: {movies.imdbVotes}
                 </Typography>
-                <Typography
-                  variant="subtitle1"
-                  color="text.secondary"
-                  component="div"
-                >
+                <Typography variant="subtitle1">
                   Score: {movies.Metascore}
                 </Typography>
               </Stack>
             </CardContent>
-          </Box>
+          </CardActionArea>
+          <CardActions
+            sx={{ background: "rgb(14 14 14 / 65%)", p: 0.3, paddingInline: 1 }}
+          >
+            {/* <Button
+              size="small"
+              color="primary"
+              sx={{ color: "#d3d6da", width: "100%" }}
+            >
+              ADD Video
+            </Button> */}
+            <Typography
+              variant="subtitle1"
+              sx={{ display:"flex", justifyContent: "center", color: "#d3d6da", width: "100%", backgroundColor: "black" }}
+            >
+               {movies.Title.substring(0, 20) || "null"}
+            </Typography>
+          </CardActions>
         </Card>
       </Grid>
 
@@ -157,12 +186,19 @@ function MCard({ id }) {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             ></iframe>
-            <DialogTitle id="alert-dialog-title">{"Available Clips"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">
+              {"Available Clips"}
+            </DialogTitle>
             <div style={{ display: "flex", overflow: "auto" }}>
               {clips.map((vid, index) => (
                 <video
                   key={index}
-                  style={{ height: "140px", width: "220px", margin: "10px", borderRadius: "7px" }}
+                  style={{
+                    height: "140px",
+                    width: "220px",
+                    margin: "10px",
+                    borderRadius: "7px",
+                  }}
                   src={vid.location}
                   title="Youtube Player"
                   frameborder="0"
@@ -173,11 +209,17 @@ function MCard({ id }) {
           </div>
         </DialogContent>
         <DialogActions>
-          <button onClick={handleClose} variant="contained" disableElevation style={{ width: "100%" }}>Close</button>
+          <button
+            onClick={handleClose}
+            variant="contained"
+            disableElevation
+            style={{ width: "100%" }}
+          >
+            Close
+          </button>
         </DialogActions>
       </Dialog>
     </>
   );
-}
-
-export default MCard;
+};
+export default MCard1;

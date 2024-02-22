@@ -5,6 +5,7 @@ import Popular from "../Assets/popular.png";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { useMyContext } from "../MyContext";
+import MCard1 from "./Card3";
 
 function PopularPicks() {
   const { value } = useMyContext();
@@ -222,7 +223,7 @@ function PopularPicks() {
           </Grid>
         ))} */}
                 {media.map(({ imdbID }) => {
-                  return <MCard key={imdbID} id={imdbID} />;
+                  return <MCard1 key={imdbID} id={imdbID} />;
                 })}
               </Grid>
             </Box>
