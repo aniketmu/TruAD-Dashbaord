@@ -134,7 +134,7 @@ function MaterialManagment() {
     setSwap(false);
   };
 
-  useEffect(() => {}, [data]);
+  useEffect(() => { }, [data]);
 
   return (
     <div className="container1">

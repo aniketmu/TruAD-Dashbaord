@@ -6,6 +6,7 @@ import logo from '../img/logo.png'
 import { useNavigate } from 'react-router-dom'
 import { CookiesProvider, useCookies } from "react-cookie";
 import './Checkout.css'
+import './Auth.css'
 
 function LoginContainer() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
