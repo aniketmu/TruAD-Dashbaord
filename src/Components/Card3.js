@@ -93,7 +93,7 @@ const MCard1 = ({ id }) => {
           }}
           className="media"
           onClick={openDialogBox}
-          style={{ boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)' }}
+          style={{ boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)" }}
         >
           <CardActionArea>
             <CardMedia
@@ -120,9 +120,14 @@ const MCard1 = ({ id }) => {
               }}
               className="media_child"
             >
-<Typography gutterBottom sx={{ fontSize: "16px" }} component="div">
-  {movies?.Plot?.split(' ').slice(0, 15).join(' ')}{movies?.Plot?.split(' ').length > 15 ? ' ....' : ''}
-</Typography>
+              <Typography
+                gutterBottom
+                sx={{ fontSize: "16px" }}
+                component="div"
+              >
+                {movies?.Plot?.split(" ").slice(0, 15).join(" ")}
+                {movies?.Plot?.split(" ").length > 15 ? " ...." : ""}
+              </Typography>
               <Stack direction="row" spacing={1}>
                 {movies?.Genre?.split(",").map((label, index) => (
                   <Chip
@@ -161,9 +166,15 @@ const MCard1 = ({ id }) => {
             </Button> */}
             <Typography
               variant="subtitle1"
-              sx={{ display:"flex", justifyContent: "center", color: "#d3d6da", width: "100%", backgroundColor: "black" }}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                color: "#d3d6da",
+                width: "100%",
+                backgroundColor: "black",
+              }}
             >
-               {movies.Title.substring(0, 20) || "null"}
+              {movies.Title.substring(0, 20) || "null"}
             </Typography>
           </CardActions>
         </Card>
