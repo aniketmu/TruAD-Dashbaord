@@ -20,7 +20,6 @@ const Dashhboard = () => {
   const [openDialog, handleDisplay] = useState(false);
   const [add, setAdd] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
-  const [files, setFiles] = useState([]);
   const [clipDuration, setClipDuration] = useState(10);
   const [poster, setPoster] = useState("");
   const [movies, setMovies] = useState([]);
