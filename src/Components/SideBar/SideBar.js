@@ -53,7 +53,7 @@ export default function SideBar({ removeCookie, navigate }) {
 
       <List>
         <Link to={"/dashboard/homepage"} style={{ textDecoration: 'none', color: "white", fontWeight: "bold" }}>
-          <ListItem key={"HOME PAGE"} disablePadding>
+          <ListItem key={"HOME PAGE"} disablePadding className={location.pathname == "/dashboard/homepage" ? "active" : ""}>
             <ListItemButton>
               <ListItemIcon sx={{ color: "#d3d6dad9" }}>
                 <HomeIcon />
@@ -142,6 +142,5 @@ export default function SideBar({ removeCookie, navigate }) {
           SIGNOUT
         </button>
     </div>
-
   );
 }
