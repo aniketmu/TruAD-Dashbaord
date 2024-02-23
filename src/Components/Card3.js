@@ -82,7 +82,7 @@ const MCard1 = ({ id }) => {
 
   return (
     <>
-      <Grid item xs={2} sm={4} md={4} key={id}>
+      <Grid item xs={2} sm={3} md={3} key={id}>
         <Card
           sx={{
             maxWidth: 230,
