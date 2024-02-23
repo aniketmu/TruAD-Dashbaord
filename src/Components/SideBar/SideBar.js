@@ -115,16 +115,17 @@ export default function SideBar({ removeCookie, navigate }) {
         })}
 
       </List>
-      <button style={{ position: "absolute", bottom: "0px" }}
-        onClick={(e) => {
-          removeCookie("user", { path: "/" });
-          navigate("/");
-        }}
-        className="signoutButton"
-      >
-        SIGNOUT
-      </button>
+      <button style={{position:"absolute", bottom:"0px"}}
+          onClick={(e) => {
+            removeCookie("user", { path: "/" });
+            navigate("/");
+          }}
+          className="signoutButton"
+        >
+        
+          SIGNOUT
+        </button>
     </div>
 
-  );
+  );
 }

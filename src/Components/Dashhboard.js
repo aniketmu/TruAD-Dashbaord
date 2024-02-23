@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Dashboard.module.css";
-import menu from "../Assets/menu.png";
 import CustomButton from "./CustomButton";
-import MCard from "./Card";
 import MCard1 from "./Card3";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
@@ -11,8 +9,10 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { experimentalStyled as styled } from "@mui/material/styles";
-import { useMyContext } from '../MyContext';
+import { useMyContext } from "../MyContext";
 import DataNotFound from "./DataNotFound";
+import SegmentIcon from "@mui/icons-material/Segment";
+import { CssBaseline } from "@mui/material";
 
 const Dashhboard = () => {
   const [selectedType, setSelectedType] = useState("");
@@ -22,7 +22,6 @@ const Dashhboard = () => {
   const [openDialog, handleDisplay] = useState(false);
   const [add, setAdd] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
-  const [files, setFiles] = useState([]);
   const [clipDuration, setClipDuration] = useState(10);
   const [poster, setPoster] = useState("");
   const [movies, setMovies] = useState([]);
@@ -44,7 +43,7 @@ const Dashhboard = () => {
         }&apikey=${apiKey}`
       );
       setMovies(response.data.Search);
-      setValue(response.data.Search)
+      setValue(response.data.Search);
       setSearchTerm("");
       // Log the array of movies
     } catch (error) {
@@ -284,34 +283,37 @@ const Dashhboard = () => {
   };
 
   return (
-    <div style={{ width: "80%", height: "100vh", overflow: "auto" }}>
+    <div style={{ width: "80%", height: "100vh", overflowY: "auto" }}>
       <div
         style={{
           display: "flex",
-          background: "grey",
+          background: "rgb(25, 25, 25)",
           width: "100%",
           height: "60px",
           alignItems: "center",
           justifyContent: "start",
-          paddingLeft: "50px",
+          paddingLeft: "20px",
           position: "fixed",
           zIndex: "2",
         }}
       >
-        <img
-          src={menu}
-          style={{ height: "40px", width: "40px" }}
-          alt="menu-btn"
+        <SegmentIcon
+          sx={{
+            width: "2em",
+            height: "2em",
+            color: "white",
+            marginLeft: 0,
+          }}
         />
       </div>
-
+      <CssBaseline/>
       <div
         style={{
           padding: "20px",
           display: "flex",
           flexDirection: "column",
           gap: "20px",
-          background: "#DCDCDC",
+          background: "#343a40e0",
         }}
       >
         <CustomButton />
@@ -327,11 +329,7 @@ const Dashhboard = () => {
         <div className={styles.dashboard}>
           <div className={styles.resource}>
             <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-              <img
-                src={menu}
-                style={{ height: "20px", width: "20px" }}
-                alt="menu-btn"
-              />
+              <SegmentIcon width="2em" height="2em" color="white" />
               <h4 style={{ margin: "0px" }}>Resource</h4>
             </div>
             <button onClick={openDialogBox} style={{ borderRadius: "8px" }}>
@@ -392,7 +390,7 @@ const Dashhboard = () => {
               </select>
             </div>
           </div>
-          <div style={{padding: "5px"}}>
+          <div style={{ padding: "5px" }}>
             {/* Card */}
             <Box sx={{ flexGrow: 1 }}>
               <Grid
@@ -400,7 +398,7 @@ const Dashhboard = () => {
                 spacing={{ xs: 2, md: 3 }}
                 columns={{ xs: 4, sm: 8, md: 12 }}
               >
-{/* <<<<<<< HEAD
+                {/* <<<<<<< HEAD
                 {movies.map(({ imdbID }) => {
 ======= */}
                 {/* {Array.from(Array(20)).map((_, index) => (
@@ -408,10 +406,14 @@ const Dashhboard = () => {
             <Item>xs=2</Item>
           </Grid>
         ))} */}
-                {movies?movies.map(({ imdbID }) => {
-// >>>>>>> a84f766f5c8bd8bd01c515329839669f745bca10
-                  return <MCard1 key={imdbID} id={imdbID} />;
-                }):<DataNotFound/>}
+                {movies ? (
+                  movies.map(({ imdbID }) => {
+                    // >>>>>>> a84f766f5c8bd8bd01c515329839669f745bca10
+                    return <MCard1 key={imdbID} id={imdbID} />;
+                  })
+                ) : (
+                  <DataNotFound />
+                )}
               </Grid>
             </Box>
           </div>
