@@ -89,11 +89,12 @@ function MaterialLibrary({ initData }) {
       </div>
       <div
         style={{
-          width: "100%",
+          width: "98.5%",
           overflow: "auto",
-          height: "75vh",
+          margin:"auto",
+          height: "77vh",
           backgroundColor: "white",
-          padding: "10px 10px 10px 3em",
+          padding: "10px 10px 10px 10px",
           borderRadius: "10px"
         }}
         className="card_container"
