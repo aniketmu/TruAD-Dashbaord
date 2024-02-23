@@ -120,7 +120,7 @@ const MCard1 = ({ id }) => {
               }}
               className="media_child"
             >
-<Typography gutterBottom sx={{ fontSize: "16px" }} component="div">
+<Typography gutterBottom sx={{ fontSize: "16px", color: "white" }} component="div">
   {movies?.Plot?.split(' ').slice(0, 15).join(' ')}{movies?.Plot?.split(' ').length > 15 ? ' ....' : ''}
 </Typography>
               <Stack direction="row" spacing={1}>
