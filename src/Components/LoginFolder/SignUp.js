@@ -2,7 +2,7 @@ import React from "react";
 // import styles from "./SignUp.module.css";
 import logo from '../img/logo.png'
 
-import './Auth.css'
+// import './Auth.css'
 import { useState } from 'react';
 
 function SignUp({ handleSwichPage, setPopUp }) {

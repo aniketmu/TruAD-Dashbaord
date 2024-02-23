@@ -1,5 +1,5 @@
 import React from 'react';
-import './Auth.css';
+// import './Auth.css';
 import { useState } from 'react';
 import logo from '../img/logo.png';
 import { useNavigate } from 'react-router-dom';
