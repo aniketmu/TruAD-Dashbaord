@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Dashboard.module.css";
-import menu from "../Assets/menu.png";
 import CustomButton from "./CustomButton";
-import MCard from "./Card";
 import MCard1 from "./Card3";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
@@ -13,6 +11,7 @@ import Grid from "@mui/material/Grid";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import { useMyContext } from '../MyContext';
 import DataNotFound from "./DataNotFound";
+import SegmentIcon from '@mui/icons-material/Segment';
 
 const Dashhboard = () => {
   const [selectedType, setSelectedType] = useState("");
@@ -292,16 +291,17 @@ const Dashhboard = () => {
           height: "60px",
           alignItems: "center",
           justifyContent: "start",
-          paddingLeft: "50px",
+          paddingLeft: "20px",
           position: "fixed",
           zIndex: "2",
         }}
       >
-        <img
-          src={menu}
-          style={{ height: "40px", width: "40px" }}
-          alt="menu-btn"
-        />
+       <SegmentIcon sx={{
+        width:'2em',
+        height:'2em',
+        color:'white',
+        marginLeft:0,
+       }}/>
       </div>
 
       <div
@@ -326,11 +326,7 @@ const Dashhboard = () => {
         <div className={styles.dashboard}>
           <div className={styles.resource}>
             <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-              <img
-                src={menu}
-                style={{ height: "20px", width: "20px" }}
-                alt="menu-btn"
-              />
+            <SegmentIcon width='2em' height='2em' color="white"/>
               <h4 style={{ margin: "0px" }}>Resource</h4>
             </div>
             <button onClick={openDialogBox} style={{ borderRadius: "8px" }}>
