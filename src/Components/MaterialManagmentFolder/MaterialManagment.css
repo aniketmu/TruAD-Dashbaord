@@ -1,5 +1,7 @@
-.container {
+.container1 {
   background-color: rgb(220, 220, 220);
+  width: 80%;
+  padding: 5px;
 }
 
 .firstContainer {
@@ -52,14 +54,16 @@
 }
 
 .inputContainer {
-  width: 98%;
+  width: 98.5%;
+  margin: auto;
   display: flex;
   justify-content: space-around;
-  margin: 5px 5px 15px 5px;
+  /* margin: 5px 5px 15px 5px; */
   /* border: 1px solid red; */
   background-color: white;
   border-radius: 7px;
   padding: 7px 0px;
+  margin-bottom: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
@@ -128,4 +132,8 @@ select {
 
 .uploadFileContainer label input {
   border: none;
+}
+
+.card_container::-webkit-scrollbar {
+  width: 8px;               /* width of the entire scrollbar */
 }

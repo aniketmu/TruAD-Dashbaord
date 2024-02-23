@@ -87,7 +87,18 @@ function MaterialLibrary({ initData }) {
           </select>
         </label>
       </div>
-      <div style={{ width: "99%", overflow: "auto", height: "75vh", backgroundColor: 'white', padding: "10px" }}>
+      <div
+        style={{
+          width: "98.5%",
+          overflow: "auto",
+          margin:"auto",
+          height: "77vh",
+          backgroundColor: "white",
+          padding: "10px 10px 10px 10px",
+          borderRadius: "10px"
+        }}
+        className="card_container"
+      >
         <Grid container spacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           {data.map((val, i) => {
             return (

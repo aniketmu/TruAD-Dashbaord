@@ -4,7 +4,8 @@ import styles from "./Dashboard.module.css";
 import Popular from "../Assets/popular.png";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { useMyContext } from '../MyContext';
+import { useMyContext } from "../MyContext";
+import MCard1 from "./Card3";
 
 function PopularPicks() {
   const { value } = useMyContext();
@@ -34,6 +35,7 @@ function PopularPicks() {
     },
   ]);
   const [media, setMedia] = useState([]);
+  const [filter, setFilter] = useState('rating')
   useEffect(() => {
     const fetchMedia = async () => {
       try {
@@ -47,16 +49,52 @@ function PopularPicks() {
             return data;
           })
         );
-        fetchedMedia.sort(
-          (media1, media2) => media2.imdbVotes - media1.imdbVotes
-        );
-
-        const filtered = fetchedMedia.map((mediaItem) => ({
-          ...mediaItem,
-          Genre: mediaItem.Genre.split(", "),
-        }));
-
-        setMedia(filtered);
+          if(filter === 'rating'){
+            fetchedMedia.sort(
+              (media1, media2) => media2.imdbRating - media1.imdbRating
+            );
+    
+            const filtered = fetchedMedia.map((mediaItem) => ({
+              ...mediaItem,
+              Genre: mediaItem.Genre.split(", "),
+            }));
+    
+            setMedia(filtered);
+          }else if(filter === 'votes'){
+            fetchedMedia.sort(
+              (media1, media2) => media2.imdbVotes - media1.imdbVotes
+            );
+    
+            const filtered = fetchedMedia.map((mediaItem) => ({
+              ...mediaItem,
+              Genre: mediaItem.Genre.split(", "),
+            }));
+    
+            setMedia(filtered);
+          }else if (filter === 'score') {
+            fetchedMedia.sort((media1, media2) => {
+              const score1 = parseInt(media1.Metascore);
+              const score2 = parseInt(media2.Metascore);
+          
+              // Handle cases where Metascore is missing or not a number (NaN)
+              if (!isNaN(score1) && !isNaN(score2)) {
+                return score2 - score1;
+              } else if (!isNaN(score1)) {
+                return -1; // Place media1 before media2
+              } else if (!isNaN(score2)) {
+                return 1; // Place media2 before media1
+              } else {
+                return 0; // Keep the order unchanged
+              }
+            });
+          
+            const filtered = fetchedMedia.map((mediaItem) => ({
+              ...mediaItem,
+              Genre: mediaItem.Genre.split(", "),
+            }));
+          
+            setMedia(filtered);
+          }
         console.log("Media:", fetchedMedia);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -64,7 +102,11 @@ function PopularPicks() {
     };
 
     fetchMedia();
-  }, []);
+  }, [filter]);
+
+  const handleFilter = (option) => {
+    setFilter(option)
+  }
 
   return (
     // <div style={{ width: "80%", height: "100vh", overflow: "auto" }}>
@@ -140,15 +182,33 @@ function PopularPicks() {
           <div className={styles.resource}>
             {/* =======
 >>>>>>> 34000198abf74c6293612118a09b7b4fa978cb2d */}
-<div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-        <img
-          src={Popular}
-          style={{ height: "40px", width: "40px" }}
-          alt="menu-btn"
-        />
-        <h4 style={{ margin: "0px", fontSize: "40px" }}>Popular Picks</h4>
+            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+              <img
+                src={Popular}
+                style={{ height: "40px", width: "40px" }}
+                alt="menu-btn"
+              />
+              <h4 style={{ margin: "0px", fontSize: "40px" }}>Popular Picks</h4>
             </div>
           </div>
+          <div className={styles.dropdowns}>
+            <div className={styles.dropdown}>
+              <label>Sort By:</label>
+              <select
+                value={filter}
+                onChange={(e) => {
+                  handleFilter(e.target.value);
+                }}
+              >
+                <option value="" disabled>
+                  Select an option
+                </option>
+                <option value='rating'>IMDB Rating</option>
+                <option value='votes'>IMDB Votes</option>
+                <option value='score'>Metascore</option>
+              </select>
+            </div>
+            </div>
           <div>
             {/* Card */}
             <Box sx={{ flexGrow: 1 }}>
@@ -163,7 +223,7 @@ function PopularPicks() {
           </Grid>
         ))} */}
                 {media.map(({ imdbID }) => {
-                  return <MCard key={imdbID} id={imdbID} />;
+                  return <MCard1 key={imdbID} id={imdbID} />;
                 })}
               </Grid>
             </Box>

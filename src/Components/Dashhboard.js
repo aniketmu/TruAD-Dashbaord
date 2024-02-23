@@ -3,6 +3,7 @@ import styles from "./Dashboard.module.css";
 import menu from "../Assets/menu.png";
 import CustomButton from "./CustomButton";
 import MCard from "./Card";
+import MCard1 from "./Card3";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import Paper from "@mui/material/Paper";
@@ -11,6 +12,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import { useMyContext } from '../MyContext';
+import DataNotFound from "./DataNotFound";
 
 const Dashhboard = () => {
   const [selectedType, setSelectedType] = useState("");
@@ -281,11 +283,7 @@ const Dashhboard = () => {
   };
 
   return (
-// <<<<<<< HEAD
     <div style={{ width: "80%", height: "100vh", overflow: "auto" }}>
-{/* =======
-    <div style={{ width: "80%", height: "100vh", overflowY: "auto" }}>
->>>>>>> 34000198abf74c6293612118a09b7b4fa978cb2d */}
       <div
         style={{
           display: "flex",
@@ -326,11 +324,7 @@ const Dashhboard = () => {
           <button onClick={handleSearch}>Search</button>
         </div>
         <div className={styles.dashboard}>
-{/* <<<<<<< HEAD */}
-          {/* <div className={styles.resource} style={{}}> */}
           <div className={styles.resource}>
-{/* =======
->>>>>>> 34000198abf74c6293612118a09b7b4fa978cb2d */}
             <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
               <img
                 src={menu}
@@ -397,7 +391,7 @@ const Dashhboard = () => {
               </select>
             </div>
           </div>
-          <div>
+          <div style={{padding: "5px"}}>
             {/* Card */}
             <Box sx={{ flexGrow: 1 }}>
               <Grid
@@ -405,14 +399,18 @@ const Dashhboard = () => {
                 spacing={{ xs: 2, md: 3 }}
                 columns={{ xs: 4, sm: 8, md: 12 }}
               >
+{/* <<<<<<< HEAD
+                {movies.map(({ imdbID }) => {
+======= */}
                 {/* {Array.from(Array(20)).map((_, index) => (
           <Grid item xs={2} sm={4} md={4} key={index}>
             <Item>xs=2</Item>
           </Grid>
         ))} */}
-                {movies.map(({ imdbID }) => {
-                  return <MCard key={imdbID} id={imdbID} />;
-                })}
+                {movies?movies.map(({ imdbID }) => {
+// >>>>>>> a84f766f5c8bd8bd01c515329839669f745bca10
+                  return <MCard1 key={imdbID} id={imdbID} />;
+                }):<DataNotFound/>}
               </Grid>
             </Box>
           </div>

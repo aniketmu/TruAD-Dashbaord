@@ -27,7 +27,6 @@
 .linksContainer {
   flex-grow: 1;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
@@ -36,22 +35,30 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .buttonLink {
   text-decoration: none;
   color: white;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .buttonContainer {
   display: flex;
-  justify-content: center;
+  width: max-content;
+  justify-content: start;
   align-items: center;
   height: 40px;
   cursor: pointer;
-  transition: all 0.3s ease;  
+  transition: all 0.3s ease;
   border-radius: 5em;
-  padding: 2px 5px;
+  padding: 2px 20px;
+  width: 70%;
 }
 
 .buttonContainer:hover {
@@ -61,3 +68,11 @@
 .signoutButton {
   width: 100%;
 }
+
+/* <<<<<<< HEAD */
+.active {
+  background-color: aqua; /* Set your desired background color */
+  border-radius: 0;
+}
+/* =======
+>>>>>>> f0809bee6d4ad4efd20eac479d818d5ae3f0dcf2 */
