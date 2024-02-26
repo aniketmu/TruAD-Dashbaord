@@ -120,6 +120,11 @@ const MCard1 = ({ id }) => {
               }}
               className="media_child"
             >
+{/* <<<<<<< HEAD
+<Typography gutterBottom sx={{ fontSize: "16px", color: "white" }} component="div">
+  {movies?.Plot?.split(' ').slice(0, 15).join(' ')}{movies?.Plot?.split(' ').length > 15 ? ' ....' : ''}
+</Typography>
+=======
               <Typography
                 gutterBottom
                 sx={{ fontSize: "16px" }}
@@ -127,7 +132,8 @@ const MCard1 = ({ id }) => {
               >
                 {movies?.Plot?.split(" ").slice(0, 15).join(" ")}
                 {movies?.Plot?.split(" ").length > 15 ? " ...." : ""}
-              </Typography>
+              </Typography> */}
+{/* >>>>>>> 7914a48d7c6852ef19159f325421cdd73b3379dc */}
               <Stack direction="row" spacing={1}>
                 {movies?.Genre?.split(",").map((label, index) => (
                   <Chip

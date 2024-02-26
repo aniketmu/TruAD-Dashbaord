@@ -29,6 +29,7 @@ input {
 button {
   padding: 10px;
   /* background-image: linear-gradient();
+>>>>>>> 78f9fddf3e20de024f30e0e0ec8ea2175d7fe158
     background-color: #007bff; */
   background: rgb(19, 15, 99);
   background: linear-gradient(90deg, rgb(25, 18, 160) 0%, rgb(40, 40, 121) 37%, rgb(21, 123, 143) 100%);
