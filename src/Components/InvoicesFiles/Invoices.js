@@ -146,11 +146,11 @@ function Invoices() {
 
 
   return (
-    <div style={{ width: "80%", backgroundColor: "rgb(220, 220, 220)" }}>
+    <div style={{ width: "80%", backgroundColor: "#6c757d" }}>
 
-      <h1 style={{ textAlign: "center", backgroundColor: 'white', margin: '10px', borderRadius: "7px", boxShadow: "rgba(0, 0, 0, 0.4) 0px 3px 8px" }}>Invoices</h1>
+      <h1 style={{ textAlign: "center", backgroundColor: '#212529', margin: '10px', borderRadius: "7px", boxShadow: "rgba(0, 0, 0, 0.4) 0px 3px 8px" ,color:"white"}}>Invoices</h1>
 
-      <div style={{ display: "flex", margin: "10px", justifyContent: "space-between", backgroundColor: "white", alignItems: 'center', boxShadow: "rgba(0, 0, 0, 0.4) 0px 3px 8px", borderRadius: "7px" }}>
+      <div style={{ display: "flex", margin: "10px", justifyContent: "space-between", backgroundColor: "#343a40", alignItems: 'center', boxShadow: "rgba(0, 0, 0, 0.4) 0px 3px 8px", borderRadius: "7px" }}>
         <div className='ch1p'>
 
           {headings.map((e, i) => {
@@ -172,7 +172,7 @@ function Invoices() {
         </div>
       </div>
 
-      <div style={{ display: "flex", margin: "10px", justifyContent: "space-between", backgroundColor: "white", alignItems: 'center', boxShadow: "rgba(0, 0, 0, 0.4) 0px 3px 8px", borderRadius: "7px" }} >
+      <div style={{ display: "flex", margin: "10px", justifyContent: "space-between", backgroundColor: "#343a40", alignItems: 'center', boxShadow: "rgba(0, 0, 0, 0.4) 0px 3px 8px", borderRadius: "7px" }} >
         <div style={{ width: "100%", margin: "10px" }}>
           {list.map((e) => {
             return <InvoiceItem data={e} />
