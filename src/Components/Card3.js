@@ -24,6 +24,7 @@ import "./MCard.css";
 const MCard1 = ({ id }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [clips, setClips] = useState([]);
+  const [adVideo, setAdVideo] = useState(null);
   const [movies, setMovies] = useState({
     Poster: "",
     Title: "null",
@@ -58,21 +59,24 @@ const MCard1 = ({ id }) => {
 
   const fetchClips = async () => {
     try {
-      const response = await fetch(
-        "https://truad-dashboard-backend.onrender.com/get-clips",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ id }),
-        }
-      );
+      const form = new FormData();
+      form.append("file", adVideo);
+      form.append("filename", adVideo.name);
+
+      const response = await fetch("http://192.168.0.108:5000/stitch", {
+        method: "POST",
+        body: form,
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
 
       const data = await response.json();
-      setClips(data.locations);
+      console.log(data);
+      setClips(data.clips);
     } catch (error) {
-      console.error("Error fetching clips:", error);
+      console.error("Error: ", error);
     }
   };
 
@@ -80,6 +84,9 @@ const MCard1 = ({ id }) => {
     navigate("/dashboard/video", { state: { location } });
   };
 
+  const handleAdVideoChange = (e) => {
+    setAdVideo(e.target.files[0]);
+  };
   return (
     <>
       <Grid item xs={2} sm={3} md={3} key={id}>
@@ -195,34 +202,61 @@ const MCard1 = ({ id }) => {
         <DialogTitle id="alert-dialog-title">{movies.Title}</DialogTitle>
         <DialogContent>
           <div>
-            <iframe
-              style={{ width: "100%" }}
-              src="https://www.youtube.com/embed/ermJ-iPg9xA?si=TvTA9sm4kr-fp3tz"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            ></iframe>
-            <DialogTitle id="alert-dialog-title">
+            {/* <img src={"https://upload.wikimedia.org/wikipedia/en/3/3f/Tanu_weds_Manu_poster.jpg"} style={{ width: "100%", borderRadius: "7px" }} alt="Img Not Found" /> */}
+
+            {/* Origial */}
+            {/* {video ? <video src={video} style={{width: "100%"}} controls/> :  <iframe
+            style={{  width: "100%" }}
+            src="https://www.youtube.com/embed/ermJ-iPg9xA?si=TvTA9sm4kr-fp3tz"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>} */}
+            {adVideo !== null ? (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "20px",
+                }}
+              >
+                <video
+                  src={URL.createObjectURL(adVideo)}
+                  style={{ width: "100%" }}
+                  controls
+                />
+                <button onClick={fetchClips}>Generate Clips</button>
+              </div>
+            ) : (
+              <div>
+                <label>Add a Video</label>
+                <input type="file" onChange={handleAdVideoChange} />
+              </div>
+            )}
+            { clips.length > 0 && (<><DialogTitle id="alert-dialog-title">
               {"Available Clips"}
             </DialogTitle>
             <div style={{ display: "flex", overflow: "auto" }}>
-              {clips.map((vid, index) => (
-                <video
-                  key={index}
-                  style={{
-                    height: "140px",
-                    width: "220px",
-                    margin: "10px",
-                    borderRadius: "7px",
-                  }}
-                  src={vid.location}
-                  title="Youtube Player"
-                  frameborder="0"
-                  onClick={(e) => handleClipClick(vid.location)}
-                />
-              ))}
-            </div>
+              {clips.map((vid) => {
+                return (
+                  <video
+                    style={{
+                      height: "140px",
+                      width: "220px",
+                      margin: "10px",
+                      borderRadius: "7px",
+                    }}
+                    controls
+                    src={vid}
+                    title="Youtube Player"
+                    frameborder="0"
+                    // allowFullScreen
+                    onClick={(e) => handleClipClick(vid.location)}
+                  />
+                );
+              })}
+            </div></>)}
           </div>
         </DialogContent>
         <DialogActions>
