@@ -108,7 +108,7 @@ function PopularPicks() {
   }
 
   return (
-    <div style={{ width: "80%", height: "100vh", overflow: "auto" }}>
+    <div style={{ width: "80%", flexGrow: "1", height: "100vh", overflow: "auto" }}>
       <div
         style={{
           padding: "20px",

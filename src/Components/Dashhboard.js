@@ -283,7 +283,7 @@ const Dashhboard = () => {
   };
 
   return (
-    <div style={{ width: "80%", height: "100vh", overflowY: "auto" }}>
+    <div style={{width: "80%", flexGrow: "1", height: "100vh", overflowY: "auto" }}>
       <div
         style={{
           display: "flex",
