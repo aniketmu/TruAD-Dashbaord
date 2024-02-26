@@ -1,5 +1,5 @@
 .container1 {
-  background-color: rgb(220, 220, 220);
+  background-color:#6c757d;
   width: 80%;
   padding: 5px;
 }
@@ -32,8 +32,9 @@
   cursor: pointer;
   /* border: 1px solid black; */
   border-radius: 7px;
-  background-color: white;
+  background-color: #212529;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: #fffffff5;
 }
 .row1 span {
   font-size: large;
@@ -49,8 +50,9 @@
   border-radius: 7px;
   padding: 7px 0px;
   /* border: 1px solid red; */
-  background-color: white;
+  background-color: #343a40;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: #fffffff5;
 }
 
 .inputContainer {
@@ -60,11 +62,12 @@
   justify-content: space-around;
   /* margin: 5px 5px 15px 5px; */
   /* border: 1px solid red; */
-  background-color: white;
+  background-color: #343a40;
   border-radius: 7px;
   padding: 7px 0px;
   margin-bottom: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: #fffffff5;;
 }
 
 .inputBox {
