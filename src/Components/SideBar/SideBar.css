@@ -68,6 +68,10 @@
   width: 100%;
 }
 
+.not-collapsed i{
+  
+}
+
 /* <<<<<<< HEAD */
 .active {
   background-color: aqua; /* Set your desired background color */

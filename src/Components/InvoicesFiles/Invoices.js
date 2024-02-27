@@ -146,7 +146,7 @@ function Invoices() {
 
 
   return (
-    <div style={{ width: "80%", backgroundColor: "#6c757d" }}>
+    <div style={{ width: "80%", flexGrow: "1", backgroundColor: "#6c757d" }}>
 
       <h1 style={{ textAlign: "center", backgroundColor: '#212529', margin: '10px', borderRadius: "7px", boxShadow: "rgba(0, 0, 0, 0.4) 0px 3px 8px" ,color:"white"}}>Invoices</h1>
 
