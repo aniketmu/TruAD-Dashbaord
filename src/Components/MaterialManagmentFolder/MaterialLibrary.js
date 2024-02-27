@@ -7,7 +7,9 @@ function MaterialLibrary({ initData }) {
   const [searchData, setSearchData] = useState(initData);
   const [productName, setProductName] = useState("");
   const [mGroup, setMGroup] = useState([]);
+  const [selectMgroup,setSeletctMgroup]=useState("");
   const [mSize, setMSize] = useState([]);
+  
 
   useEffect(() => {
     const arr1 = [];
@@ -44,6 +46,10 @@ function MaterialLibrary({ initData }) {
     arr.splice(key, 1);
     setData(arr);
   }
+  const handleChangeMGroup=()=> {
+    // setSeletctMgroup("chnage")
+    console.log("testing")
+  }
 
   return (
     <>
@@ -71,7 +77,7 @@ function MaterialLibrary({ initData }) {
             id="material-group"
             className="inputBox"
           >
-            <option value="">Select Material Group</option>
+            <option value={selectMgroup} onChange={handleChangeMGroup}>Select Material Group</option>
             {mGroup.map((el) => {
               return <option value={el}>{el}</option>;
             })}
@@ -80,7 +86,7 @@ function MaterialLibrary({ initData }) {
         <label className="inputLabelContainer">
           Material Size:
           <select name="material-size" id="material-size" className="inputBox">
-            <option value="">Select Material Size</option>
+            <option value="" >Select Material Size</option>
             {mSize.map((el) => {
               return <option value={el}>{el}</option>;
             })}
@@ -91,7 +97,7 @@ function MaterialLibrary({ initData }) {
         style={{
           width: "98.5%",
           overflow: "auto",
-          margin:"auto",
+          margin: "auto",
           height: "77vh",
           backgroundColor: "#343a40",
           padding: "10px 10px 10px 10px",
