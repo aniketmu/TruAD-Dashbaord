@@ -1,7 +1,7 @@
 
 import './App.css';
-import Dashhboard from './Components/Dashhboard';
-import DashBoardContainer from './Components/DashBoardContainer';
+import Dashhboard from './Components/Dashboard/Dashhboard.js';
+import DashBoardContainer from './Components/Dashboard/DashBoardContainer';
 import MaterialManagment from './Components/MaterialManagmentFolder/MaterialManagment';
 import LoginContainer from '../src/Components/LoginFolder/LoginContainer'
 import DataReport from './Components/DataReport';

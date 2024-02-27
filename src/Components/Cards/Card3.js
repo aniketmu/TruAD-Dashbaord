@@ -18,8 +18,8 @@ import {
   CardActionArea,
   CardActions,
 } from "@mui/material";
-import img from "../image/imageofmovie.png";
-import "./MCard.css";
+import img from "../../image/imageofmovie.png"
+import "../MCard.css";
 
 const MCard1 = ({ id }) => {
   const [openDialog, setOpenDialog] = useState(false);

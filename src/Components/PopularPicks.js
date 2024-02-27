@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import styles from "./Dashboard.module.css";
+import styles from "./Dashboard/Dashboard.module.css";
 import Popular from "../Assets/popular.png";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { useMyContext } from "../MyContext";
-import MCard1 from "./Card3";
+import MCard1 from "./Cards/Card3";
 
 function PopularPicks() {
   const { value } = useMyContext();
@@ -121,7 +121,7 @@ function PopularPicks() {
       >
         <div className={styles.dashboard}>
           <div className={styles.resource}>
-            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "20px", justifyContent: "center", width: "100%"}}>
               <img
                 src={Popular}
                 style={{ height: "40px", width: "40px" }}
@@ -131,7 +131,7 @@ function PopularPicks() {
             </div>
           </div>
           <div className={styles.dropdowns}>
-            <div className={styles.dropdown}>
+            <div className={styles.dropdown} style={{justifyContent: "center", width: "100%"}}>
               <label>Sort By:</label>
               <select
                 value={filter}

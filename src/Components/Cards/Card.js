@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
 import { Chip, Stack,  Button,CardActionArea, CardActions, } from "@mui/material";
-import img from '../image/imageofmovie.png';
+import img from "../../image/imageofmovie.png"
 import './MCard.css';
 
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import styles from "./Dashboard.module.css";
-import CustomButton from "./CustomButton";
-import MCard1 from "./Card3";
+import styles from "./Dashboard.module.css"
+import CustomButton from "../CustomButton";
+import MCard1 from "../Cards/Card3";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import Paper from "@mui/material/Paper";
@@ -9,8 +9,8 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { experimentalStyled as styled } from "@mui/material/styles";
-import { useMyContext } from "../MyContext";
-import DataNotFound from "./DataNotFound";
+import { useMyContext } from "../../MyContext";
+import DataNotFound from "../DataNotFound";
 import SegmentIcon from "@mui/icons-material/Segment";
 import { CssBaseline } from "@mui/material";
 
@@ -283,7 +283,14 @@ const Dashhboard = () => {
   };
 
   return (
-    <div style={{width: "80%", flexGrow: "1", height: "100vh", overflowY: "auto" }}>
+    <div
+      style={{
+        width: "80%",
+        flexGrow: "1",
+        height: "100vh",
+        overflowY: "auto",
+      }}
+    >
       <div
         style={{
           display: "flex",
@@ -306,7 +313,7 @@ const Dashhboard = () => {
           }}
         />
       </div>
-      <CssBaseline/>
+      <CssBaseline />
       <div
         style={{
           padding: "20px",
