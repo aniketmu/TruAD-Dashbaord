@@ -68,8 +68,7 @@
   width: 100%;
 }
 
-.not-collapsed i{
-  
+.not-collapsed i {
 }
 
 /* <<<<<<< HEAD */
@@ -77,5 +76,10 @@
   background-color: aqua; /* Set your desired background color */
   border-radius: 0;
 }
-/* =======
->>>>>>> f0809bee6d4ad4efd20eac479d818d5ae3f0dcf2 */
+
+.icon-wrapper{
+  display: hidden;
+} 
+.icon-wrapper:hover{
+  display: block;
+}

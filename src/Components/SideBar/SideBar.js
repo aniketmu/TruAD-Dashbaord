@@ -64,6 +64,8 @@ const list = [
 export default function SideBar({ removeCookie, navigate }) {
   const [list1, setList1] = useState(list);
   const [collapsed, setCollapsed] = useState(false);
+  const [hoveredIcon, setHoveredIcon] = useState(null); // State to track hovered icon
+  const [hoverPosition, setHoverPosition] = useState({ x: 0, y: 0 }); // State to track mouse hover position
 
   const handleListColor = (i) => {
     const newArr = [...list];
@@ -76,6 +78,15 @@ export default function SideBar({ removeCookie, navigate }) {
   };
 
   const location = useLocation(); // Get current location
+
+  const handleMouseEnter = (e, i) => {
+    setHoveredIcon(i);
+    setHoverPosition({ x: e.clientX, y: e.clientY });
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIcon(null);
+  };
 
   return (
     <div
@@ -101,15 +112,11 @@ export default function SideBar({ removeCookie, navigate }) {
           alt=""
         />
       </Toolbar>
-      <div style={{display: "flex", justifyContent: "center"}}>
-
-      <button
-        onClick={() => setCollapsed(!collapsed)}
-        style={{width: "80%"}}
-        >
-        {collapsed ? "Open" : "Collapse"}
-      </button>
-        </div>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <button onClick={() => setCollapsed(!collapsed)} style={{ width: "80%" }}>
+          {collapsed ? "Open" : "Collapse"}
+        </button>
+      </div>
       <List>
         {list1.map((e, i) => (
           <Link
@@ -139,7 +146,10 @@ export default function SideBar({ removeCookie, navigate }) {
                   : { width: "80%" }
               }
             >
-              <ListItemButton>
+              <ListItemButton
+                onMouseEnter={(event) => handleMouseEnter(event, i)} // Set hovered icon index and position
+                onMouseLeave={handleMouseLeave} // Reset hovered icon
+              >
                 <ListItemIcon
                   sx={{ color: "#d3d6dad9" }}
                   style={
@@ -171,6 +181,12 @@ export default function SideBar({ removeCookie, navigate }) {
       >
         SIGNOUT
       </button>
+      {/* Show hovered icon name if collapsed and icon is hovered */}
+      {collapsed && hoveredIcon !== null && (
+        <div style={{ position: "absolute", top: hoverPosition.y, left: hoverPosition.x, backgroundColor: "rgba(0,0,0,0.5)" }}>
+          {list1[hoveredIcon].name.toUpperCase()}
+        </div>
+      )}
     </div>
   );
 }

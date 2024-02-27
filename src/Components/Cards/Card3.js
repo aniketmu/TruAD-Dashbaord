@@ -134,7 +134,7 @@ const MCard1 = ({ id }) => {
 ======= */}
               <Typography
                 gutterBottom
-                sx={{ fontSize: "16px" }}
+                sx={{ fontSize: "16px", color: "white" }}
                 component="div"
               >
                 {movies?.Plot?.split(" ").slice(0, 15).join(" ")}
