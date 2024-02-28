@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./Dashboard.module.css"
+import styles from "./Dashboard.module.css";
 import CustomButton from "../CustomButton";
 import MCard1 from "../Cards/Card3";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -12,7 +12,11 @@ import { experimentalStyled as styled } from "@mui/material/styles";
 import { useMyContext } from "../../MyContext";
 import DataNotFound from "../DataNotFound";
 import SegmentIcon from "@mui/icons-material/Segment";
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, Stack, Avatar } from "@mui/material";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const Dashhboard = () => {
   const [selectedType, setSelectedType] = useState("");
@@ -312,6 +316,94 @@ const Dashhboard = () => {
             marginLeft: 0,
           }}
         />
+{/* 
+        <Stack direction={"row"} spacing={3} sx={{ paddingX: "2em" }}>
+          <FormControl
+            variant="standard"
+            sx={{ m: 1, minWidth: 60, color: "white" }}
+          >
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              sx={{ color: "white" }}
+            >
+              Type
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
+              label="Type"
+              sx={{ color: "white", ".MuiSvgIcon-root": { color: "white" } }}
+              value={selectedType}
+              onChange={(e) => {
+                handleTypeSelect(e.target.value);
+              }}
+            >
+              {typeOptions?.map((option) => {
+                return (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <FormControl
+            variant="standard"
+            sx={{ m: 1, minWidth: 90, color: "white" }}
+          >
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              sx={{ color: "white" }}
+            >
+              Category
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
+              label="Category"
+              sx={{ color: "white", ".MuiSvgIcon-root": { color: "white" } }}
+              value={selectedCategory}
+              onChange={(e) => {
+                handleCategorySelect(e.target.value);
+              }}
+            >
+              {categories.map((option) => {
+                return (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <FormControl
+            variant="standard"
+            sx={{ m: 1, minWidth: 110, color: "white" }}
+          >
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              sx={{ color: "white" }}
+            >
+              Certification
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
+              label="Certification"
+              sx={{ color: "white", ".MuiSvgIcon-root": { color: "white" } }}
+              value={selectedCerti}
+              onChange={(e) => handleCertificationSelect(e.target.value)}
+            >
+              {certifications.map((option) => {
+                return (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </Stack> */}
       </div>
       <CssBaseline />
       <div
@@ -325,6 +417,94 @@ const Dashhboard = () => {
       >
         <CustomButton />
         <div className={styles.search_container}>
+          
+        <Stack direction={"row"} spacing={3} sx={{ paddingX: "2em" }}>
+          <FormControl
+            variant="standard"
+            sx={{ m: 1, minWidth: 60, color: "white" }}
+          >
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              sx={{ color: "white" }}
+            >
+              Type
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
+              label="Type"
+              sx={{ color: "white", ".MuiSvgIcon-root": { color: "white" } }}
+              value={selectedType}
+              onChange={(e) => {
+                handleTypeSelect(e.target.value);
+              }}
+            >
+              {typeOptions?.map((option) => {
+                return (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <FormControl
+            variant="standard"
+            sx={{ m: 1, minWidth: 90, color: "white" }}
+          >
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              sx={{ color: "white" }}
+            >
+              Category
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
+              label="Category"
+              sx={{ color: "white", ".MuiSvgIcon-root": { color: "white" } }}
+              value={selectedCategory}
+              onChange={(e) => {
+                handleCategorySelect(e.target.value);
+              }}
+            >
+              {categories.map((option) => {
+                return (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <FormControl
+            variant="standard"
+            sx={{ m: 1, minWidth: 110, color: "white" }}
+          >
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              sx={{ color: "white" }}
+            >
+              Certification
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
+              label="Certification"
+              sx={{ color: "white", ".MuiSvgIcon-root": { color: "white" } }}
+              value={selectedCerti}
+              onChange={(e) => handleCertificationSelect(e.target.value)}
+            >
+              {certifications.map((option) => {
+                return (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </Stack>
           <input
             type="text"
             placeholder="Please enter the resource name, actors, production company and placement client"
@@ -343,7 +523,7 @@ const Dashhboard = () => {
               Add
             </button>
           </div>
-          <div className={styles.dropdowns}>
+          {/* <div className={styles.dropdowns}>
             <div className={styles.dropdown}>
               <label>Type</label>
               <select
@@ -396,7 +576,7 @@ const Dashhboard = () => {
                 ))}
               </select>
             </div>
-          </div>
+          </div> */}
           <div style={{ padding: "5px" }}>
             {/* Card */}
             <Box sx={{ flexGrow: 1 }}>

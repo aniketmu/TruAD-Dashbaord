@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import axios from "axios";
 import { useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { Dialog, DialogContent } from "@mui/material";
@@ -14,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 import {
   Chip,
   Stack,
-  Button,
   CardActionArea,
   CardActions,
 } from "@mui/material";
