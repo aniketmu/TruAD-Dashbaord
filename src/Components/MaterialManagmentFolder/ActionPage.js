@@ -123,14 +123,14 @@ function ActionPage() {
     const [image, setimage] = useState(location.state.img);
 
     return (
-        <div style={{ width: "100%", backgroundColor: "rgb(220, 220, 220)" }}>
+        <div style={{ width: "100%", backgroundColor: "#6c757d" ,color:"white"}}>
 
             {/* // head container */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", height: "60px", padding: '12px 20px 10px 20px' }} >
-                <div style={{ backgroundColor: "white", width: "50%", height: "50px", margin: "0 10px", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "7px", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
+                <div style={{ backgroundColor: "#343a40", width: "50%", height: "50px", margin: "0 10px", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "7px", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
                     <h4>Oprate</h4>
                 </div>
-                <div style={{ backgroundColor: "white", width: "50%", height: "50px", margin: "0 10px", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "7px", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
+                <div style={{ backgroundColor: "#343a40", width: "50%", height: "50px", margin: "0 10px", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "7px", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
                     <h4>Raise Ticket</h4>
                 </div>
             </div>
@@ -149,12 +149,13 @@ function ActionPage() {
                         margin: "10px",
                         display: "flex",
                         flexDirection: "column",
-                        backgroundColor: "white",
+                        backgroundColor: "#343a40",
                         borderRadius: '7px',
-                        boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"
+                        boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                        
                     }}
                 >
-                    <h6 style={{ textAlign: "center", paddingTop:"15px", paddingBottom:"5px" }}>Resource</h6>
+                    <h6 style={{ textAlign: "center", paddingTop: "15px", paddingBottom: "5px" }}>Resource</h6>
                     <iframe
                         style={{ width: "95%", margin: "0 auto", height: "40%", borderRadius: "7px", boxShadow: "rgba(0, 0, 1, 0.74) 0px 3px 8px" }}
 
@@ -164,12 +165,12 @@ function ActionPage() {
                         allowFullScreen
                     />
 
-                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "7px" ,height:"40px", position:"relative"  }}>
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "7px", height: "40px", position: "relative" }}>
                         <h6
                             style={{
                                 textAlign: "center",
-                                position:"absolute",
-                                bottom:"0px"
+                                position: "absolute",
+                                bottom: "0px"
 
                                 // boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"
                             }}
@@ -204,13 +205,13 @@ function ActionPage() {
                 </div>
 
                 {/* rigthSide */}
-                <div style={{ width: "50%", backgroundColor: "white", margin: "10px", border: '1px solid white', borderRadius: '7px' }}>
+                <div style={{ width: "50%", backgroundColor: "#343a40", margin: "10px", borderRadius: '7px'  }}>
                     <h6
                         style={{
                             textAlign: "center",
                             marginTop: "10px",
                             borderRadius: "7px",
-                            
+
                         }}
                     >
                         All Material
