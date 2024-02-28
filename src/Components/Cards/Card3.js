@@ -16,7 +16,7 @@ import {
   CardActionArea,
   CardActions,
 } from "@mui/material";
-import img from "../../image/imageofmovie.png"
+import img from "../../image/imageofmovie.png";
 import "../MCard.css";
 
 const MCard1 = ({ id }) => {
@@ -106,6 +106,7 @@ const MCard1 = ({ id }) => {
               height="260"
               image={movies.Poster == "N/A" ? img : movies.Poster}
               onMouseLeave={() => console.log(29)}
+              style={{objectFit: "fill"}}
               alt="green iguana"
             />
             <CardContent
@@ -125,20 +126,20 @@ const MCard1 = ({ id }) => {
               }}
               className="media_child"
             >
-{/* <<<<<<< HEAD
+              {/* <<<<<<< HEAD
 <Typography gutterBottom sx={{ fontSize: "16px", color: "white" }} component="div">
   {movies?.Plot?.split(' ').slice(0, 15).join(' ')}{movies?.Plot?.split(' ').length > 15 ? ' ....' : ''}
 </Typography>
 ======= */}
               <Typography
                 gutterBottom
-                sx={{ fontSize: "16px" }}
+                sx={{ fontSize: "16px", color: "white" }}
                 component="div"
               >
                 {movies?.Plot?.split(" ").slice(0, 15).join(" ")}
                 {movies?.Plot?.split(" ").length > 15 ? " ...." : ""}
               </Typography>
-{/* >>>>>>> 7914a48d7c6852ef19159f325421cdd73b3379dc */}
+              {/* >>>>>>> 7914a48d7c6852ef19159f325421cdd73b3379dc */}
               <Stack direction="row" spacing={1}>
                 {movies?.Genre?.split(",").map((label, index) => (
                   <Chip
@@ -232,29 +233,33 @@ const MCard1 = ({ id }) => {
                 <input type="file" onChange={handleAdVideoChange} />
               </div>
             )}
-            { clips.length > 0 && (<><DialogTitle id="alert-dialog-title">
-              {"Available Clips"}
-            </DialogTitle>
-            <div style={{ display: "flex", overflow: "auto" }}>
-              {clips.map((vid) => {
-                return (
-                  <video
-                    style={{
-                      height: "140px",
-                      width: "220px",
-                      margin: "10px",
-                      borderRadius: "7px",
-                    }}
-                    controls
-                    src={vid}
-                    title="Youtube Player"
-                    frameborder="0"
-                    // allowFullScreen
-                    onClick={(e) => handleClipClick(vid.location)}
-                  />
-                );
-              })}
-            </div></>)}
+            {clips.length > 0 && (
+              <>
+                <DialogTitle id="alert-dialog-title">
+                  {"Available Clips"}
+                </DialogTitle>
+                <div style={{ display: "flex", overflow: "auto" }}>
+                  {clips.map((vid) => {
+                    return (
+                      <video
+                        style={{
+                          height: "140px",
+                          width: "220px",
+                          margin: "10px",
+                          borderRadius: "7px",
+                        }}
+                        controls
+                        src={vid}
+                        title="Youtube Player"
+                        frameborder="0"
+                        // allowFullScreen
+                        onClick={(e) => handleClipClick(vid.location)}
+                      />
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </div>
         </DialogContent>
         <DialogActions>

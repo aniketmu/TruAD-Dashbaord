@@ -1,19 +1,17 @@
-
-import './App.css';
-import Dashhboard from './Components/Dashboard/Dashhboard.js';
-import DashBoardContainer from './Components/Dashboard/DashBoardContainer';
-import MaterialManagment from './Components/MaterialManagmentFolder/MaterialManagment';
-import LoginContainer from '../src/Components/LoginFolder/LoginContainer'
-import DataReport from './Components/DataReport';
-import HomePage from './Components/HomePage';
-import PlacePromotion from './Components/PlacePromotion';
-import PopularPicks from './Components/PopularPicks';
-import VideoClip from './Components/VideoClip';
+import "./App.css";
+import Dashhboard from "./Components/Dashboard/Dashhboard.js";
+import DashBoardContainer from "./Components/Dashboard/DashBoardContainer";
+import MaterialManagment from "./Components/MaterialManagmentFolder/MaterialManagment";
+import LoginContainer from "../src/Components/LoginFolder/LoginContainer";
+import DataReport from "./Components/DataReport";
+import HomePage from "./Components/HomePage";
+import PlacePromotion from "./Components/PlacePromotion";
+import PopularPicks from "./Components/Popular Picks/PopularPicks.js";
+import VideoClip from "./Components/VideoClip";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ActionPage from './Components/MaterialManagmentFolder/ActionPage';
-import Invoices from './Components/InvoicesFiles/Invoices';
-import { MyContextProvider } from './MyContext';
-
+import ActionPage from "./Components/MaterialManagmentFolder/ActionPage";
+import Invoices from "./Components/InvoicesFiles/Invoices";
+import { MyContextProvider } from "./MyContext";
 
 const router = createBrowserRouter([
   {
@@ -24,30 +22,30 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashBoardContainer />,
-    children:[
+    children: [
       {
-        path:"/dashboard/",
-        element:<Dashhboard/>
+        path: "/dashboard/",
+        element: <Dashhboard />,
       },
       {
-        path:"/dashboard/material/",
-        element:<MaterialManagment/>
+        path: "/dashboard/material/",
+        element: <MaterialManagment />,
       },
       {
-        path:"/dashboard/homepage",
-        element:<HomePage/>
+        path: "/dashboard/homepage",
+        element: <HomePage />,
       },
       {
-        path:"/dashboard/popularpicks/",
-        element:<PopularPicks/>
+        path: "/dashboard/popularpicks/",
+        element: <PopularPicks />,
       },
       {
-        path:"/dashboard/placepromotion",
-        element:<PlacePromotion/>
+        path: "/dashboard/placepromotion",
+        element: <PlacePromotion />,
       },
       {
-        path:"/dashboard/datareport/",
-        element:<DataReport/>
+        path: "/dashboard/datareport/",
+        element: <DataReport />,
       },
 
       {
@@ -55,26 +53,22 @@ const router = createBrowserRouter([
         element: <VideoClip />,
       },
       {
-        path:"/dashboard/actionpage",
-        element :<ActionPage/>
+        path: "/dashboard/actionpage",
+        element: <ActionPage />,
       },
       {
-        path:"/dashboard/invoices",
-        element:<Invoices/>
-      }
-
-    ]
-   
-  }
- 
-])
+        path: "/dashboard/invoices",
+        element: <Invoices />,
+      },
+    ],
+  },
+]);
 
 function App() {
-  
   return (
     <MyContextProvider>
       <RouterProvider router={router}></RouterProvider>
-  </MyContextProvider>
+    </MyContextProvider>
   );
 }
 

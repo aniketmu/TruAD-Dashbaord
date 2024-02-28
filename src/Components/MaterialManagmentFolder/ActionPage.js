@@ -1,9 +1,9 @@
+import { Button } from "@mui/material";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 function ActionPage() {
   const location = useLocation();
-  // console.log(location.state.video);
   const [data, setData] = useState([
     {
       file: "https://imgs.search.brave.com/5YfDZ_BrNmW8ShDojzoMD8HgsVQ7SLM2tRWHWNbqQEE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFFMW44VCtJbkwu/anBn",
@@ -124,7 +124,6 @@ function ActionPage() {
 
   return (
     <div style={{ width: "100%", backgroundColor: "#6c757d" }}>
-      {/* // head container */}
       <div
         style={{
           display: "flex",
@@ -227,8 +226,6 @@ function ActionPage() {
                 textAlign: "center",
                 position: "absolute",
                 bottom: "0px",
-
-                // boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"
               }}
             >
               Material
@@ -254,16 +251,18 @@ function ActionPage() {
               }}
             />
           </div>
-
-          <button
-            style={{
-              margin: "20px 10px",
-              borderRadius: "7px",
-              backgroundColor: "red",
-            }}
-          >
+          <Button
+             component="div"
+          sx={{
+            margin: 2,
+            marginBottom: 1.3,
+            padding:1,
+            color:'white',
+            bgcolor:'red',
+            bgcolor:'linear-gradient(90deg, #343a40 0%, red 37%, red 100%);',
+          }}>
             Blend
-          </button>
+          </Button>
         </div>
 
         {/* rigthSide */}
