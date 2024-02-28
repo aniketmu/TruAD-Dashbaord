@@ -80,7 +80,7 @@ export default function SideBar({ removeCookie, navigate }) {
   return (
     <div
       style={{
-        width: collapsed ? "150px" : "20%",
+        width: collapsed ? "100px" : "20%",
         backgroundColor: "#191919",
         color: "white",
         height: "100vh",
@@ -101,15 +101,15 @@ export default function SideBar({ removeCookie, navigate }) {
           alt=""
         />
       </Toolbar>
-      <div style={{display: "flex", justifyContent: "center"}}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
 
-      <button
-        onClick={() => setCollapsed(!collapsed)}
-        style={{width: "80%"}}
+        <button
+          onClick={() => setCollapsed(!collapsed)}
+          style={{ width: "80%" }}
         >
-        {collapsed ? "Open" : "Collapse"}
-      </button>
-        </div>
+          {collapsed ? "Open" : "Collapse"}
+        </button>
+      </div>
       <List>
         {list1.map((e, i) => (
           <Link
@@ -120,6 +120,7 @@ export default function SideBar({ removeCookie, navigate }) {
               fontWeight: "bold",
               display: "flex",
               justifyContent: "center",
+              
             }}
             key={i}
             onClick={() => {
@@ -131,11 +132,11 @@ export default function SideBar({ removeCookie, navigate }) {
               style={
                 e.isActive
                   ? {
-                      backgroundColor: "red",
-                      border: "1px solid black",
-                      borderRadius: "5px",
-                      width: "80%",
-                    }
+                    backgroundColor: "red",
+                    border: "1px solid black",
+                    borderRadius: "5px",
+                    width: "80%",
+                  }
                   : { width: "80%" }
               }
             >
@@ -145,10 +146,10 @@ export default function SideBar({ removeCookie, navigate }) {
                   style={
                     collapsed
                       ? {
-                          display: "flex",
-                          justifyContent: "center",
-                          width: "100%",
-                        }
+                        display: "flex",
+                        justifyContent: "center",
+                        width: "100%",
+                      }
                       : {}
                   }
                 >
