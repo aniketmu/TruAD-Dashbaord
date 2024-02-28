@@ -11,6 +11,7 @@ function PopularPicks() {
   const { value } = useMyContext();
   const [media, setMedia] = useState([]);
   const [filter, setFilter] = useState("rating");
+  const [searchTerm, setSearchTerm] = useState("");
   useEffect(() => {
     const fetchMedia = async () => {
       try {
@@ -46,6 +47,16 @@ function PopularPicks() {
     setFilter(option);
   };
 
+  const handleSearch = () => {
+    const filtered = media.filter(
+      (item) =>
+        item.Title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.Type.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    // searchMovies();
+    setMedia(filtered);
+    setSearchTerm("");
+  };
   return (
     <div
       style={{ width: "80%", flexGrow: "1", height: "100vh", overflow: "auto" }}
@@ -59,6 +70,15 @@ function PopularPicks() {
           backgroundColor: "rgb(52 58 64 / 88%)",
         }}
       >
+        <div className={styles.search_container}>
+          <input
+            type="text"
+            placeholder="Please enter the resource name, actors, production company and placement client"
+            onChange={(e) => setSearchTerm(e.target.value)}
+            value={searchTerm}
+          />
+          <button onClick={handleSearch}>Search</button>
+        </div>
         <div className={styles.dashboard}>
           <div className={styles.resource}>
             <div
