@@ -17,7 +17,7 @@ import "../MCard.css"
 export default function MaterialMCard({ data, index, handleDelete }) {
     // >>>>>>> 790dee5c0b629f4d47ec39a49c8d5a99b492be38
     return (
-        <Card sx={{ maxWidth: 300, borderRadius: "10px", backgroundColor:'#6c757d', color:'white',}} className='mcard'>
+        <Card sx={{ maxWidth: "100%", borderRadius: "10px", backgroundColor:'#6c757d', color:'white'}} className='mcard'>
             <CardMedia
                 component="img"
                 alt="green iguana"
