@@ -170,9 +170,10 @@ export default function SideBar({ removeCookie, navigate }) {
           </Link>
         ))}
       </List>
-
+                
       <button
-        style={{ position: "absolute", bottom: "0px" }}
+        style={{ position: "absolute", bottom: "0px", 
+      }}
         onClick={(e) => {
           removeCookie("user", { path: "/" });
           navigate("/");

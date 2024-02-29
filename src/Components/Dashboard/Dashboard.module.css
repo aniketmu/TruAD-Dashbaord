@@ -6,25 +6,26 @@
   align-items: center;
 }
 .search_container input {
-  height: 30px;
-  width: 90%;
+  height: 43px;
+  width: 600px;
   font-size: 14px;
   background-image: url(https://cdn2.hubspot.net/hubfs/4004166/bioticresearch_website_assets/images/search_icon.png);
   background-repeat: no-repeat;
   background-position: left center;
   padding-left: 40px;
   background-color: #fff;
-  border: 1px solid #000;
+  outline: none;
   box-shadow: none;
-  border-radius: 10px;
-  /* -webkit-appearance: none; */
+  border: none;
+  border-radius: 10px 0 0 10px;
 }
 
 .search_container button {
-  background-color: #00ced1;
+  height: 45px;
+  margin-left: -1;
   border: none;
-  border-radius: 10px;
-  width: 70px;
+  border-radius: 0 10px 10px 0;
+  width: 100px;
   color: white;
 }
 

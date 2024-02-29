@@ -70,7 +70,10 @@ function PopularPicks() {
           backgroundColor: "rgb(52 58 64 / 88%)",
         }}
       >
-        <div className={styles.search_container}>
+        <div className={styles.search_container}
+        style={{justifyContent:'end'}}
+        >
+          <div style={{paddingRight:'2rem'}}>
           <input
             type="text"
             placeholder="Please enter the resource name, actors, production company and placement client"
@@ -78,6 +81,7 @@ function PopularPicks() {
             value={searchTerm}
           />
           <button onClick={handleSearch}>Search</button>
+          </div>
         </div>
         <div className={styles.dashboard}>
           <div className={styles.resource}>

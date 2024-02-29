@@ -254,12 +254,15 @@ function ActionPage() {
           <Button
              component="div"
           sx={{
+            borderRadius:2,
             margin: 2,
             marginBottom: 1.3,
             padding:1,
             color:'white',
-            bgcolor:'red',
-            bgcolor:'linear-gradient(90deg, #343a40 0%, red 37%, red 100%);',
+            bgcolor:'rgba(0, 0, 0, 0.38);',
+            '&:hover': {
+              bgcolor: 'rgb(0 0 0 / 66%)',
+            },
           }}>
             Blend
           </Button>

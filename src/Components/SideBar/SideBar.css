@@ -65,7 +65,12 @@
 }
 
 .signoutButton {
+  position:'absolute';
+  bottom:'0px';
   width: 100%;
+  text-align:'center';
+  /* padding-bottom:'40px'; */
+  background-color: aqua;
 }
 
 
