@@ -14,6 +14,8 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const list = [
   {
@@ -98,7 +100,7 @@ export default function SideBar({ removeCookie, navigate }) {
         transition: "width 0.5s ease",
       }}
     >
-      <Toolbar sx={{ background: "black", width: "100%", display: "flex", justifyContent: "center" }}>
+      <Toolbar sx={{ background: "black", width: "100%", display: "flex", justifyContent: "center" ,position:"relative" }}>
         <img
           src="https://www.truad.co/wp-content/uploads/2023/11/logo_transparent_1-150x150.png"
           style={{
@@ -110,11 +112,12 @@ export default function SideBar({ removeCookie, navigate }) {
           }}
           alt=""
         />
+        
       </Toolbar>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <button onClick={() => setCollapsed(!collapsed)} style={{ width: "80%" }}>
-          {collapsed ? "Open" : "Collapse"}
-        </button>
+        <div onClick={() => setCollapsed(!collapsed)} style={{ width: "100%" ,textAlign:"center",padding:"10px" }}>
+          {collapsed ?<ArrowForwardIosIcon/>:<ArrowBackIosNewIcon/> }
+        </div>
       </div>
       <List>
         {list1.map((e, i) => (
