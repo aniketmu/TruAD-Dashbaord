@@ -126,11 +126,6 @@ const MCard1 = ({ id }) => {
               }}
               className="media_child"
             >
-              {/* <<<<<<< HEAD
-<Typography gutterBottom sx={{ fontSize: "16px", color: "white" }} component="div">
-  {movies?.Plot?.split(' ').slice(0, 15).join(' ')}{movies?.Plot?.split(' ').length > 15 ? ' ....' : ''}
-</Typography>
-======= */}
               <Typography
                 gutterBottom
                 sx={{ fontSize: "16px", color: "white" }}
@@ -139,7 +134,6 @@ const MCard1 = ({ id }) => {
                 {movies?.Plot?.split(" ").slice(0, 15).join(" ")}
                 {movies?.Plot?.split(" ").length > 15 ? " ...." : ""}
               </Typography>
-              {/* >>>>>>> 7914a48d7c6852ef19159f325421cdd73b3379dc */}
               <Stack direction="row" spacing={1}>
                 {movies?.Genre?.split(",").map((label, index) => (
                   <Chip
@@ -169,13 +163,6 @@ const MCard1 = ({ id }) => {
           <CardActions
             sx={{ background: "rgb(14 14 14 / 65%)", p: 0.3, paddingInline: 1 }}
           >
-            {/* <Button
-              size="small"
-              color="primary"
-              sx={{ color: "#d3d6da", width: "100%" }}
-            >
-              ADD Video
-            </Button> */}
             <Typography
               variant="subtitle1"
               sx={{
@@ -184,6 +171,7 @@ const MCard1 = ({ id }) => {
                 color: "#d3d6da",
                 width: "100%",
                 backgroundColor: "black",
+                borderRadius:1.5
               }}
             >
               {movies.Title.substring(0, 20) || "null"}

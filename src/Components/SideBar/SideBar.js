@@ -19,7 +19,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const list = [
   {
-    name: "home page",
+    name: "Home Page",
     targetLink: "/dashboard/homepage",
     icon: <HomeIcon />,
     isActive: false,
@@ -43,7 +43,7 @@ const list = [
     isActive: false,
   },
   {
-    name: "invoices",
+    name: "Invoices",
     targetLink: "/dashboard/invoices/",
     icon: <ReceiptIcon />,
     isActive: false,
@@ -167,7 +167,7 @@ export default function SideBar({ removeCookie, navigate }) {
                 >
                   {e.icon}
                 </ListItemIcon>
-                {!collapsed && <ListItemText primary={e.name.toUpperCase()} />}
+                {!collapsed && <ListItemText primary={e.name} />}
               </ListItemButton>
             </ListItem>
           </Link>
@@ -186,9 +186,10 @@ export default function SideBar({ removeCookie, navigate }) {
         SIGNOUT
       </button>
       {/* Show hovered icon name if collapsed and icon is hovered */}
-      {collapsed && hoveredIcon !== null && (
-        <div style={{ position: "absolute", top: hoverPosition.y, left: hoverPosition.x, backgroundColor: "rgba(0,0,0,0.5)" }}>
-          {list1[hoveredIcon].name.toUpperCase()}
+      {collapsed && hoveredIcon !== null && 
+      (
+        <div style={{ position: "absolute", top: hoverPosition.y, left: hoverPosition.x, backgroundColor: "rgba(0,0,0,0.5)", minWidth: '100px' }}>
+          {list1[hoveredIcon].name}
         </div>
       )}
     </div>
