@@ -1,0 +1,21 @@
+.raiseTicketContainer{
+    width: 100%;
+    background-color: #6c757d;
+    color: white;
+    display: flex;
+    
+    align-items: center;
+    flex-direction: column;
+}
+.raise{
+    width: 99%;
+    border-radius: 7px;
+    margin-top: 10px;
+
+}
+.raise1{
+    background-color: #171a1cc9;
+    height: 40px;
+    
+
+}

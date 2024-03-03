@@ -2,8 +2,11 @@ import { Button } from "@mui/material";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
+import { useNavigate } from "react-router-dom";
+
 function ActionPage() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [data, setData] = useState([
     {
       file: "https://imgs.search.brave.com/5YfDZ_BrNmW8ShDojzoMD8HgsVQ7SLM2tRWHWNbqQEE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFFMW44VCtJbkwu/anBn",
@@ -137,7 +140,7 @@ function ActionPage() {
         <div
           style={{
             backgroundColor: "#212529",
-            color:'#fffffff5',
+            color: '#fffffff5',
             width: "50%",
             height: "50px",
             margin: "0 10px",
@@ -146,14 +149,21 @@ function ActionPage() {
             alignItems: "center",
             borderRadius: "7px",
             boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+            cursor: "pointer"
+
           }}
         >
           <h4>Oprate</h4>
         </div>
+
         <div
+          onClick={() => {
+            console.log("navigate issue")
+            navigate("/dashboard/raiseticket")
+          }}
           style={{
             backgroundColor: "#212529",
-            color:'#fffffff5',
+            color: '#fffffff5',
             width: "50%",
             height: "50px",
             margin: "0 10px",
@@ -162,6 +172,7 @@ function ActionPage() {
             alignItems: "center",
             borderRadius: "7px",
             boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+            cursor: "pointer"
           }}
         >
           <h4>Raise Ticket</h4>
@@ -182,7 +193,7 @@ function ActionPage() {
             display: "flex",
             flexDirection: "column",
             backgroundColor: "#343a40",
-            color:'#fffffff5',
+            color: '#fffffff5',
             borderRadius: "7px",
             boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
           }}
@@ -203,7 +214,7 @@ function ActionPage() {
               height: "40%",
               borderRadius: "7px",
               boxShadow: "rgba(0, 0, 1, 0.74) 0px 3px 8px",
-              backgroundColor:'white',
+              backgroundColor: 'white',
             }}
             src={location.state.video}
             title="Youtube Player"
@@ -252,18 +263,18 @@ function ActionPage() {
             />
           </div>
           <Button
-             component="div"
-          sx={{
-            borderRadius:2,
-            margin: 2,
-            marginBottom: 1.3,
-            padding:1,
-            color:'white',
-            bgcolor:'rgba(0, 0, 0, 0.38);',
-            '&:hover': {
-              bgcolor: 'rgb(0 0 0 / 66%)',
-            },
-          }}>
+            component="div"
+            sx={{
+              borderRadius: 2,
+              margin: 2,
+              marginBottom: 1.3,
+              padding: 1,
+              color: 'white',
+              bgcolor: 'rgba(0, 0, 0, 0.38);',
+              '&:hover': {
+                bgcolor: 'rgb(0 0 0 / 66%)',
+              },
+            }}>
             Blend
           </Button>
         </div>
@@ -273,7 +284,7 @@ function ActionPage() {
           style={{
             width: "50%",
             backgroundColor: "#343a40",
-            color:'#fffffff5',
+            color: '#fffffff5',
             margin: "10px",
             borderRadius: "7px",
           }}

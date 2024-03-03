@@ -12,6 +12,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ActionPage from "./Components/MaterialManagmentFolder/ActionPage";
 import Invoices from "./Components/InvoicesFiles/Invoices";
 import { MyContextProvider } from "./MyContext";
+import RaiseTicket from "./Components/MaterialManagmentFolder/Raise Ticket/RaiseTicket.js";
 
 const router = createBrowserRouter([
   {
@@ -55,11 +56,23 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/actionpage",
         element: <ActionPage />,
+        children : [
+          {
+           
+
+          }
+        ]
+
       },
       {
         path: "/dashboard/invoices",
         element: <Invoices />,
       },
+      {
+        path:"/dashboard/raiseticket",
+        element:<RaiseTicket/>
+      }
+      
     ],
   },
 ]);
