@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./raiseticket.css"
 
 
@@ -46,26 +46,46 @@ function createData(ticketid, subject, status, lastupdate) {
 
 const rows = [
   createData(1001, 'Not Getting Proper Data', "On Hold", "2 days ago",),
-  createData(1002, 'Not Getting Proper Data', "In Progress",  "2 days ago"),
+  createData(1002, 'Not Getting Proper Data', "In Progress", "2 days ago"),
   createData(1003, 'Not Getting Proper Data', "Completed", "2 days ago"),
-  createData(1004, 'Not Getting Proper Data', "In Progress",  "2 days ago"),
-  createData(1005, 'Not Getting Proper Data', "On Hold",  "2 days ago"),
-  createData(1006, 'Not Getting Proper Data', "Completed",  "2 days ago"),
+  createData(1004, 'Not Getting Proper Data', "In Progress", "2 days ago"),
+  createData(1005, 'Not Getting Proper Data', "On Hold", "2 days ago"),
+  createData(1006, 'Not Getting Proper Data', "Completed", "2 days ago"),
   createData(1007, 'Not Getting Proper Data', "On Hold", "2 days ago"),
-  createData(1008, 'Not Getting Proper Data', "Completed","2 days ago"),
-  createData(1009, 'Not Getting Proper Data', "In Progress",  "2 days ago"),
-  createData(1010, 'Not Getting Proper Data', "On Hold",  "2 days ago"),
+  createData(1008, 'Not Getting Proper Data', "Completed", "2 days ago"),
+  createData(1009, 'Not Getting Proper Data', "In Progress", "2 days ago"),
+  createData(1010, 'Not Getting Proper Data', "On Hold", "2 days ago"),
   createData(1011, 'Not Getting Proper Data', "In Progress", "2 days ago"),
   createData(1012, "Not Getting Proper Data", "In Progress", "2 days ago"),
   createData(1013, 'Not Getting Proper Data', "On Hold", "2 days ago"),
   createData(1014, 'Not Getting Proper Data', "Completed", "2 days ago"),
-  createData(1015, 'Not Getting Proper Data', "On Hold",  "2 days ago"),
+  createData(1015, 'Not Getting Proper Data', "On Hold", "2 days ago"),
 ];
 
 function RaiseTicket() {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [input, setInput] = useState("");
+  const [data,setData]=useState(rows)
+
+  const handleInputChange = (e) => {
+    // console.log(e.target.value)
+    setInput(e.target.value)
+  }
+  const handleSearch=()=>{
+    const newArr=[...rows];
+    const serchTearm=input.trim();
+    if(serchTearm){
+    const filerdArray=newArr.filter((val)=>{
+      return val.ticketid==serchTearm;
+    })
+    setData(filerdArray)
+  }
+    else{
+      setData(rows)
+    }
+  }
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -87,12 +107,13 @@ function RaiseTicket() {
         </div>
       </div>
       <div className='raise2 raise'>
-        <div style={{width:"100%"}}>
-          <input type="text"  style={{width:"30%",height:"35px"}}/>
-          <span> Total  {rows.length} Ticket </span>
+        <div style={{ width: "50%" }}>
+          <input type="text" value={input} style={{ width: "60%", height: "35px" }} onChange={handleInputChange} placeholder='Enter Ticket ID' />
+          <button onClick={handleSearch} style={{ borderRadius: "7px", backgroundColor: "red", marginLeft: "10px", width: "15%" }} >Search</button>
+          <span> Total  {data.length} Ticket </span>
         </div>
-        <div>
-          <button style={{width:"70px" ,backgroundColor:"red",borderRadius:"7px solid white"}}><span>+</span>test</button> 
+        <div className='addTicketContainer' >
+          <button ><span>+</span>Raise New Ticket</button>
         </div>
       </div>
       <div className='raise3 raise'>
@@ -117,7 +138,7 @@ function RaiseTicket() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows
+                  {data
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
                       return (
@@ -142,7 +163,7 @@ function RaiseTicket() {
             <TablePagination style={{ color: "white" }}
               rowsPerPageOptions={[10, 25, 100]}
               component="div"
-              count={rows.length}
+              count={data.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}

@@ -31,11 +31,34 @@
     border-left: 1px solid white;
     cursor: pointer;
 }
+.addTicketContainer{ 
+    width:50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+}
+.addTicketContainer button{
+    width:auto;
+    background-color: red;
+    border-radius: 7px;
+    height: 45px;
+    
+    
+
+
+}
+.addTicketContainer button span{
+   border-right: 1px solid black;
+   padding-right: 10px;
+   margin-right: 10px;
+
+}
 .raise2{
     background-color: #171a1cc9;
     /* height: 70px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 5%;
+    padding: 3px 2% ;
 }
