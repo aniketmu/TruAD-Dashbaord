@@ -11,11 +11,31 @@
     width: 99%;
     border-radius: 7px;
     margin-top: 10px;
+    
 
 }
 .raise1{
     background-color: #171a1cc9;
     height: 40px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    justify-content: space-between;
+    padding:  25px;
     
 
+}
+.raise1 div span {
+    margin-left: 25px;
+    padding-left: 20px;
+    border-left: 1px solid white;
+    cursor: pointer;
+}
+.raise2{
+    background-color: #171a1cc9;
+    /* height: 70px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 5%;
 }
