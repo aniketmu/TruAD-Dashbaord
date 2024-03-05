@@ -42,8 +42,7 @@ const Dashhboard = () => {
     const apiKey = "37f889dd"; // Replace with your OMDb API key
     try {
       const response = await axios.get(
-        `https://www.omdbapi.com/?s=${
-          searchTerm ? searchTerm : "Comedy"
+        `https://www.omdbapi.com/?s=${searchTerm ? searchTerm : "Comedy"
         }&apikey=${apiKey}`
       );
       setMovies(response.data.Search);
@@ -58,8 +57,7 @@ const Dashhboard = () => {
     const apiKey = "37f889dd"; // Replace with your OMDb API key
     try {
       const response = await axios.get(
-        `https://www.omdbapi.com/?s=${
-          selectedCategory ? selectedCategory : "Top Movie"
+        `https://www.omdbapi.com/?s=${selectedCategory ? selectedCategory : "Top Movie"
         }&apikey=${apiKey}`
       );
       setMovies(response.data.Search);
@@ -146,7 +144,7 @@ const Dashhboard = () => {
     fetchData();
   }, [openDialog]);
 
-  useEffect(() => {}, [mediaArray]);
+  useEffect(() => { }, [mediaArray]);
 
   const handleCategorySelect = (option) => {
     setSelectedCategory(option);
@@ -329,102 +327,102 @@ const Dashhboard = () => {
       >
         <CustomButton />
         <div className={styles.search_container}>
-          
-        <Stack direction={"row"} spacing={3} sx={{ paddingX: "2em" }}>
-          <FormControl
-            variant="standard"
-            sx={{ m: 1, minWidth: 60, color: "white" }}
-          >
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              sx={{ color: "white" }}
+
+          <Stack direction={"row"} spacing={3} sx={{ paddingX: "2em" }}>
+            <FormControl
+              variant="standard"
+              sx={{ m: 1, minWidth: 60, color: "white" }}
             >
-              Type
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              label="Type"
-              sx={{ color: "white", ".MuiSvgIcon-root": { color: "white" } }}
-              value={selectedType}
-              onChange={(e) => {
-                handleTypeSelect(e.target.value);
-              }}
+              <InputLabel
+                id="demo-simple-select-standard-label"
+                sx={{ color: "white" }}
+              >
+                Type
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                label="Type"
+                sx={{ color: "white", ".MuiSvgIcon-root": { color: "white" } }}
+                value={selectedType}
+                onChange={(e) => {
+                  handleTypeSelect(e.target.value);
+                }}
+              >
+                {typeOptions?.map((option) => {
+                  return (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+            <FormControl
+              variant="standard"
+              sx={{ m: 1, minWidth: 90, color: "white" }}
             >
-              {typeOptions?.map((option) => {
-                return (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-          <FormControl
-            variant="standard"
-            sx={{ m: 1, minWidth: 90, color: "white" }}
-          >
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              sx={{ color: "white" }}
+              <InputLabel
+                id="demo-simple-select-standard-label"
+                sx={{ color: "white" }}
+              >
+                Category
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                label="Category"
+                sx={{ color: "white", ".MuiSvgIcon-root": { color: "white" } }}
+                value={selectedCategory}
+                onChange={(e) => {
+                  handleCategorySelect(e.target.value);
+                }}
+              >
+                {categories.map((option) => {
+                  return (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+            <FormControl
+              variant="standard"
+              sx={{ m: 1, minWidth: 110, color: "white" }}
             >
-              Category
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              label="Category"
-              sx={{ color: "white", ".MuiSvgIcon-root": { color: "white" } }}
-              value={selectedCategory}
-              onChange={(e) => {
-                handleCategorySelect(e.target.value);
-              }}
-            >
-              {categories.map((option) => {
-                return (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-          <FormControl
-            variant="standard"
-            sx={{ m: 1, minWidth: 110, color: "white" }}
-          >
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              sx={{ color: "white" }}
-            >
-              Certification
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              label="Certification"
-              sx={{ color: "white", ".MuiSvgIcon-root": { color: "white" } }}
-              value={selectedCerti}
-              onChange={(e) => handleCertificationSelect(e.target.value)}
-            >
-              {certifications.map((option) => {
-                return (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-        </Stack>
-        <Box sx={{paddingInline: 3,}}>
-          <input
-            type="text"
-            placeholder="Please enter the resource name, actors, production company and placement client"
-            onChange={(e) => setSearchTerm(e.target.value)}
-            value={searchTerm}
-          />
-          <button onClick={handleSearch}>Search</button>
+              <InputLabel
+                id="demo-simple-select-standard-label"
+                sx={{ color: "white" }}
+              >
+                Certification
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                label="Certification"
+                sx={{ color: "white", ".MuiSvgIcon-root": { color: "white" } }}
+                value={selectedCerti}
+                onChange={(e) => handleCertificationSelect(e.target.value)}
+              >
+                {certifications.map((option) => {
+                  return (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+          </Stack>
+          <Box sx={{ paddingInline: 3, width:"50%" }}>
+            <input
+              type="text"
+              placeholder="Please enter the resource name, actors, production company and placement client"
+              onChange={(e) => setSearchTerm(e.target.value)}
+              value={searchTerm}
+            />
+            <button style={{width:"20%"}} onClick={handleSearch}>Search</button>
           </Box>
         </div>
         <div className={styles.dashboard}>

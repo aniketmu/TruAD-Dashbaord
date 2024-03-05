@@ -45,21 +45,21 @@ function createData(ticketid, subject, status, lastupdate) {
 }
 
 const rows = [
-  createData(1001, 'Not Getting Proper Data', "On Hold", 3287263,),
-  createData(1002, 'Not Getting Proper Data', "In Progress", 9596961),
-  createData(1003, 'Not Getting Proper Data', "Completed", 301340),
-  createData(1004, 'Not Getting Proper Data', "In Progress", 9984670),
-  createData(1005, 'Not Getting Proper Data Hold', 327167434, 9833520),
-  createData(1006, 'Not Getting Proper Data', "Completed", 7692024),
-  createData(1007, 'Not Getting Proper Data', "On Hold", 357578),
-  createData(1008, 'Not Getting Proper Data', "Completed", 70273),
-  createData(1009, 'Not Getting Proper Data', "In Progress", 1972550),
-  createData(1010, 'Not Getting Proper Data', "On Hold", 377973),
-  createData(1011, 'Not Getting Proper Data', "In Progress", 640679),
-  createData(1012, "Not Getting Proper Data", "In Progress", 67545757, 242495),
-  createData(1013, 'Not Getting Proper Data', "On Hold", 17098246),
-  createData(1014, 'Not Getting Proper Data', "Completed", 923768),
-  createData(1015, 'Not Getting Proper Data', "On Hold", 8515767),
+  createData(1001, 'Not Getting Proper Data', "On Hold", "2 days ago",),
+  createData(1002, 'Not Getting Proper Data', "In Progress",  "2 days ago"),
+  createData(1003, 'Not Getting Proper Data', "Completed", "2 days ago"),
+  createData(1004, 'Not Getting Proper Data', "In Progress",  "2 days ago"),
+  createData(1005, 'Not Getting Proper Data', "On Hold",  "2 days ago"),
+  createData(1006, 'Not Getting Proper Data', "Completed",  "2 days ago"),
+  createData(1007, 'Not Getting Proper Data', "On Hold", "2 days ago"),
+  createData(1008, 'Not Getting Proper Data', "Completed","2 days ago"),
+  createData(1009, 'Not Getting Proper Data', "In Progress",  "2 days ago"),
+  createData(1010, 'Not Getting Proper Data', "On Hold",  "2 days ago"),
+  createData(1011, 'Not Getting Proper Data', "In Progress", "2 days ago"),
+  createData(1012, "Not Getting Proper Data", "In Progress", "2 days ago"),
+  createData(1013, 'Not Getting Proper Data', "On Hold", "2 days ago"),
+  createData(1014, 'Not Getting Proper Data', "Completed", "2 days ago"),
+  createData(1015, 'Not Getting Proper Data', "On Hold",  "2 days ago"),
 ];
 
 function RaiseTicket() {
@@ -89,10 +89,10 @@ function RaiseTicket() {
       <div className='raise2 raise'>
         <div style={{width:"100%"}}>
           <input type="text"  style={{width:"30%",height:"35px"}}/>
-          <span>   7 Ticket Total</span>
+          <span> Total  {rows.length} Ticket </span>
         </div>
         <div>
-          <button>test</button>
+          <button style={{width:"70px" ,backgroundColor:"red",borderRadius:"7px solid white"}}><span>+</span>test</button> 
         </div>
       </div>
       <div className='raise3 raise'>
@@ -101,7 +101,7 @@ function RaiseTicket() {
         </div>
         <div>
           <Paper sx={{ width: '100%', overflow: 'hidden', backgroundColor: "#171a1cc9", color: "white" }} style={{ color: "white" }}>
-            <TableContainer sx={{ maxHeight: 650 }}>
+            <TableContainer sx={{ maxHeight: 600 }}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead >
                   <TableRow>
