@@ -12,6 +12,9 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
+import RaiseDailog from './RaiseDailog';
+import CardActions from '@mui/material/CardActions';
+
 const columns = [
   { id: 'ticketid', label: 'Ticket ID', minWidth: 50 },
   { id: 'subject', label: 'Subject', minWidth: 200 },
@@ -67,22 +70,22 @@ function RaiseTicket() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [input, setInput] = useState("");
-  const [data,setData]=useState(rows)
+  const [data, setData] = useState(rows)
 
   const handleInputChange = (e) => {
     // console.log(e.target.value)
     setInput(e.target.value)
   }
-  const handleSearch=()=>{
-    const newArr=[...rows];
-    const serchTearm=input.trim();
-    if(serchTearm){
-    const filerdArray=newArr.filter((val)=>{
-      return val.ticketid==serchTearm;
-    })
-    setData(filerdArray)
-  }
-    else{
+  const handleSearch = () => {
+    const newArr = [...rows];
+    const serchTearm = input.trim();
+    if (serchTearm) {
+      const filerdArray = newArr.filter((val) => {
+        return val.ticketid == serchTearm;
+      })
+      setData(filerdArray)
+    }
+    else {
       setData(rows)
     }
   }
@@ -97,6 +100,7 @@ function RaiseTicket() {
   };
   return (
     <div className='raiseTicketContainer'>
+
 
       <div className='raise1 raise'>
         <h3>Help</h3>
@@ -113,7 +117,9 @@ function RaiseTicket() {
           <span> Total  {data.length} Ticket </span>
         </div>
         <div className='addTicketContainer' >
-          <button ><span>+</span>Raise New Ticket</button>
+          <CardActions>
+           <RaiseDailog />  {/*  <button ><span>+</span>Raise New Ticket</button> */}
+          </CardActions>
         </div>
       </div>
       <div className='raise3 raise'>
