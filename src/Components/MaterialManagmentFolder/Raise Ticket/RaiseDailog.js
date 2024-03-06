@@ -9,11 +9,16 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 
 
-function RaiseDailog() {
+function RaiseDailog(props) {
 
   const [open, setOpen] = React.useState(false);
 
   const[selectedOption,setSelectOption]=useState("option")
+  const [text,setText]=useState("")
+  const handleText=(e)=>{
+    console.log(text)
+    setText(e.target.value)
+  }
   const handleSelectChange=(e)=>{
     console.log(e.target.value)
     setSelectOption(e.target.value)
@@ -53,7 +58,8 @@ function RaiseDailog() {
                 cols={60}
                 name="feedback"
                 placeholder="Enter your feedback here"
-                defaultValue={""}
+                defaultValue={text}
+                onChange={handleText}
               />
 
             </div>
@@ -83,6 +89,8 @@ function RaiseDailog() {
 
           <Button onClick={() => {
 
+           
+            props.addRaiseNewData(text,selectedOption)
             setOpen(false)
           }} variant="contained" disableElevation style={{ width: "50%" }}>
             Raise Ticket

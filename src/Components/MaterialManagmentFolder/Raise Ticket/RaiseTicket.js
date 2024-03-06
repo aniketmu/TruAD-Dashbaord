@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./raiseticket.css"
 
 
@@ -41,9 +41,9 @@ const columns = [
   },
 ];
 
-function createData(ticketid, subject, status, lastupdate) {
+function createData(ticketid, subject, status, lastupdate , support) {
   // const density = population / size;
-  const support = "Qayyum"
+  // const support = "Qayyum"
   return { ticketid, subject, status, lastupdate, support }; //density
 }
 
@@ -76,6 +76,7 @@ function RaiseTicket() {
     // console.log(e.target.value)
     setInput(e.target.value)
   }
+  
   const handleSearch = () => {
     const newArr = [...rows];
     const serchTearm = input.trim();
@@ -88,6 +89,14 @@ function RaiseTicket() {
     else {
       setData(rows)
     }
+  }
+
+  const addRaiseNewData=(text,selectedDepartment)=>{
+
+    const s=createData(1001+rows.length, text, "In Process", "today",selectedDepartment)
+    const newArr =[s,...data]
+    rows.unshift(s);
+    setData(newArr)
   }
 
   const handleChangePage = (event, newPage) => {
@@ -118,7 +127,7 @@ function RaiseTicket() {
         </div>
         <div className='addTicketContainer' >
           <CardActions>
-           <RaiseDailog />  {/*  <button ><span>+</span>Raise New Ticket</button> */}
+           <RaiseDailog addRaiseNewData={addRaiseNewData} />  
           </CardActions>
         </div>
       </div>
