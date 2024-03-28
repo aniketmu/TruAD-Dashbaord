@@ -12,6 +12,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 function RaiseDailog(props) {
 
   const [open, setOpen] = React.useState(false);
+  const [file,setFile]=React.useState("");
 
   const[selectedOption,setSelectOption]=useState("option")
   const [text,setText]=useState("")
@@ -31,6 +32,12 @@ function RaiseDailog(props) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleFile= (e)=> {
+   const url= URL.createObjectURL(e.target.files[0])
+   setFile(url);
+
+  }
   return (
     <React.Fragment>
       <button variant="contained" disableElevation onClick={handleClickOpen} ><span>+</span>Raise New Ticket</button>
@@ -79,6 +86,14 @@ function RaiseDailog(props) {
               </select>
             </div>
 
+            <div className="mb-3">
+              <label >
+               Upload Screenshot
+              </label>
+              <br/>
+                <input type='file' onChange={handleFile}/>
+            </div>
+
           </div>
 
 
@@ -89,8 +104,7 @@ function RaiseDailog(props) {
 
           <Button onClick={() => {
 
-           
-            props.addRaiseNewData(text,selectedOption)
+            props.addRaiseNewData(text,selectedOption ,file)
             setOpen(false)
           }} variant="contained" disableElevation style={{ width: "50%" }}>
             Raise Ticket

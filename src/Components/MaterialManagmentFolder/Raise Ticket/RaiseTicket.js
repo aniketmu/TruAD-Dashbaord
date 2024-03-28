@@ -14,6 +14,7 @@ import TableRow from '@mui/material/TableRow';
 
 import RaiseDailog from './RaiseDailog';
 import CardActions from '@mui/material/CardActions';
+import { Button } from 'bootstrap';
 
 const columns = [
   { id: 'ticketid', label: 'Ticket ID', minWidth: 50 },
@@ -38,17 +39,24 @@ const columns = [
     minWidth: 170,
     align: 'left',
     // format: (value) => value.toFixed(2),
+  }, {
+    id: 'viewfile',
+    label: 'View File',
+    minWidth: 30,
+    align: 'right',
+    // format: (value) => value.toFixed(2),
   },
 ];
 
-function createData(ticketid, subject, status, lastupdate , support) {
+function createData(ticketid, subject, status, lastupdate, support,img) {
   // const density = population / size;
-  // const support = "Qayyum"
-  return { ticketid, subject, status, lastupdate, support }; //density
+  // const img = "Qayyum"
+
+  return { ticketid, subject, status, lastupdate, support ,img}; //density
 }
 
 const rows = [
-  createData(1001, 'Not Getting Proper Data', "On Hold", "2 days ago",),
+  createData(1001, 'Not Getting Proper Data', "On Hold", "2 days ago"),
   createData(1002, 'Not Getting Proper Data', "In Progress", "2 days ago"),
   createData(1003, 'Not Getting Proper Data', "Completed", "2 days ago"),
   createData(1004, 'Not Getting Proper Data', "In Progress", "2 days ago"),
@@ -76,7 +84,7 @@ function RaiseTicket() {
     // console.log(e.target.value)
     setInput(e.target.value)
   }
-  
+
   const handleSearch = () => {
     const newArr = [...rows];
     const serchTearm = input.trim();
@@ -91,10 +99,10 @@ function RaiseTicket() {
     }
   }
 
-  const addRaiseNewData=(text,selectedDepartment)=>{
+  const addRaiseNewData = (text, selectedDepartment,img) => {
 
-    const s=createData(1001+rows.length, text, "In Process", "today",selectedDepartment)
-    const newArr =[s,...data]
+    const s = createData(1001 + rows.length, text, "In Process", "today", selectedDepartment ,img)
+    const newArr = [s, ...data]
     rows.unshift(s);
     setData(newArr)
   }
@@ -127,7 +135,7 @@ function RaiseTicket() {
         </div>
         <div className='addTicketContainer' >
           <CardActions>
-           <RaiseDailog addRaiseNewData={addRaiseNewData} />  
+            <RaiseDailog addRaiseNewData={addRaiseNewData} />
           </CardActions>
         </div>
       </div>
@@ -160,14 +168,42 @@ function RaiseTicket() {
                         <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                           {columns.map((column) => {
                             const value = row[column.id];
-                            return (
-                              <TableCell key={column.id} align={column.align} style={{ color: "white" }}>
-                                {column.format && typeof value === 'number'
-                                  ? column.format(value)
-                                  : value}
-                                {/* {column.} */}
-                              </TableCell>
-                            );
+                            
+
+                            if (column.id == 'viewfile') {
+                              return (
+                                <TableCell  key={column.id} align={column.align}>
+                                  <a href={row.img} target='blank'>
+                                  <button style={{borderRadius:"7px"}} >View Image </button>
+                                {/* <h1></h1> */}
+                                </a>
+                                </TableCell>
+                              )
+                            }
+                            else {
+                              return (
+                                <TableCell key={column.id} align={column.align} style={{ color: "white" }}>
+                                  {column.format && typeof value === 'number'
+                                    ? column.format(value)
+                                    : value}
+                                  {/* {column.} */}
+
+                                </TableCell>
+
+                              )
+                            }
+
+
+                            // return (
+                            //   {(vi==="viewfile")?<TableCell>Qaayyum</TableCell>:<TableCell key={column.id} align={column.align} style={{ color: "white" }}>
+                            //   {column.format && typeof value === 'number'
+                            //     ? column.format(value)
+                            //     : value}
+                            //   {/* {column.} */}
+
+                            // </TableCell>}
+
+                            // );
                           })}
                         </TableRow>
                       );
