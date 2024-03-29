@@ -12,6 +12,10 @@ export default function SignIn({ handleSwichPage }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState("");
 
+  const handleForget=()=>{
+    navigate('/verifyotp')
+  }
+
   const handleLogin = async () => {
     try {
       const response = await fetch('https://truad-dashboard-backend.onrender.com/api/login', {
@@ -66,12 +70,16 @@ export default function SignIn({ handleSwichPage }) {
           Login
         </button>
         {error && <p style={{ color: 'red' }}>{error}</p>}
+        <div style={{ margin: '20px 0' ,display:"flex",justifyContent:'space-between' }}>
         <span
           onClick={handleSwichPage}
-          style={{ margin: '20px 0', cursor: 'pointer' }}
+          style={{cursor: 'pointer', }}
         >
           Don't Have an Account
         </span>
+        <span style={{color:"red",cursor:"pointer"}} onClick={handleForget}>Forgot Password</span>
+        </div>
+        
       </form>
     </div>
   );

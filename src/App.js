@@ -13,11 +13,22 @@ import ActionPage from "./Components/MaterialManagmentFolder/ActionPage";
 import Invoices from "./Components/InvoicesFiles/Invoices";
 import { MyContextProvider } from "./MyContext";
 import RaiseTicket from "./Components/MaterialManagmentFolder/Raise Ticket/RaiseTicket.js";
+import VerifyOTP from "./Components/LoginFolder/ForgotPassword/VerifyOTP.js";
+import ConfirmNewPass from './Components/LoginFolder/ForgotPassword/ConfirmNewPass.js'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LoginContainer />,
+
+  },
+  {
+    path: "/verifyotp",
+    element: <VerifyOTP />
+  },
+  {
+    path: "/ConfirmNewPass",
+    element: <ConfirmNewPass />
   },
 
   {
@@ -56,9 +67,9 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/actionpage",
         element: <ActionPage />,
-        children : [
+        children: [
           {
-           
+
 
           }
         ]
@@ -69,10 +80,10 @@ const router = createBrowserRouter([
         element: <Invoices />,
       },
       {
-        path:"/dashboard/raiseticket",
-        element:<RaiseTicket/>
+        path: "/dashboard/raiseticket",
+        element: <RaiseTicket />
       }
-      
+
     ],
   },
 ]);
