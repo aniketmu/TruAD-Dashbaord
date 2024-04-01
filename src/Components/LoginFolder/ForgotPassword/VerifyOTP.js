@@ -5,6 +5,7 @@ import React from 'react';
 import { useState } from 'react';
 import logo from '../../img/logo.png';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 
 export default function VerifyOTP({ handleSwichPage }) {
@@ -13,17 +14,71 @@ export default function VerifyOTP({ handleSwichPage }) {
     const [email, setEmail] = useState('');
     const [error, setError] = useState("");
     const [genrate, setGenrate] = useState(false);
-    
+    const [otp, setOtp] = useState(0)
+    const [cookies, setCookie] = useCookies(["token"]);
 
 
-    const handleGenrate = () => {
-        setGenrate(!genrate)
+    const handleGenrate = async () => {
+        try {
+            const response = await fetch("http://localhost:4000/api/forgot", {  //https://truad-dashboard-backend.onrender.com/api/register
+                method: "POST", 
+                body: JSON.stringify({
+                    email
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            
+            if(response.status == 404){
+                return setError("User does not exist")
+            }
+
+            if(response.status == 500){
+                return setError("Something went Wrong")
+            }
+
+            if(response.status == 200){
+                return setGenrate(true)
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     // /ConfirmNewPass
 
-    const handleVerify=()=>{
-        navigate('/ConfirmNewPass')
+    const handleVerify= async()=>{
+        console.log(otp)
+        try {
+            const response  = await fetch("http://localhost:4000/verifyOtp", {
+                method: "POST",
+                body: JSON.stringify({
+                    email,
+                    otp
+                }),
+                headers: {
+                    "Content-Type" : "application/json"
+                }
+            })
+
+            if(response.status ==  403){
+                return setError("Invalid OTP")
+            }
+
+            if(response.status == 404){
+                return setError("User not found")
+            }
+
+            if(response.status == 200){
+                const data = await response.json()
+                console.log("data", data)
+                setCookie("token", data.token)
+                navigate('/ConfirmNewPass')
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
@@ -50,7 +105,7 @@ export default function VerifyOTP({ handleSwichPage }) {
 
                     <form>
                         <label>Enter OTP:</label>
-                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <input type="email" value={otp} onChange={(e) => setOtp(e.target.value)} />
                         <button type="button"  style={{ marginTop: "20px", borderRadius: "5px" }} onClick={handleVerify} >
                             Verify OTP
                         </button>

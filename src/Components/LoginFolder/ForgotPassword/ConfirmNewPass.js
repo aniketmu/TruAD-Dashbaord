@@ -4,17 +4,52 @@ import React from 'react';
 import { useState } from 'react';
 import logo from '../../img/logo.png';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 
 export default function ConfirmNewPass({ handleSwichPage }) {
 
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('')
     const [error, setError] = useState("");
     const [genrate, setGenrate] = useState(false);
+    const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 
-    const handleGenrate = () => {
-        setGenrate(!genrate)
+    const handleGenrate = async() => {
+        if(password !== confirmPassword){
+            return setError("Please enter correct Password in both the fields")
+        }
+
+        try {
+            const response = await fetch('http://localhost:4000/resetPassword', {
+                method: "POST",
+                body: JSON.stringify({
+
+                    newPassword : password
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${cookies.token}`
+                }
+            })
+
+            if(response.status == 403){
+                return setError("Unauthorized")
+            }
+
+            if(response.status == 404){
+                return setError("User not found")
+            }
+
+            if(response.status == 400){
+                return setError("Password must be at least 8 characters long and contain at least one special character, one uppercase character, and one number.")
+            }
+
+            setError("Password Updated")
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
@@ -31,9 +66,9 @@ export default function ConfirmNewPass({ handleSwichPage }) {
             <h2 style={{ textAlign: 'center' }}>Reset Password</h2>
             <form>
                 <label>New Password :</label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type="email" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <label>Confirm New Password:</label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type="email" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
 
                 <button type="button" onClick={handleGenrate} style={{ marginTop: "20px", borderRadius: "5px" }}>
                     Update
