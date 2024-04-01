@@ -30,6 +30,10 @@ export default function SignIn({ handleSwichPage }) {
         return setError("User not found");
       }
 
+      if(response.status === 403){
+        return setError("User Email is not verified");
+      }
+
       if(response.status === 200){
         const data = await response.json();
         // Cookies.set("token", data.token, {
