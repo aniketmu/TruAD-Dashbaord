@@ -113,7 +113,7 @@ export default function VerifyOTP({ handleSwichPage }) {
                         </button>
                     </form>
 
-                </div> : <div>error</div>}
+                </div> : <div></div>}
 
 
             </form>
