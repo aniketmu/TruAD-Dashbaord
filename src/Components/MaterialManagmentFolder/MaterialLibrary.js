@@ -98,7 +98,7 @@ function MaterialLibrary({ initData }) {
           width: "98.5%",
           overflow: "auto",
           margin: "auto",
-          height: "77vh",
+          height: "76vh",
           backgroundColor: "#343a40",
           padding: "10px 10px 10px 10px",
           borderRadius: "10px"

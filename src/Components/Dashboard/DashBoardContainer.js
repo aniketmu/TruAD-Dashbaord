@@ -22,7 +22,7 @@ function DashBoardContainer() {
       <SideBar removeCookie={removeCookie} navigate={navigate} />
       <Outlet />
 
-      <div style={{ position: "fixed", bottom: "10px", right: "10px", borderRadius: "10px", width: "20vw" }} ><ChatBox></ChatBox></div>
+      <div style={{ position: "fixed", bottom: "30px", right: "10px", borderRadius: "10px", width: "20vw" }} ><ChatBox></ChatBox></div>
     </div>
   );
 }
