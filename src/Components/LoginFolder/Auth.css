@@ -37,7 +37,9 @@ button {
   margin-top: 10px;
 
 }
-
+button {
+  background-color: gray;
+}
 button:hover {
   background-color:red;
 }

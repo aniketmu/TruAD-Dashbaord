@@ -20,6 +20,7 @@ export default function ConfirmNewPass({ handleSwichPage }) {
 
 
     return (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' ,height:'100vh',width:'100vw', backgroundColor:"rgb(18, 18, 18) ",color:"white"}}>
         <div className="auth-container">
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <img
@@ -42,6 +43,7 @@ export default function ConfirmNewPass({ handleSwichPage }) {
 
 
             </form>
+        </div>
         </div>
     );
 }

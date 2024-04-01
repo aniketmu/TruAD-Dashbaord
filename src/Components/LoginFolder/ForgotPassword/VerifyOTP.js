@@ -28,7 +28,8 @@ export default function VerifyOTP({ handleSwichPage }) {
 
 
     return (
-        <div className="auth-container">
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' ,height:'100vh',width:'100vw', backgroundColor:"rgb(18, 18, 18) "}}>
+        <div className="auth-container" style={{backgroundColor:"black",color:"white"}}>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <img
                     src={logo}
@@ -51,7 +52,7 @@ export default function VerifyOTP({ handleSwichPage }) {
                     <form>
                         <label>Enter OTP:</label>
                         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                        <button type="button"  style={{ marginTop: "20px", borderRadius: "5px" }} onClick={handleVerify} >
+                        <button type="button"  style={{ marginTop: "20px", borderRadius: "5px"  }} onClick={handleVerify} >
                             Verify OTP
                         </button>
                     </form>
@@ -61,6 +62,7 @@ export default function VerifyOTP({ handleSwichPage }) {
 
 
             </form>
+        </div>
         </div>
     );
 }
