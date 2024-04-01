@@ -20,7 +20,7 @@ export default function VerifyOTP({ handleSwichPage }) {
 
     const handleGenrate = async () => {
         try {
-            const response = await fetch("http://localhost:4000/api/forgot", {  //https://truad-dashboard-backend.onrender.com/api/register
+            const response = await fetch("https://truad-dashboard-backend.onrender.com/api/forgot", {  //https://truad-dashboard-backend.onrender.com/api/register
                 method: "POST", 
                 body: JSON.stringify({
                     email
@@ -51,7 +51,7 @@ export default function VerifyOTP({ handleSwichPage }) {
     const handleVerify= async()=>{
         console.log(otp)
         try {
-            const response  = await fetch("http://localhost:4000/verifyOtp", {
+            const response  = await fetch("https://truad-dashboard-backend.onrender.com/verifyOtp", {
                 method: "POST",
                 body: JSON.stringify({
                     email,
@@ -109,7 +109,6 @@ export default function VerifyOTP({ handleSwichPage }) {
 
                         <input type="email" value={otp} onChange={(e) => setOtp(e.target.value)} />
                         <button type="button"  style={{ marginTop: "20px", borderRadius: "5px" }} onClick={handleVerify} >
-
                             Verify OTP
                         </button>
                     </form>

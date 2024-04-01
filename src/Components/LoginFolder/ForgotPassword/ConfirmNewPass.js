@@ -22,7 +22,7 @@ export default function ConfirmNewPass({ handleSwichPage }) {
         }
 
         try {
-            const response = await fetch('http://localhost:4000/resetPassword', {
+            const response = await fetch('https://truad-dashboard-backend.onrender.com/resetPassword', {
                 method: "POST",
                 body: JSON.stringify({
 
