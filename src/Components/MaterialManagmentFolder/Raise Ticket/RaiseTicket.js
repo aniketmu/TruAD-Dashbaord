@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import "./raiseticket.css"
 
 
@@ -14,8 +14,6 @@ import TableRow from '@mui/material/TableRow';
 
 import RaiseDailog from './RaiseDailog';
 import CardActions from '@mui/material/CardActions';
-import { Button } from 'bootstrap';
-
 const columns = [
   { id: 'ticketid', label: 'Ticket ID', minWidth: 50 },
   { id: 'subject', label: 'Subject', minWidth: 200 },
@@ -90,7 +88,7 @@ function RaiseTicket() {
     const serchTearm = input.trim();
     if (serchTearm) {
       const filerdArray = newArr.filter((val) => {
-        return val.ticketid == serchTearm;
+        return val.ticketid === serchTearm;
       })
       setData(filerdArray)
     }
@@ -170,7 +168,7 @@ function RaiseTicket() {
                             const value = row[column.id];
                             
 
-                            if (column.id == 'viewfile') {
+                            if (column.id === 'viewfile') {
                               return (
                                 <TableCell  key={column.id} align={column.align}>
                                   <a href={row.img} target='blank'>
