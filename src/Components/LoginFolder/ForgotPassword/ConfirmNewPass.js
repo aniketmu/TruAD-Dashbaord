@@ -32,6 +32,7 @@ export default function ConfirmNewPass({ handleSwichPage }) {
                     "Content-Type": "application/json",
                     'Authorization': `Bearer ${cookies.token}`
                 }
+
             })
 
             if(response.status == 403){
@@ -47,6 +48,10 @@ export default function ConfirmNewPass({ handleSwichPage }) {
             }
 
             setError("Password Updated")
+            setTimeout(()=>{
+                navigate('/')
+            },3000)
+            
         } catch (error) {
             console.log(error)
         }
@@ -67,14 +72,15 @@ export default function ConfirmNewPass({ handleSwichPage }) {
             <h2 style={{ textAlign: 'center' }}>Reset Password</h2>
             <form>
                 <label>New Password :</label>
-                <input type="email" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <label>Confirm New Password:</label>
-                <input type="email" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
 
                 <button type="button" onClick={handleGenrate} style={{ marginTop: "20px", borderRadius: "5px" }}>
                     Update
                 </button>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
+                {/* {error && <p style={{ color: 'red' }}>{error}</p>} */}
+                {error=="Password Updated"?<p style={{ color: 'green' }}>{error}</p>:<p style={{ color: 'red' }}>{error}</p>}
 
 
             </form>

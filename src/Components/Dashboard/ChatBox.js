@@ -48,7 +48,7 @@ export default function ChatBox() {
                 </DialogActions>
             </Dialog> */}
       {open ? (
-        <div style={{ width: "20vw", height: "70vh", backgroundColor: "white", borderRadius: "10px",overflow:"scroll"}}>
+        <div style={{ width: "20vw", height: "70vh", backgroundColor: "white", borderRadius: "10px"}}>
           <Button onClick={handleClose} >
           <ExitToAppIcon/> close
           </Button>
