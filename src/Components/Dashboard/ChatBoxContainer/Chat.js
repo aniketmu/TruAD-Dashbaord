@@ -39,7 +39,9 @@ const Chatter = () => (
       <Window>
         <ChannelHeader />
         <MessageList />
-        <MessageInput />
+        <div style={{position:'fixed',bottom:'0'}}>
+        <MessageInput  />
+        </div>
       </Window>
       <Thread />
     </Channel>

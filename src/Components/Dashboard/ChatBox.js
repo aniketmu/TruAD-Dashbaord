@@ -23,7 +23,7 @@ export default function ChatBox() {
   };
 
   return (
-    <div style={{ position: "fixed", bottom: "10px", right: "10px" }}>
+    <div style={{ position: "fixed", bottom: "10px", right: "10px" ,borderRadius:"10px"}}>
       {/* <Button variant="contained" disableElevation style={{ width: "100%" ,zIndex:"999999",backgroundColor:"green" }} onClick={handleClickOpen}>
             <HeadsetMicIcon/>   Chat With Us
             </Button> */}
@@ -48,8 +48,8 @@ export default function ChatBox() {
                 </DialogActions>
             </Dialog> */}
       {open ? (
-        <div style={{ width: "20vw", height: "auto", backgroundColor: "white", borderRadius: "10px"}}>
-          <Button onClick={handleClose}>
+        <div style={{ width: "20vw", height: "70vh", backgroundColor: "white", borderRadius: "10px",overflow:"scroll"}}>
+          <Button onClick={handleClose} >
           <ExitToAppIcon/> close
           </Button>
           <Chatter />
