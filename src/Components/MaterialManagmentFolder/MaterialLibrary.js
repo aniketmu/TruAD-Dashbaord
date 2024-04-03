@@ -26,6 +26,27 @@ function MaterialLibrary({ initData }) {
     setMSize(arr2);
   }, [initData]);
 
+  // useEffect(() => {
+  //   const fetchData = async() => {
+  //     const response = await fetch("http://localhost:4000/api/getMaterial");
+  //     const datar = await response.json()
+
+  //     const materials = datar.materials
+
+  //     materials.forEach(element => {
+  //       element["file"] = element.url;
+  //       delete  element['url']
+  //     })
+
+  //     console.log(materials)
+  //     setData(materials)
+
+  //     console.log("updated",data)
+  //   }
+
+  //   fetchData()
+  // }, []);
+  
   function handleProductName(event) {
     if (event.target.value.trim() !== "") {
       const arr = [...searchData];
@@ -105,7 +126,7 @@ function MaterialLibrary({ initData }) {
         }}
         className="card_container"
       >
-        <Grid container spacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Grid container spacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           {data.map((val, i) => {
             return (
               <Grid item {...{ xs: 12, sm: 6, md: 4, lg: 3 }} key={i}>

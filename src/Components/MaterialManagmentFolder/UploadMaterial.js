@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useCookies } from "react-cookie";
 
-function UploadMaterial({ setData }) {
+function UploadMaterial({ setData, setMaterialAdded }) {
   const [file, setFile] = useState(null);
   const [files, setFiles] = useState({});
   const [imageUrl, setImageUrl] = useState(null);
+  const [cookies, setCookie] = useCookies(['user'])
 
   const handleChange = (e) => {
     if (e.target.id === "Image") {
@@ -15,19 +17,46 @@ function UploadMaterial({ setData }) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    console.log(cookies.user)
     const fileObj = {
       name: files.Name,
       type: files.Type,
       size: files.Size,
-      date: files.Date,
-      group: files.Group,
-      submitBy: files.SubmitBy,
-      file: imageUrl, // Changed 'file' to 'Image' to match the object key
-    };
+      // date: files.Date,
+      url: imageUrl, // Changed 'file' to 'Image' to match the object key
+      group: files.Group,}
+    //   submitBy: files.SubmitBy,
+    //   file: imageUrl, // Changed 'file' to 'Image' to match the object key
+    // };
 
-    setData((prev) => [fileObj, ...prev]);
+    // setData((prev) => [fileObj, ...prev]);
+    try {
+      const response = await fetch("http://localhost:4000/api/uploadMaterial", {
+        method: "POST",
+        body: JSON.stringify({
+          material : fileObj
+        }),
+        headers: {
+          "Authorization": `Bearer ${cookies.user}`,
+          "Content-Type" : "application/json"
+        }
+      })
+
+      if(response.status == 200){
+        return console.log("Success")
+      }
+
+      if(response.status == 500){
+        return console.log("unsuccessful")
+      }
+
+      setMaterialAdded((prev) => prev + 1)
+      setData((prev) => [...prev, fileObj])
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (
