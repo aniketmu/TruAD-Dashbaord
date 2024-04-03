@@ -73,7 +73,7 @@ function PopularPicks() {
         <div className={styles.search_container}
         style={{justifyContent:'end'}}
         >
-          <div style={{paddingRight:'2rem'}}>
+          <div style={{paddingRight:'1rem', width:"50%"}}>
           <input
             type="text"
             placeholder="Please enter the resource name, actors, production company and placement client"

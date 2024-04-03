@@ -37,9 +37,11 @@ const Chatter = () => (
   <Chat client={chatClient} theme='str-chat__theme-light'>
     <Channel channel={channel}>
       <Window>
-        <ChannelHeader />
+        {/* <ChannelHeader /> */}
         <MessageList />
-        <MessageInput />
+        <div style={{position:'fixed',bottom:'0'}}>
+        <MessageInput  />
+        </div>
       </Window>
       <Thread />
     </Channel>

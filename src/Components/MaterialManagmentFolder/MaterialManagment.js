@@ -138,7 +138,7 @@ function MaterialManagment() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("http://localhost:4000/api/getMaterial");
+      const response = await fetch("https://truad-dashboard-backend.onrender.com/api/getMaterial");
       const datar = await response.json();
 
       const materials = datar.materials;

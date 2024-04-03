@@ -33,7 +33,7 @@ function UploadMaterial({ setData, setMaterialAdded }) {
 
     // setData((prev) => [fileObj, ...prev]);
     try {
-      const response = await fetch("http://localhost:4000/api/uploadMaterial", {
+      const response = await fetch("https://truad-dashboard-backend.onrender.com/api/uploadMaterial", {
         method: "POST",
         body: JSON.stringify({
           material : fileObj
