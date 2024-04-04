@@ -5,14 +5,16 @@ import logo from '../img/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
+
 export default function SignIn({ handleSwichPage }) {
   const [cookies, setCookie] = useCookies(["user"]);
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState("");
+  const [isChecked,setIsChecked]=useState(false)
 
-  const handleForget=()=>{
+  const handleForget = () => {
     navigate('/verifyotp')
   }
 
@@ -30,15 +32,15 @@ export default function SignIn({ handleSwichPage }) {
         return setError("Invalid Password");
       }
 
-      if(response.status === 404){
+      if (response.status === 404) {
         return setError("User not found");
       }
 
-      if(response.status === 403){
+      if (response.status === 403) {
         return setError("User Email is not verified");
       }
 
-      if(response.status === 200){
+      if (response.status === 200) {
         const data = await response.json();
         // Cookies.set("token", data.token, {
         //   secure: true,
@@ -68,22 +70,25 @@ export default function SignIn({ handleSwichPage }) {
         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
 
         <label>Password:</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input type={isChecked?"text":"password"} value={password} onChange={(e) => setPassword(e.target.value)} />
+        <div style={{marginTop:"3px"}}>
+          <input type="checkbox" id="pass" checked={isChecked} onChange={()=>{setIsChecked(!isChecked)}}  />
+        <label for="pass" style={{marginLeft:"5px"}}> Show Password</label></div>
 
-        <button type="button" onClick={handleLogin}  style={{ marginTop: "20px", borderRadius: "5px" }}>
+        <button type="button" onClick={handleLogin} style={{ marginTop: "20px", borderRadius: "5px" }}>
           Login
         </button>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <div style={{ margin: '20px 0' ,display:"flex",justifyContent:'space-between' }}>
-        <span
-          onClick={handleSwichPage}
-          style={{cursor: 'pointer', }}
-        >
-          Don't Have an Account
-        </span>
-        <span style={{color:"red",cursor:"pointer"}} onClick={handleForget}>Forgot Password</span>
+        <div style={{ margin: '20px 0', display: "flex", justifyContent: 'space-between' }}>
+          <span
+            onClick={handleSwichPage}
+            style={{ cursor: 'pointer', }}
+          >
+            Don't Have an Account
+          </span>
+          <span style={{ color: "red", cursor: "pointer" }} onClick={handleForget}>Forgot Password</span>
         </div>
-        
+
       </form>
     </div>
   );
