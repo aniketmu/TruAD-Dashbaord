@@ -62,10 +62,28 @@ function MaterialLibrary({ initData }) {
     setProductName(event.target.value);
   }
 
-  function handleDelete(key) {
-    const arr = [...data];
-    arr.splice(key, 1);
-    setData(arr);
+  async function handleDelete(key) {
+    // const arr = [...data];
+    // arr.splice(key, 1);
+    const response = await fetch("https://truad-dashboard-backend.onrender.com/api/deleteMaterial", {
+      method: "POST",
+      body: JSON.stringify( {
+        materialID : key
+      }),
+      headers: {
+        "Content-Type" : "application/json"
+      }
+    })
+
+    if(response.status == 404){
+      console.log("Material not found")
+      return 
+    };
+
+    if(response.status == 200){
+      const filtered = data.filter((elem) => elem._id !== key)
+      setData(filtered);
+    }
   }
   const handleChangeMGroup=()=> {
     // setSeletctMgroup("chnage")
@@ -127,12 +145,12 @@ function MaterialLibrary({ initData }) {
         className="card_container"
       >
       <Grid container spacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          {data.map((val, i) => {
+          {data.map((val) => {
             return (
-              <Grid item {...{ xs: 12, sm: 6, md: 4, lg: 3 }} key={i}>
+              <Grid item {...{ xs: 12, sm: 6, md: 4, lg: 3 }} key={val._id}>
                 <MaterialMCard
                   data={val}
-                  index={i}
+                  key={val._id}
                   handleDelete={handleDelete}
                 />
               </Grid>

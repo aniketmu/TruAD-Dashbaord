@@ -14,7 +14,7 @@ import "../MCard.css"
 // export default function MaterialMCard({name, group, file, size}) {
 // =======
 
-export default function MaterialMCard({ data, index, handleDelete }) {
+export default function MaterialMCard({ data, key, handleDelete }) {
     // >>>>>>> 790dee5c0b629f4d47ec39a49c8d5a99b492be38
     return (
         <Card sx={{ maxWidth: "100%", borderRadius: "10px", backgroundColor:'#6c757d', color:'white'}} className='mcard'>
@@ -51,7 +51,7 @@ export default function MaterialMCard({ data, index, handleDelete }) {
             </CardContent>
             <CardActions>
 
-                <AlertDialog index={index} handleDelete={handleDelete} >delete</AlertDialog>
+                <AlertDialog index={data._id} handleDelete={handleDelete} >delete</AlertDialog>
 
                 <OprateDialog thumbnail={data.file}>Oprate</OprateDialog>
 
