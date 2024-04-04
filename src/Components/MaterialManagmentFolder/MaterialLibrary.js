@@ -65,7 +65,7 @@ function MaterialLibrary({ initData }) {
   async function handleDelete(key) {
     // const arr = [...data];
     // arr.splice(key, 1);
-    const response = await fetch("http://localhost:4000/api/deleteMaterial", {
+    const response = await fetch("https://truad-dashboard-backend.onrender.com/api/deleteMaterial", {
       method: "POST",
       body: JSON.stringify( {
         materialID : key
