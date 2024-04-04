@@ -88,6 +88,7 @@ function UploadMaterial({ setData, setMaterialAdded }) {
             }}
           >
             {imageUrl ? (
+            <div style={{height:"100%", width:"50%"}}>
               <img
                 src={imageUrl}
                 style={{
@@ -95,9 +96,11 @@ function UploadMaterial({ setData, setMaterialAdded }) {
                   height: "100%",
                   marginRight: "20px",
                   borderRadius: "7px",
+                  objectFit:'cover'
                 }}
                 alt="Preview"
               ></img>
+              </div>
             ) : (
               <span>Select file to see preview...</span>
             )}
