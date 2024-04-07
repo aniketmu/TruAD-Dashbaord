@@ -46,11 +46,11 @@ const columns = [
   },
 ];
 
-function createData(ticketid, subject, status, lastupdate, support,img) {
+function createData(ticketid, subject, status, lastupdate, support, img) {
   // const density = population / size;
   // const img = "Qayyum"
 
-  return { ticketid, subject, status, lastupdate, support ,img}; //density
+  return { ticketid, subject, status, lastupdate, support, img }; //density
 }
 
 const rows = [
@@ -76,7 +76,8 @@ function RaiseTicket() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [input, setInput] = useState("");
-  const [data, setData] = useState(rows)
+  const [data, setData] = useState(rows);
+  const [switchPage, setSwitchPage] = useState(true);
 
   const handleInputChange = (e) => {
     // console.log(e.target.value)
@@ -97,9 +98,9 @@ function RaiseTicket() {
     }
   }
 
-  const addRaiseNewData = (text, selectedDepartment,img) => {
+  const addRaiseNewData = (text, selectedDepartment, img) => {
 
-    const s = createData(1001 + rows.length, text, "In Process", "today", selectedDepartment ,img)
+    const s = createData(1001 + rows.length, text, "In Process", "today", selectedDepartment, img)
     const newArr = [s, ...data]
     rows.unshift(s);
     setData(newArr)
@@ -125,6 +126,16 @@ function RaiseTicket() {
           <span>Announcement</span>
         </div>
       </div>
+      <div className='raise1 raise'>
+        {/* <h3>Help</h3> */}
+        <div>
+          <span onClick={()=>{setSwitchPage(true)}}>Raise by you</span>
+          <span onClick={()=>{setSwitchPage(false)}}>Raise for you</span>
+          {/* <span>Announcement</span> */}
+        </div>
+      </div>
+     
+     {switchPage?<div className='raise'>
       <div className='raise2 raise'>
         <div style={{ width: "50%" }}>
           <input type="text" value={input} style={{ width: "60%", height: "35px" }} onChange={handleInputChange} placeholder='Enter Ticket ID' />
@@ -166,15 +177,15 @@ function RaiseTicket() {
                         <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                           {columns.map((column) => {
                             const value = row[column.id];
-                            
+
 
                             if (column.id === 'viewfile') {
                               return (
-                                <TableCell  key={column.id} align={column.align}>
+                                <TableCell key={column.id} align={column.align}>
                                   <a href={row.img} target='blank'>
-                                  <button style={{borderRadius:"7px"}} >View Image </button>
-                                {/* <h1></h1> */}
-                                </a>
+                                    <button style={{ borderRadius: "7px" }} >View Image </button>
+                                    {/* <h1></h1> */}
+                                  </a>
                                 </TableCell>
                               )
                             }
@@ -190,18 +201,6 @@ function RaiseTicket() {
 
                               )
                             }
-
-
-                            // return (
-                            //   {(vi==="viewfile")?<TableCell>Qaayyum</TableCell>:<TableCell key={column.id} align={column.align} style={{ color: "white" }}>
-                            //   {column.format && typeof value === 'number'
-                            //     ? column.format(value)
-                            //     : value}
-                            //   {/* {column.} */}
-
-                            // </TableCell>}
-
-                            // );
                           })}
                         </TableRow>
                       );
@@ -221,6 +220,94 @@ function RaiseTicket() {
           </Paper>
         </div>
       </div>
+
+     </div>:<div className='raise'>
+      <div className='raise2 raise'>
+        <div style={{ width: "50%" }}>
+          <input type="text" value={input} style={{ width: "60%", height: "35px" }} onChange={handleInputChange} placeholder='Enter Ticket ID' />
+          <button onClick={handleSearch} style={{ borderRadius: "7px", backgroundColor: "red", marginLeft: "10px", width: "15%" }} >Search</button>
+          <span> Total  {data.length} Ticket </span>
+        </div>
+        <div className='addTicketContainer' >
+          {/* <CardActions>
+            <RaiseDailog addRaiseNewData={addRaiseNewData} />
+          </CardActions> */}
+        </div>
+      </div>
+      <div className='raise3 raise'>
+        <div>
+
+        </div>
+        <div>
+          <Paper sx={{ width: '100%', overflow: 'hidden', backgroundColor: "#171a1cc9", color: "white" }} style={{ color: "white" }}>
+            <TableContainer sx={{ maxHeight: 600 }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead >
+                  <TableRow>
+                    {columns.map((column) => (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{ minWidth: column.minWidth }}
+                      >
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {data
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                      return (
+                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                          {columns.map((column) => {
+                            const value = row[column.id];
+
+
+                            if (column.id === 'viewfile') {
+                              return (
+                                <TableCell key={column.id} align={column.align}>
+                                  <a href={row.img} target='blank'>
+                                    <button style={{ borderRadius: "7px" }} >View Image </button>
+                                    {/* <h1></h1> */}
+                                  </a>
+                                </TableCell>
+                              )
+                            }
+                            else {
+                              return (
+                                <TableCell key={column.id} align={column.align} style={{ color: "white" }}>
+                                  {column.format && typeof value === 'number'
+                                    ? column.format(value)
+                                    : value}
+                                  {/* {column.} */}
+
+                                </TableCell>
+
+                              )
+                            }
+                          })}
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination style={{ color: "white" }}
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={data.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Paper>
+        </div>
+      </div>
+
+     </div>}
     </div>
   )
 }
