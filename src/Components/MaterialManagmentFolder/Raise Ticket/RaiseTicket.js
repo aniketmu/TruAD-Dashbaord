@@ -12,8 +12,11 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+
 import RaiseDailog from './RaiseDailog';
 import CardActions from '@mui/material/CardActions';
+import { colors } from '@mui/material';
 const columns = [
   { id: 'ticketid', label: 'Ticket ID', minWidth: 50 },
   { id: 'subject', label: 'Subject', minWidth: 200 },
@@ -272,6 +275,9 @@ function RaiseTicket() {
                                     <button style={{ borderRadius: "7px" }} >View Image </button>
                                     {/* <h1></h1> */}
                                   </a>
+                                  <MoreVertIcon sx={{color:"white"}}/>
+
+
                                 </TableCell>
                               )
                             }
