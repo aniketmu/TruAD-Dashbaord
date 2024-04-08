@@ -46,16 +46,16 @@ function RaiseDailog(props) {
   
       const response= await fetch(`https://truad-dashboard-backend.onrender.com/api/user/${props.user_email}`, {
         method: 'POST', // It's good practice to use uppercase HTTP methods
-        headers: {
-          "Content-Type": "multipart/form-data"
-        },
+        // headers: {
+        //   "Content-Type": "multipart/form-data"
+        // },
         body: formData,
         // Don't set Content-Type for FormData; the browser will handle it
       });
-
-      if(!response.ok){
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      console.log(response)
+      // if(!response.ok){
+      //   throw new Error(`HTTP error! status: ${response.status}`);
+      // }
        
       const data = await response.json();
       console.log('Ticket Created Successfully:', data);
@@ -129,7 +129,9 @@ function RaiseDailog(props) {
 
           <Button onClick={() => {
 
-            props.addRaiseNewData(text,selectedOption ,file)
+            // props.addRaiseNewData(text,selectedOption ,file)
+            addTicke()
+            // props.setrender(!props.render)
             setOpen(false)
           }} variant="contained" disableElevation style={{ width: "50%" }}>
             Raise Ticket
