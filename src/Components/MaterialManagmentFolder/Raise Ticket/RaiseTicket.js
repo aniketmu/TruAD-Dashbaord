@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./raiseticket.css"
 
 
@@ -11,7 +11,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-
+import { useCookies } from "react-cookie";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import RaiseDailog from './RaiseDailog';
@@ -80,7 +80,14 @@ function RaiseTicket() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [input, setInput] = useState("");
   const [data, setData] = useState(rows);
-  const [switchPage, setSwitchPage] = useState(true);
+  
+  const [cookies, setCookie] = useCookies(["user"]);
+  const [user, setuser]=useState({
+    name:'',
+    email:'',
+    raiseTicket:[],
+  })
+
 
   const handleInputChange = (e) => {
     // console.log(e.target.value)
@@ -117,6 +124,30 @@ function RaiseTicket() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  useEffect(()=>{
+    const getTicket= async()=>{
+      try {
+        const data= await fetch("https://truad-dashboard-backend.onrender.com/api/user", {
+          method: "GET", // Added method for clarity, assuming it's a GET request
+          headers: {
+            "Authorization": `Bearer ${cookies.user}`,
+            "Content-Type": "application/json",
+          },
+        })
+        const ticketData= await data.json();
+        setuser({
+          name: ticketData.user.name,
+              email: ticketData.user.email,
+              raiseTicket: ticketData.user.raiseTicket,
+      })
+      } catch (error) {
+        console.log('error=>',error)
+      }
+    }
+    getTicket()
+  },[]);
+  console.log(user.raiseTicket)
   return (
     <div className='raiseTicketContainer'>
 
@@ -129,16 +160,16 @@ function RaiseTicket() {
           <span>Announcement</span>
         </div>
       </div>
-      <div className='raise1 raise'>
-        {/* <h3>Help</h3> */}
+      {/* <div className='raise1 raise'>
+        
         <div>
           <span onClick={()=>{setSwitchPage(true)}}>Raise by you</span>
           <span onClick={()=>{setSwitchPage(false)}}>Raise for you</span>
-          {/* <span>Announcement</span> */}
+        
         </div>
-      </div>
+      </div> */}
      
-     {switchPage?<div className='raise'>
+     <div className='raise'>
       <div className='raise2 raise'>
         <div style={{ width: "50%" }}>
           <input type="text" value={input} style={{ width: "60%", height: "35px" }} onChange={handleInputChange} placeholder='Enter Ticket ID' />
@@ -147,7 +178,7 @@ function RaiseTicket() {
         </div>
         <div className='addTicketContainer' >
           <CardActions>
-            <RaiseDailog addRaiseNewData={addRaiseNewData} />
+            <RaiseDailog addRaiseNewData={addRaiseNewData} user_email={user.email} />
           </CardActions>
         </div>
       </div>
@@ -224,96 +255,7 @@ function RaiseTicket() {
         </div>
       </div>
 
-     </div>:<div className='raise'>
-      <div className='raise2 raise'>
-        <div style={{ width: "50%" }}>
-          <input type="text" value={input} style={{ width: "60%", height: "35px" }} onChange={handleInputChange} placeholder='Enter Ticket ID' />
-          <button onClick={handleSearch} style={{ borderRadius: "7px", backgroundColor: "red", marginLeft: "10px", width: "15%" }} >Search</button>
-          <span> Total  {data.length} Ticket </span>
-        </div>
-        <div className='addTicketContainer' >
-          {/* <CardActions>
-            <RaiseDailog addRaiseNewData={addRaiseNewData} />
-          </CardActions> */}
-        </div>
-      </div>
-      <div className='raise3 raise'>
-        <div>
-
-        </div>
-        <div>
-          <Paper sx={{ width: '100%', overflow: 'hidden', backgroundColor: "#171a1cc9", color: "white" }} style={{ color: "white" }}>
-            <TableContainer sx={{ maxHeight: 600 }}>
-              <Table stickyHeader aria-label="sticky table">
-                <TableHead >
-                  <TableRow>
-                    {columns.map((column) => (
-                      <TableCell
-                        key={column.id}
-                        align={column.align}
-                        style={{ minWidth: column.minWidth }}
-                      >
-                        {column.label}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {data
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => {
-                      return (
-                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                          {columns.map((column) => {
-                            const value = row[column.id];
-
-
-                            if (column.id === 'viewfile') {
-                              return (
-                                <TableCell key={column.id} align={column.align}>
-                                  <a href={row.img} target='blank'>
-                                    <button style={{ borderRadius: "7px" }} >View Image </button>
-                                    {/* <h1></h1> */}
-                                  </a>
-                                  <MoreVertIcon sx={{color:"white"}}/>
-
-
-                                </TableCell>
-                              )
-                            }
-                            else {
-                              return (
-                                <TableCell key={column.id} align={column.align} style={{ color: "white" }}>
-                                  {column.format && typeof value === 'number'
-                                    ? column.format(value)
-                                    : value}
-                                  {/* {column.} */}
-
-                                </TableCell>
-
-                              )
-                            }
-                          })}
-                        </TableRow>
-                      );
-                    })}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <TablePagination style={{ color: "white" }}
-              rowsPerPageOptions={[10, 25, 100]}
-              component="div"
-              count={data.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </Paper>
-        </div>
-      </div>
-
-     </div>}
+     </div>
     </div>
   )
 }

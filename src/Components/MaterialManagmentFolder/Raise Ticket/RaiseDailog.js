@@ -36,6 +36,33 @@ function RaiseDailog(props) {
    setFile(url);
 
   }
+
+  const addTicke=async()=>{
+    try {
+      const formData = new FormData();
+      formData.append('subject', text); // Assuming 'text' is defined elsewhere in your code
+      formData.append('supportTeam', selectedOption); // Assuming 'selectedOption' is defined elsewhere in your code
+      formData.append('viewImage', file); // Assuming 'file' is defined elsewhere in your code
+  
+      const response= await fetch(`https://truad-dashboard-backend.onrender.com/api/user/${props.user_email}`, {
+        method: 'POST', // It's good practice to use uppercase HTTP methods
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
+        body: formData,
+        // Don't set Content-Type for FormData; the browser will handle it
+      });
+
+      if(!response.ok){
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+       
+      const data = await response.json();
+      console.log('Ticket Created Successfully:', data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <React.Fragment>
       <button variant="contained" disableElevation onClick={handleClickOpen} ><span>+</span>Raise New Ticket</button>
