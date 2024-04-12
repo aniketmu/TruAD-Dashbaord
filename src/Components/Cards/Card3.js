@@ -61,7 +61,7 @@ const MCard1 = ({ id }) => {
       form.append("file", adVideo);
       form.append("filename", adVideo.name);
 
-      const response = await fetch("http://192.168.0.108:5000/stitch", {
+      const response = await fetch("http://13.201.93.173:5000/stitch", {
         method: "POST",
         body: form,
       });
@@ -71,8 +71,12 @@ const MCard1 = ({ id }) => {
       }
 
       const data = await response.json();
-      console.log(data);
-      setClips(data.clips);
+  console.log(data);
+
+  const data2 = [];
+  data.video_urls.map((elem) => data2.push(elem.split("?AWS")[0]))
+
+  setClips(prev => [...prev, ...data2])
     } catch (error) {
       console.error("Error: ", error);
     }
@@ -241,7 +245,7 @@ const MCard1 = ({ id }) => {
                         title="Youtube Player"
                         frameborder="0"
                         // allowFullScreen
-                        onClick={(e) => handleClipClick(vid.location)}
+                        onClick={(e) => handleClipClick(vid)}
                       />
                     );
                   })}
