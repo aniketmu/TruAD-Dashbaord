@@ -42,6 +42,7 @@ const MCard1 = ({ id }) => {
     }
   };
 
+
   useEffect(() => {
     searchMovies();
     fetchClips();
@@ -53,17 +54,44 @@ const MCard1 = ({ id }) => {
 
   const openDialogBox = () => {
     setOpenDialog(true);
+    fetchVids()
   };
 
+  const fetchVids = async () => {
+    try {
+      const response = await fetch("https://truad-dashboard-backend.onrender.com/get-clips", {
+        method: "POST",
+        body: JSON.stringify({
+          id
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log(data.locations);
+      const locations = data.locations.map((elem) => elem.location.split("?AWS")[0])
+      setClips((prev) => [...prev, ...locations]);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  
   const fetchClips = async () => {
     try {
       const form = new FormData();
       form.append("file", adVideo);
       form.append("filename", adVideo.name);
+      form.append("id", id);
 
-      const response = await fetch("http://13.201.93.173:5000/stitch", {
+      const response = await fetch("http://10.10.10.12:5000/stitch", {
         method: "POST",
-        body: form,
+        body: form
       });
 
       if (!response.ok) {
