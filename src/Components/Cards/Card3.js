@@ -58,8 +58,8 @@ const MCard1 = ({ id }) => {
   };
 
   const fetchVids = async () => {
-    try {
-      const response = await fetch("https://truad-dashboard-backend.onrender.com/get-clips", {
+    try { 
+      const response = await fetch("http://localhost:4001/get-clips", {
         method: "POST",
         body: JSON.stringify({
           id
@@ -89,7 +89,7 @@ const MCard1 = ({ id }) => {
       form.append("filename", adVideo.name);
       form.append("id", id);
 
-      const response = await fetch("http://10.10.10.12:5000/stitch", {
+      const response = await fetch("http://10.10.10.10:5000/stitch", {
         method: "POST",
         body: form
       });
@@ -248,7 +248,7 @@ const MCard1 = ({ id }) => {
                 <button onClick={fetchClips}>Generate Clips</button>
               </div>
             ) : (
-              <div>
+              <div style={clips.length !== 0 ? {display: "none"} : {display: "block"}}>
                 <label>Add a Video</label>
                 <input type="file" onChange={handleAdVideoChange} />
               </div>
