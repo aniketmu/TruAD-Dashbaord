@@ -5,7 +5,7 @@ import MaterialManagment from "./Components/MaterialManagmentFolder/MaterialMana
 import LoginContainer from "../src/Components/LoginFolder/LoginContainer";
 import DataReport from "./Components/DataReport";
 import HomePage from "./Components/HomePage";
-import PlacePromotion from "./Components/PlacePromotion";
+import PlacePromotion from "./Components/PlacePromotionFile/PlacePromotion.js";
 import PopularPicks from "./Components/Popular Picks/PopularPicks.js";
 import VideoClip from "./Components/VideoClip";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
