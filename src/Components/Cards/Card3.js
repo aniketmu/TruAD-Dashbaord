@@ -59,7 +59,7 @@ const MCard1 = ({ id }) => {
 
   const fetchVids = async () => {
     try { 
-      const response = await fetch("http://localhost:4001/get-clips", {
+      const response = await fetch("https://truad-dashboard-backend.onrender.com/get-clips", {
         method: "POST",
         body: JSON.stringify({
           id
