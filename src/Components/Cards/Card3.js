@@ -10,7 +10,9 @@ import { DialogActions } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import {
+  
   Chip,
   Stack,
   CardActionArea,
@@ -147,7 +149,10 @@ const MCard1 = ({ id }) => {
               onMouseLeave={() => console.log(29)}
               style={{objectFit: "fill"}}
               alt="green iguana"
+
             />
+            {clips.length!==0?<div style={{position:"absolute" , top:"5px" ,right:"5px"}}><CheckCircleIcon sx={{color:'green'}}/></div>:<></>}
+           
             <CardContent
               sx={{
                 position: "absolute",

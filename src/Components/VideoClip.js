@@ -126,7 +126,7 @@ const VideoClip = () => {
     console.log(location.state.location)
     try {
         const response = await fetch("http://localhost:4001/blend-clip", {
-            Method: "POST",
+            method: "POST",
             body: JSON.stringify({
                 id: location.state.location._id
             }),
