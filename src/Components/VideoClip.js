@@ -121,6 +121,33 @@ const VideoClip = () => {
       },
   ]);
   const [image, setimage] = useState(location.state.img);
+
+  const handleClipChange = async() => {
+    console.log(location.state.location)
+    try {
+        const response = await fetch("http://localhost:4001/blend-clip", {
+            Method: "POST",
+            body: JSON.stringify({
+                id: location.state.location._id
+            }),
+            headers: {
+                "Content-Type" : "application/json"
+            }
+        })
+
+        if(response.status == 500){
+            console.log("Internal Server Error")
+            return
+        }
+
+        if(response.status == 200){
+            console.log("Success")
+            return
+        }
+    } catch (error) {
+        console.log(error)
+    }
+  }
   return (
       <div style={{ width: "100%", backgroundColor: "rgb(220, 220, 220)" }}>
 
@@ -162,7 +189,7 @@ const VideoClip = () => {
                       frameborder="0"
                       allowFullScreen
                   />} */}
-                  {location.state?.location && <video style={{ width: "95%", margin: "0 auto", height: "40%", borderRadius: "7px", boxShadow: "rgba(0, 0, 1, 0.74) 0px 3px 8px" }} src={location.state.location || null} controls></video>}
+                  {location.state?.location && <video style={{ width: "95%", margin: "0 auto", height: "40%", borderRadius: "7px", boxShadow: "rgba(0, 0, 1, 0.74) 0px 3px 8px" }} src={location.state.location.location || null} controls></video>}
                   <div style={{ display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "7px" ,height:"40px", position:"relative"  }}>
                       <h6
                           style={{
@@ -197,7 +224,7 @@ const VideoClip = () => {
                       />
                   </div>
 
-                  <button style={{ margin: "20px 10px", borderRadius: "7px", backgroundColor: 'red' }}>
+                  <button style={{ margin: "20px 10px", borderRadius: "7px", backgroundColor: 'red' }} onClick={handleClipChange}>
                       Blend
                   </button>
               </div>

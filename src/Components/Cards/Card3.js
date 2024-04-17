@@ -74,9 +74,14 @@ const MCard1 = ({ id }) => {
       }
   
       const data = await response.json();
-      console.log(data.locations);
-      const locations = data.locations.map((elem) => elem.location.split("?AWS")[0])
-      setClips((prev) => [...prev, ...locations]);
+      console.log("data", data)
+      console.log("datalocations", data.locations);
+      // const locations = data.locations.map((elem) => elem.location.split("?AWS")[0])
+      // console.log("locations", locations)
+
+      const data2 = data.locations.map((elem) => ({...elem, location: elem.location.split("?AWS")[0]}))
+
+      setClips((prev) => [...prev, ...data2]);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -101,8 +106,10 @@ const MCard1 = ({ id }) => {
       const data = await response.json();
   console.log(data);
 
-  const data2 = [];
-  data.video_urls.map((elem) => data2.push(elem.split("?AWS")[0]))
+  // const data2 = [];
+  // data.video_urls.map((elem) => data2.push(elem.location.split("?AWS")[0]))
+
+  const data2 = data.video_urls.map((elem) => ({...elem, location: elem.location.split("?AWS")[0]}))
 
   setClips(prev => [...prev, ...data2])
     } catch (error) {
@@ -269,7 +276,7 @@ const MCard1 = ({ id }) => {
                           borderRadius: "7px",
                         }}
                         controls
-                        src={vid}
+                        src={vid.location}
                         title="Youtube Player"
                         frameborder="0"
                         // allowFullScreen
