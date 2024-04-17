@@ -1,4 +1,5 @@
 import React from "react";
+import PieChart from "./Piechart"
 
 const list=[
   {
@@ -44,8 +45,11 @@ const list=[
 ]
 export default function ObjectSelling() {
   return (
-    <section className="section dashboard">
-      <div className="col-12">
+    <section className="section dashboard row">
+      <div className="col-4">
+      <PieChart/>
+      </div>
+      <div className="col-8">
         <div className="card top-selling overflow-auto">
 
           <div className="card-body pb-0" style={{backgroundColor:"rgba(234, 231, 231, 0.776)"}}>
@@ -85,6 +89,7 @@ export default function ObjectSelling() {
           </div>
         </div>
       </div>
+      
     </section>
   );
 }

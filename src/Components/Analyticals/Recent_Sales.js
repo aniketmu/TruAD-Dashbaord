@@ -61,7 +61,7 @@ export default function RecentSales() {
   };
   return (
     <section className="section dashboard row">
-      <div className="col-8">
+      <div className="col-lg-8 col-12">
         <div className="card recent-sales overflow-auto">
           <div
             className="card-body"
@@ -209,7 +209,7 @@ export default function RecentSales() {
           </div>
         </div>
       </div>
-      <div className="col-4 " >
+      <div className=" col-lg-4 col-12 mt-lg-0 mt-4" >
         <Formatting/>
       </div>
     </section>
