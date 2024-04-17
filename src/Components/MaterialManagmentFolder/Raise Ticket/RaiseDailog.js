@@ -16,7 +16,6 @@ function RaiseDailog(props) {
   const[selectedOption,setSelectOption]=useState("option")
   const [text,setText]=useState("")
   const handleText=(e)=>{
-    console.log(text)
     setText(e.target.value)
   }
   const handleSelectChange=(e)=>{

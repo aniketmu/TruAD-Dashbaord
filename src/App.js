@@ -14,7 +14,8 @@ import Invoices from "./Components/InvoicesFiles/Invoices";
 import { MyContextProvider } from "./MyContext";
 import RaiseTicket from "./Components/MaterialManagmentFolder/Raise Ticket/RaiseTicket.js";
 import VerifyOTP from "./Components/LoginFolder/ForgotPassword/VerifyOTP.js";
-import ConfirmNewPass from './Components/LoginFolder/ForgotPassword/ConfirmNewPass.js'
+import ConfirmNewPass from './Components/LoginFolder/ForgotPassword/ConfirmNewPass.js';
+import Analyticals from "./Components/Analyticals"
 
 const router = createBrowserRouter([
   {
@@ -82,7 +83,12 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/raiseticket",
         element: <RaiseTicket />
+      },
+      {
+        path: "/dashboard/analyticals",
+        element: <Analyticals />
       }
+
 
     ],
   },
