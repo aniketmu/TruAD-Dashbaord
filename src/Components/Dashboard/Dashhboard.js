@@ -17,6 +17,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import './resposive.css'
 
 const Dashhboard = () => {
   const [selectedType, setSelectedType] = useState("");
@@ -326,12 +327,12 @@ const Dashhboard = () => {
         }}
       >
         <CustomButton />
-        <div className={styles.search_container}>
+        <div className={styles.search_container } id="searchContainer">
 
           <Stack direction={"row"} spacing={3} sx={{ paddingX: "2em" }}>
             <FormControl
               variant="standard"
-              sx={{ m: 1, minWidth: 60, color: "white" }}
+              sx={{ m: 1,  color: "white" }}
             >
               <InputLabel
                 id="demo-simple-select-standard-label"
@@ -360,7 +361,7 @@ const Dashhboard = () => {
             </FormControl>
             <FormControl
               variant="standard"
-              sx={{ m: 1, minWidth: 90, color: "white" }}
+              sx={{ m: 1, color: "white" }}
             >
               <InputLabel
                 id="demo-simple-select-standard-label"
@@ -389,7 +390,7 @@ const Dashhboard = () => {
             </FormControl>
             <FormControl
               variant="standard"
-              sx={{ m: 1, minWidth: 110, color: "white" }}
+              sx={{ m: 1,  color: "white" }}
             >
               <InputLabel
                 id="demo-simple-select-standard-label"
@@ -415,14 +416,14 @@ const Dashhboard = () => {
               </Select>
             </FormControl>
           </Stack>
-          <Box sx={{ paddingInline: 3, width:"50%" }}>
-            <input
+          <Box sx={{ paddingInline: 3 ,display:"flex" }}>
+            <input style={{width:"75%"}}
               type="text"
               placeholder="Please enter the resource name, actors, production company and placement client"
               onChange={(e) => setSearchTerm(e.target.value)}
               value={searchTerm}
             />
-            <button style={{width:"20%"}} onClick={handleSearch}>Search</button>
+            <button style={{ width:"25%" ,fontSize:'12px' ,textAlign:"center"}} onClick={handleSearch}>Search</button>
           </Box>
         </div>
         <div className={styles.dashboard}>
@@ -435,67 +436,20 @@ const Dashhboard = () => {
               Add
             </button>
           </div>
-          {/* <div className={styles.dropdowns}>
-            <div className={styles.dropdown}>
-              <label>Type</label>
-              <select
-                value={selectedType}
-                onChange={(e) => {
-                  handleTypeSelect(e.target.value);
-                }}
-              >
-                <option value="" disabled>
-                  Select an option
-                </option>
-                {typeOptions?.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className={styles.dropdown}>
-              <label>Category</label>
-              <select
-                value={selectedCategory}
-                onChange={(e) => {
-                  handleCategorySelect(e.target.value);
-                }}
-              >
-                <option value="" disabled>
-                  Select an option
-                </option>
-                {categories.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className={styles.dropdown}>
-              <label>Certification</label>
-              <select
-                value={selectedCerti}
-                onChange={(e) => handleCertificationSelect(e.target.value)}
-              >
-                <option value="" disabled>
-                  Select an option
-                </option>
-                {certifications.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div> */}
+          
           <div style={{ padding: "5px" }}>
             {/* Card */}
             <Box sx={{ flexGrow: 1 }}>
               <Grid
                 container
-                spacing={{ xs: 2, md: 3 }}
+                spacing={2}
                 columns={{ xs: 4, sm: 8, md: 12 }}
+
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+
+
               >
                 {/* <<<<<<< HEAD
                 {movies.map(({ imdbID }) => {

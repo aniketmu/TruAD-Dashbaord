@@ -1,0 +1,34 @@
+.inputContainers{
+    width: 50%;
+}
+.inputContainers input{
+    width: 80%;
+    margin: 0;
+    padding: 0;
+}
+.inputContainers button{
+    width: 20%;
+    margin: 0;
+    padding: 0;
+}
+
+
+@media only screen and (max-width: 770px) {
+
+    .inputContainers{
+        width: 100%;
+      /* background-color: black; */
+      justify-content: center;
+    }
+    .inputContainers input{
+        width: 70%;
+        margin: 0;
+        padding: 0;
+    }
+    .inputContainers button{
+        width: 20%;
+        color: red;
+        margin: 0;
+        padding: 0;
+    }
+  }
