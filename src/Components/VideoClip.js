@@ -121,32 +121,53 @@ const VideoClip = () => {
     //   },
   ]);
   const [image, setimage] = useState(location.state.img);
-
+  const [imageSrc, setImageSrc] = useState(null)
   const handleClipChange = async() => {
     console.log(location.state.location)
+    console.log("image", image)
+    // try {
+    //     const response = await fetch("http://localhost:4001/blend-clip", {
+    //         method: "POST",
+    //         body: JSON.stringify({
+    //             id: location.state.location._id
+    //         }),
+    //         headers: {
+    //             "Content-Type" : "application/json"
+    //         }
+    //     })
+
+    //     if(response.status == 500){
+    //         console.log("Internal Server Error")
+    //         return
+    //     }
+
+    //     if(response.status == 200){
+    //         console.log("Success")
+    //         return
+    //     }
+    // } catch (error) {
+    //     console.log(error)
+    // }
     try {
-        const response = await fetch("http://localhost:4001/blend-clip", {
-            method: "POST",
+        const response = await fetch ("http://127.0.0.1:5000/apply_material", {
+            method: 'POST',
             body: JSON.stringify({
-                id: location.state.location._id
+                material_name: image.name
             }),
             headers: {
-                "Content-Type" : "application/json"
+                'Content-Type' : "application/json"
             }
         })
-
-        if(response.status == 500){
-            console.log("Internal Server Error")
-            return
-        }
-
-        if(response.status == 200){
-            console.log("Success")
-            return
-        }
-    } catch (error) {
-        console.log(error)
-    }
+        if (!response.ok) {
+            throw new Error("Failed to fetch image");
+          }
+  
+          const blob = await response.blob();
+          const url = URL.createObjectURL(blob);
+          setImageSrc(url);
+        } catch (error) {
+            console.error("Error fetching image:", error);
+          }
   }
 
   useEffect(() => {
@@ -211,7 +232,8 @@ const VideoClip = () => {
                       frameborder="0"
                       allowFullScreen
                   />} */}
-                  {location.state?.location && <video style={{ width: "95%", margin: "0 auto", height: "40%", borderRadius: "7px", boxShadow: "rgba(0, 0, 1, 0.74) 0px 3px 8px" }} src={location.state.location.location || null} controls></video>}
+                  {/* {location.state?.location && <video style={{ width: "95%", margin: "0 auto", height: "40%", borderRadius: "7px", boxShadow: "rgba(0, 0, 1, 0.74) 0px 3px 8px" }} src={location.state.location.location || null} controls></video>} */}
+                  {!imageSrc && location.state?.location ? <video style={{ width: "95%", margin: "0 auto", height: "40%", borderRadius: "7px", boxShadow: "rgba(0, 0, 1, 0.74) 0px 3px 8px" }} src={location.state.location.location || null} controls></video> : imageSrc && <img src={imageSrc} style={{ width: "95%", margin: "0 auto", height: "40%", borderRadius: "7px", boxShadow: "rgba(0, 0, 1, 0.74) 0px 3px 8px" }}></img>}
                   <div style={{ display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "7px" ,height:"40px", position:"relative"  }}>
                       <h6
                           style={{
@@ -234,7 +256,7 @@ const VideoClip = () => {
                       }}
                   >
                       <img
-                          src={image}
+                          src={image?.file}
                           alt=""
                           style={{
                               objectFit: "contain",
@@ -285,7 +307,7 @@ const VideoClip = () => {
                           }}
                       >
 
-                          {data.map(({ file }, index) => {
+                          {data?.map(( elem , index) => {
                               return (
                                   <div
                                       key={index} // Moved the key here for proper list rendering
@@ -295,8 +317,8 @@ const VideoClip = () => {
                                       }}
                                   >
                                       <img
-                                          src={file}
-                                          onClick={({ target: { src } }) => setimage(src)}
+                                          src={elem?.file}
+                                          onClick={() => setimage(elem)}
                                           style={{
                                               objectFit: "contain",
                                               width: "100%",
