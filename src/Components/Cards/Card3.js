@@ -12,7 +12,7 @@ import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import {
-  
+
   Chip,
   Stack,
   CardActionArea,
@@ -60,7 +60,7 @@ const MCard1 = ({ id }) => {
   };
 
   const fetchVids = async () => {
-    try { 
+    try {
       const response = await fetch("https://truad-dashboard-backend.onrender.com/get-clips", {
         method: "POST",
         body: JSON.stringify({
@@ -70,11 +70,11 @@ const MCard1 = ({ id }) => {
           "Content-Type": "application/json"
         }
       });
-  
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-  
+
       const data = await response.json();
       console.log("data", data)
       console.log("datalocations", data.locations);
@@ -88,7 +88,7 @@ const MCard1 = ({ id }) => {
       console.error("Error:", error);
     }
   };
-  
+
   const fetchClips = async () => {
     try {
       const form = new FormData();
@@ -106,14 +106,15 @@ const MCard1 = ({ id }) => {
       }
 
       const data = await response.json();
-  console.log(data);
+      console.log(data);
 
   // const data2 = [];
   // data.video_urls.map((elem) => data2.push(elem.location.split("?AWS")[0]))
 
   const data2 = data.video_urls.map((elem) => ({...elem, location: elem.location.split("?AWS")[0]}))
 
-  setClips(prev => [...prev, ...data2])
+
+      setClips(prev => [...prev, ...data2])
     } catch (error) {
       console.error("Error: ", error);
     }
@@ -128,11 +129,19 @@ const MCard1 = ({ id }) => {
   };
   return (
     <>
-      <Grid item xs={2} sm={3} md={3} key={id}>
+      <Grid item
+        // container
+        // spacing={0}
+        direction="row"
+        alignItems="center"
+      // justifyContent="center"
+
+      >
         <Card
           sx={{
             maxWidth: 230,
-            minWidth: 150,
+            minWidth: 190,
+           
             background: "#616161",
             color: "white",
             position: "relative",
@@ -147,12 +156,12 @@ const MCard1 = ({ id }) => {
               height="260"
               image={movies.Poster == "N/A" ? img : movies.Poster}
               onMouseLeave={() => console.log(29)}
-              style={{objectFit: "fill"}}
+              style={{ objectFit: "fill" }}
               alt="green iguana"
 
             />
-            {clips.length!==0?<div style={{position:"absolute" , top:"5px" ,right:"5px"}}><CheckCircleIcon sx={{color:'green'}}/></div>:<></>}
-           
+            {clips.length !== 0 ? <div style={{ position: "absolute", top: "5px", right: "5px" }}><CheckCircleIcon sx={{ color: 'green' }} /></div> : <></>}
+
             <CardContent
               sx={{
                 position: "absolute",
@@ -215,7 +224,7 @@ const MCard1 = ({ id }) => {
                 color: "#d3d6da",
                 width: "100%",
                 backgroundColor: "black",
-                borderRadius:1.5
+                borderRadius: 1.5
               }}
             >
               {movies.Title.substring(0, 20) || "null"}
@@ -260,7 +269,7 @@ const MCard1 = ({ id }) => {
                 <button onClick={fetchClips}>Generate Clips</button>
               </div>
             ) : (
-              <div style={clips.length !== 0 ? {display: "none"} : {display: "block"}}>
+              <div style={clips.length !== 0 ? { display: "none" } : { display: "block" }}>
                 <label>Add a Video</label>
                 <input type="file" onChange={handleAdVideoChange} />
               </div>

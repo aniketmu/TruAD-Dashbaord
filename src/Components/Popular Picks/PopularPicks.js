@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import { useMyContext } from "../../MyContext";
 import MCard1 from "../Cards/Card3";
 import { sortByRating, sortByVotes, sortByScore } from "./Utils";
+import './responsive.css'
 
 function PopularPicks() {
   const { value } = useMyContext();
@@ -70,20 +71,26 @@ function PopularPicks() {
           backgroundColor: "rgb(52 58 64 / 88%)",
         }}
       >
-        <div className={styles.search_container}
-        style={{justifyContent:'end'}}
+        <div 
+        className={styles.search_container} 
+          style={{justifyContent:"center"}}
         >
-          <div style={{paddingRight:'1rem', width:"50%"}}>
-          <input
-            type="text"
-            placeholder="Please enter the resource name, actors, production company and placement client"
-            onChange={(e) => setSearchTerm(e.target.value)}
-            value={searchTerm}
-          />
-          <button onClick={handleSearch}>Search</button>
+          <div className="inputContainers"
+          >
+
+            <input
+              type="text"
+              placeholder="Please enter the resource name, actors, production company and placement client"
+              onChange={(e) => setSearchTerm(e.target.value)}
+              value={searchTerm}
+            />
+
+            <button onClick={handleSearch}>Search</button>
+
           </div>
         </div>
         <div className={styles.dashboard}>
+          
           <div className={styles.resource}>
             <div
               style={{

@@ -1,5 +1,5 @@
 .container1 {
-  background-color:#6c757d;
+  background-color: #6c757d;
   width: 80%;
   flex-grow: 1;
   padding: 5px;
@@ -17,13 +17,14 @@
   height: 50px;
 }
 
-.firstContainer > p {
+.firstContainer>p {
   transition: all 0.3s ease;
 }
 
 .firstContainer :hover {
   background-color: #808080;
 }
+
 .row1 {
   width: 49%;
   height: 100%;
@@ -38,6 +39,7 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   color: #fffffff5;
 }
+
 .row1 span {
   font-size: large;
   font-weight: bold;
@@ -69,7 +71,8 @@
   padding: 7px 0px;
   margin-bottom: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  color: #fffffff5;;
+  color: #fffffff5;
+  ;
 }
 
 .inputBox {
@@ -78,14 +81,14 @@
   border-radius: 5px;
 }
 
-.inputLabelContainer > {
+.inputLabelContainer> {
   /* background-color: white; */
   padding: 5px;
   font-size: 16px;
 }
 
-.inputLabelContainer > input,
-.inputLabelContainer > select {
+.inputLabelContainer>input,
+.inputLabelContainer>select {
   margin-left: 20px;
 }
 
@@ -118,6 +121,7 @@ select {
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
 .submitUpload:hover {
   background: linear-gradient(45deg, rgb(0, 4, 98), rgb(12, 150, 26));
   color: white;
@@ -140,5 +144,28 @@ select {
 }
 
 .card_container::-webkit-scrollbar {
-  width: 8px;               /* width of the entire scrollbar */
+  width: 8px;
+  /* width of the entire scrollbar */
+}
+
+/* .inputContainer{
+
+} */
+
+@media only screen and (max-width: 750px) {
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #343a40;
+    border-radius: 7px;
+    padding: 7px 0px;
+    margin-bottom: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    color: #fffffff5;
+    
+  }
+   
+
 }
