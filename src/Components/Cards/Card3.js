@@ -96,7 +96,7 @@ const MCard1 = ({ id }) => {
       form.append("filename", adVideo.name);
       form.append("id", id);
 
-      const response = await fetch("http://10.10.10.10:5000/stitch", {
+      const response = await fetch("http://10.10.10.11:5000/stitch", {
         method: "POST",
         body: form
       });
