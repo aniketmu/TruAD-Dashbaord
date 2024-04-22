@@ -1,7 +1,7 @@
 import React from "react";
 import "./HomePage.css";
 import EmailIcon from "@mui/icons-material/Email";
-import greenDot from "../Assets/greenDot.jpg";
+import greenDot from '../../Assets/greenDot.jpg';
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
 function HomePage() {
@@ -56,10 +56,29 @@ function HomePage() {
           </div>
           <div className="activity_info">
             <p>Total Invoices: 121</p>
-            <div className="line"></div>
+            <div className="line"></div>     
             <p>Payment Pending: 32</p>
             <div className="line"></div>
             <p>Cleared Invoices: 89</p>
+          </div>
+        </div>
+        <div className="homepage_clip_info">
+          <div className="activity-title">
+            <p>Recent Work</p>
+          </div>
+          <div className="df">
+            <div>
+              <iframe src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <h5>video name</h5>
+            </div>
+            <div>
+              <iframe src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <h5>video name</h5>
+            </div>
+            <div>
+              <iframe src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <h5>video name</h5>
+            </div>
           </div>
         </div>
       </div>
