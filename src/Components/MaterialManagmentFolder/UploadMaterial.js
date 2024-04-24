@@ -182,3 +182,9 @@ function UploadMaterial({ setData, setMaterialAdded }) {
 }
 
 export default UploadMaterial;
+
+
+export function uploadMaterialnew(){
+  return(<></>)
+}
+

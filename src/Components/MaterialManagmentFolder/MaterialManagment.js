@@ -5,7 +5,6 @@ import MaterialLibrary from "./MaterialLibrary";
 import UploadMaterial from "./UploadMaterial";
 
 function MaterialManagment() {
-  // <<<<<<< HEAD
   const [data, setData] = useState([
     // {
     //   file: "https://imgs.search.brave.com/5YfDZ_BrNmW8ShDojzoMD8HgsVQ7SLM2tRWHWNbqQEE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFFMW44VCtJbkwu/anBn",
@@ -125,9 +124,7 @@ function MaterialManagment() {
   const [materialAdded, setMaterialAdded] = useState(0);
 
   const [swap, setSwap] = useState(true);
-  // =======
-  //   const [swap, setSwap] = useState(true);
-  // >>>>>>> 790dee5c0b629f4d47ec39a49c8d5a99b492be38
+  
 
   const handleForLibrary = () => {
     setSwap(true);
@@ -169,7 +166,7 @@ function MaterialManagment() {
         </p>
       </div>
 
-      {/* <<<<<<< HEAD */}
+     
 
       {swap ? (
         <>
@@ -183,10 +180,7 @@ function MaterialManagment() {
         <UploadMaterial setData={setData} setMaterialAdded={setMaterialAdded} />
       )}
 
-      {/* // ======= */}
-      {/* //       {swap ? <MaterialLibrary /> : <UploadMaterial />} */}
-      {/* // >>>>>>> 790dee5c0b629f4d47ec39a49c8d5a99b492be38 */}
-      {/* <MaterialLibrary/> */}
+     
     </div>
   );
 }

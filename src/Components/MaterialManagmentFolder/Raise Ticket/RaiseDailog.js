@@ -115,7 +115,7 @@ function RaiseDailog(props) {
                Upload Screenshot
               </label>
               <br/>
-                <input type='file' onChange={handleFile}/>
+                <input type='file' name="viewImage" onChange={handleFile}/>
             </div>
 
           </div>
