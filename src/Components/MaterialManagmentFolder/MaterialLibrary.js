@@ -26,27 +26,6 @@ function MaterialLibrary({ initData }) {
     setMSize(arr2);
   }, [initData]);
 
-  // useEffect(() => {
-  //   const fetchData = async() => {
-  //     const response = await fetch("http://localhost:4000/api/getMaterial");
-  //     const datar = await response.json()
-
-  //     const materials = datar.materials
-
-  //     materials.forEach(element => {
-  //       element["file"] = element.url;
-  //       delete  element['url']
-  //     })
-
-  //     console.log(materials)
-  //     setData(materials)
-
-  //     console.log("updated",data)
-  //   }
-
-  //   fetchData()
-  // }, []);
-  
   function handleProductName(event) {
     if (event.target.value.trim() !== "") {
       const arr = [...searchData];
@@ -63,8 +42,6 @@ function MaterialLibrary({ initData }) {
   }
 
   async function handleDelete(key) {
-    // const arr = [...data];
-    // arr.splice(key, 1);
     const response = await fetch("https://truad-dashboard-backend.onrender.com/api/deleteMaterial", {
       method: "POST",
       body: JSON.stringify( {
@@ -86,7 +63,6 @@ function MaterialLibrary({ initData }) {
     }
   }
   const handleChangeMGroup=()=> {
-    // setSeletctMgroup("chnage")
     console.log("testing")
   }
 

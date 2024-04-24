@@ -57,19 +57,6 @@ function createData(ticketid, subject, status, lastupdate, support, img) {
 }
 
 const rows = [
-  // createData(1001, 'Not Getting Proper Data', "On Hold", "2 days ago"),
-  // createData(1002, 'Not Getting Proper Data', "In Progress", "2 days ago"),
-  // createData(1003, 'Not Getting Proper Data', "Completed", "2 days ago"),
-  // createData(1004, 'Not Getting Proper Data', "In Progress", "2 days ago"),
-  // createData(1005, 'Not Getting Proper Data', "On Hold", "2 days ago"),
-  // createData(1006, 'Not Getting Proper Data', "Completed", "2 days ago"),
-  // createData(1007, 'Not Getting Proper Data', "On Hold", "2 days ago"),
-  // createData(1008, 'Not Getting Proper Data', "Completed", "2 days ago"),
-  // createData(1009, 'Not Getting Proper Data', "In Progress", "2 days ago"),
-  // createData(1010, 'Not Getting Proper Data', "On Hold", "2 days ago"),
-  // createData(1011, 'Not Getting Proper Data', "In Progress", "2 days ago"),
-  // createData(1012, "Not Getting Proper Data", "In Progress", "2 days ago"),
-  // createData(1013, 'Not Getting Proper Data', "On Hold", "2 days ago"),
   createData(1014, "Not Getting Proper Data", "Completed", "2 days ago"),
   createData(1015, "Not Getting Proper Data", "On Hold", "2 days ago"),
 ];
@@ -78,7 +65,7 @@ function RaiseTicket() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [input, setInput] = useState("");
-  const [data, setData] = useState(rows);
+  const [data, setData] = useState([]);
   // const [render, setrender] = useState['t']
   const [cookies, setCookie] = useCookies(["user"]);
   const [user, setuser] = useState({
@@ -174,7 +161,7 @@ function RaiseTicket() {
       }
     };
     getTicket();
-  }, []);
+  }, [cookies]);
 
 
 
@@ -188,14 +175,6 @@ function RaiseTicket() {
           <span>Announcement</span>
         </div>
       </div>
-      {/* <div className='raise1 raise'>
-        
-        <div>
-          <span onClick={()=>{setSwitchPage(true)}}>Raise by you</span>
-          <span onClick={()=>{setSwitchPage(false)}}>Raise for you</span>
-        
-        </div>
-      </div> */}
 
       <div className="raise">
         <div className="raise2 raise">
@@ -223,8 +202,6 @@ function RaiseTicket() {
           <div className="addTicketContainer">
             <CardActions>
               <RaiseDailog
-                // render={render}
-                // setrender={setrender}
                 user_email={user.email}
               />
             </CardActions>
@@ -284,7 +261,6 @@ function RaiseTicket() {
                                       <button style={{ borderRadius: "7px" }}>
                                         View Image{" "}
                                       </button>
-                                      {/* <h1></h1> */}
                                     </a>
                                   </TableCell>
                                 );
@@ -298,7 +274,6 @@ function RaiseTicket() {
                                     {column.format && typeof value === "number"
                                       ? column.format(value)
                                       : value}
-                                    {/* {column.} */}
                                   </TableCell>
                                 );
                               }
