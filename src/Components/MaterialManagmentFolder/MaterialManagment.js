@@ -3,8 +3,11 @@ import "./MaterialManagment.css";
 
 import MaterialLibrary from "./MaterialLibrary";
 import UploadMaterial from "./UploadMaterial";
+import { useLocation } from "react-router-dom";
 
 function MaterialManagment() {
+  const location = useLocation()
+  const isUpload = location?.state
   // <<<<<<< HEAD
   const [data, setData] = useState([
     // {
@@ -124,14 +127,17 @@ function MaterialManagment() {
   ]);
   const [materialAdded, setMaterialAdded] = useState(0);
 
-  const [swap, setSwap] = useState(true);
+  const [swap, setSwap] = useState(isUpload || true);
   // =======
   //   const [swap, setSwap] = useState(true);
   // >>>>>>> 790dee5c0b629f4d47ec39a49c8d5a99b492be38
 
+  console.log(location?.state?.swap)
+
   const handleForLibrary = () => {
     setSwap(true);
   };
+
   const handleForUpload = () => {
     setSwap(false);
   };
