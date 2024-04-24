@@ -7,7 +7,7 @@ import { useCookies } from 'react-cookie';
 
 
 export default function SignIn({ handleSwichPage }) {
-  const [cookies, setCookie] = useCookies(["user"]);
+  const [cookies, setCookie] = useCookies(["user", "userdata"]);
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +20,7 @@ export default function SignIn({ handleSwichPage }) {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('https://truad-dashboard-backend.onrender.com/api/login', {
+      const response = await fetch('http://localhost:4000/api/login', {
         method: 'POST',
         body: JSON.stringify({ email, password }),
         headers: {
@@ -48,6 +48,7 @@ export default function SignIn({ handleSwichPage }) {
         //   httpOnly: true,
         // });
         setCookie("user", data.token);
+        setCookie("userdata", data);
         navigate('/dashboard');
       }
     } catch (error) {

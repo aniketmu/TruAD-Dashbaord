@@ -1,16 +1,23 @@
 import React from "react";
 import "./HomePage.css";
 import EmailIcon from "@mui/icons-material/Email";
-import greenDot from '../../Assets/greenDot.jpg';
+import greenDot from "../../Assets/greenDot.jpg";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 function HomePage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [cookies, setCookie] = useCookies(["userdata"]); 
+
+  console.log(cookies.userdata)
   return (
     <div className="homepage_container">
       <div className="homepage_navbar">
         <div className="homepage_navbar_info">
-          <h2>Hi Aniket Mukherjee</h2>
-          <h6>aniketm.truad.co</h6>
+          <h2>Hi {cookies.userdata.username}!</h2>
+          <h6>{cookies.userdata.email}</h6>
         </div>
         <div className="homepage_navbar_email">
           <EmailIcon />
@@ -50,13 +57,13 @@ function HomePage() {
             <p>Solved Tickets: 3</p>
           </div>
         </div>
-        <div className="homepage_clip_info">
+        <div className="homepage_clip_info_invoice">
           <div className="activity-title">
             <p>Invoices</p>
           </div>
           <div className="activity_info">
             <p>Total Invoices: 121</p>
-            <div className="line"></div>     
+            <div className="line"></div>
             <p>Payment Pending: 32</p>
             <div className="line"></div>
             <p>Cleared Invoices: 89</p>
@@ -68,17 +75,63 @@ function HomePage() {
           </div>
           <div className="df">
             <div>
-              <iframe src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <iframe
+                src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
               <h5>video name</h5>
             </div>
             <div>
-              <iframe src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <iframe
+                src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
               <h5>video name</h5>
             </div>
             <div>
-              <iframe src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <iframe
+                src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
               <h5>video name</h5>
             </div>
+          </div>
+        </div>
+        <div className="homepage_clip_info_next">
+          <div className="activity-title">
+            <p>What's next</p>
+          </div>
+          <div className="activity_info">
+            <p>We are soon going to be partnering up with Sony Liv</p>
+          </div>
+        </div>
+        <div className="homepage_clip_info_next">
+          <div className="activity-title">
+            <p>Links</p>
+          </div>
+          <div className="activity_info_button">
+            <button
+              onClick={() => {
+                navigate("/dashboard/material/", { swap:  true});
+              }}
+            >
+              Upload new Materials
+            </button>
+            <button onClick={() => navigate("/dashboard/raiseticket")}>
+              Have an issue? Raise a ticket
+            </button>
           </div>
         </div>
       </div>

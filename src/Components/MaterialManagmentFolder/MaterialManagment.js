@@ -3,8 +3,15 @@ import "./MaterialManagment.css";
 
 import MaterialLibrary from "./MaterialLibrary";
 import UploadMaterial from "./UploadMaterial";
+import { useLocation } from "react-router-dom";
 
 function MaterialManagment() {
+// <<<<<<< HEAD
+// =======
+  const location = useLocation()
+  const isUpload = location?.state.img
+  // <<<<<<< HEAD
+// >>>>>>> b2837b2f480b1542faccdb5543f9dcc0cb05ec0f
   const [data, setData] = useState([
     // {
     //   file: "https://imgs.search.brave.com/5YfDZ_BrNmW8ShDojzoMD8HgsVQ7SLM2tRWHWNbqQEE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFFMW44VCtJbkwu/anBn",
@@ -126,9 +133,12 @@ function MaterialManagment() {
   const [swap, setSwap] = useState(true);
   
 
+  console.log(location?.state?.swap)
+
   const handleForLibrary = () => {
     setSwap(true);
   };
+
   const handleForUpload = () => {
     setSwap(false);
   };

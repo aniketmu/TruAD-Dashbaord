@@ -53,6 +53,7 @@
     flex-wrap: wrap; /* Allows items to wrap to the next line */
     justify-content: space-between; /* Distributes items evenly along the main axis */
     padding: 1.5rem;
+    align-items: center;
 }
 
 .homepage_clip_info {
@@ -60,6 +61,23 @@
     margin-bottom: 1.5rem; /* Adds space between rows */
     border-radius: 8px;
     overflow: hidden;
+}
+
+.homepage_clip_info_invoice{
+    width: calc(50% - 0.75rem); /* Adjust the width to fit two cards with spacing */
+    margin-bottom: 1.5rem; /* Adds space between rows */
+    border-radius: 8px;
+    overflow: hidden;
+    height: max-content;
+}
+
+.homepage_clip_info_next{
+    margin-top: 0;
+    width: calc(50% - 0.75rem); /* Adjust the width to fit two cards with spacing */
+    margin-bottom: 1.5rem; /* Adds space between rows */
+    border-radius: 8px;
+    overflow: hidden;
+    height: max-content;
 }
 
 .activity-title {
@@ -86,6 +104,15 @@
     width: 100%; 
 }
 
+.activity_info_button{
+    background-color: white;
+    padding: 8px 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%; 
+}
+
 .activity_info > p {
     margin: 0;
     text-align: center; 
@@ -108,8 +135,6 @@
     padding: 4px;
     border-radius: 7px;
 }
-
-
 
 @media only screen and (max-width: 700px) {
 
