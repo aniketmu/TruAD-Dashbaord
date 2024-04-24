@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import "./HomePage.css";
 import EmailIcon from "@mui/icons-material/Email";
 import greenDot from "../../Assets/greenDot.jpg";
@@ -9,9 +9,34 @@ import { useCookies } from "react-cookie";
 function HomePage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [cookies, setCookie] = useCookies(["userdata"]); 
+  const [cookies, setCookie] = useCookies(["userdata"]);
+  const [clips, setClips] = useState([]);
 
-  console.log(cookies.userdata)
+  console.log(cookies.userdata);
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const response = await fetch("http://localhost:4000/allItems", {
+          method: "GET",
+        });
+
+        const data = await response.json();
+        // const data2 = data.items.map((item) => item.location.split("?AWS")[0]);
+        const data2 = data.items.map((elem) => ({
+          ...elem,
+          location: elem.location.split("?AWS")[0],
+        }));
+        setClips(data2);
+        console.log(clips);
+      } catch (error) {
+        console.error("Error fetching videos:", error);
+      }
+    };
+
+    fetchVideos();
+  }, []);
+
   return (
     <div className="homepage_container">
       <div className="homepage_navbar">
@@ -33,6 +58,62 @@ function HomePage() {
         </div>
       </div>
       <div className="homepage_activities">
+      <div className="homepage_clip_info">
+          <div className="activity-title">
+            <p>Available Content Clips</p>
+          </div>
+          <div className="df">
+            {clips.length > 0 && (
+              <div style={{ display: "flex" }}>
+                {clips.map((item) => (
+                  <video
+                    style={{ height: "150px", width: "200px" }}
+                    src={item.location}
+                    controls
+                    // title="YouTube video player"
+                    // frameborder="0"
+                    // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    // referrerpolicy="strict-origin-when-cross-origin"
+                    // allowfullscreen
+                  ></video>
+                ))}
+              </div>
+            )}
+            {/* <div>
+              <iframe
+                src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+              <h5>video name</h5>
+            </div>
+            <div>
+              <iframe
+                src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+              <h5>video name</h5>
+            </div>
+            <div>
+              <iframe
+                src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+              <h5>video name</h5>
+            </div> */}
+          </div>
+        </div>
         <div className="homepage_clip_info">
           <div className="activity-title">
             <p>Clips Advertisement</p>
@@ -69,46 +150,7 @@ function HomePage() {
             <p>Cleared Invoices: 89</p>
           </div>
         </div>
-        <div className="homepage_clip_info">
-          <div className="activity-title">
-            <p>Recent Work</p>
-          </div>
-          <div className="df">
-            <div>
-              <iframe
-                src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
-              <h5>video name</h5>
-            </div>
-            <div>
-              <iframe
-                src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
-              <h5>video name</h5>
-            </div>
-            <div>
-              <iframe
-                src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
-              <h5>video name</h5>
-            </div>
-          </div>
-        </div>
+        
         <div className="homepage_clip_info_next">
           <div className="activity-title">
             <p>What's next</p>
@@ -124,7 +166,7 @@ function HomePage() {
           <div className="activity_info_button">
             <button
               onClick={() => {
-                navigate("/dashboard/material/", { swap:  true});
+                navigate("/dashboard/material/", { swap: true });
               }}
             >
               Upload new Materials

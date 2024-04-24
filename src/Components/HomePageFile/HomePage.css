@@ -2,6 +2,7 @@
     background-color: #171a1cc9;
     height: 100vh;
     width: 100%;
+    overflow: hidden;
 }
 
 .homepage_navbar {
@@ -60,7 +61,8 @@
     width: calc(50% - 0.75rem); /* Adjust the width to fit two cards with spacing */
     margin-bottom: 1.5rem; /* Adds space between rows */
     border-radius: 8px;
-    overflow: hidden;
+    /* overflow: hidden;
+    overflow-y: scroll; */
 }
 
 .homepage_clip_info_invoice{
@@ -131,7 +133,7 @@
     justify-content: space-between;
     background-color: white;
 }
-.df iframe {
+.df video {
     padding: 4px;
     border-radius: 7px;
 }
