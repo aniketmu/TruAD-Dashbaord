@@ -5,7 +5,9 @@ import greenDot from "../../Assets/greenDot.jpg";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { Margin } from "@mui/icons-material";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -14,13 +16,35 @@ function HomePage() {
   const [clips, setClips] = useState([]);
 
   console.log(cookies.userdata);
+  const settings = {
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
 
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch("https://truad-dashboard-backend.onrender.com/allItems", {
-          method: "GET",
-        });
+        const response = await fetch(
+          "https://truad-dashboard-backend.onrender.com/allItems",
+          {
+            method: "GET",
+          }
+        );
 
         const data = await response.json();
         // const data2 = data.items.map((item) => item.location.split("?AWS")[0]);
@@ -29,7 +53,7 @@ function HomePage() {
           location: elem.location.split("?AWS")[0],
         }));
         setClips(data2);
-        console.log(clips);
+        console.log("clip", clips);
       } catch (error) {
         console.error("Error fetching videos:", error);
       }
@@ -63,12 +87,12 @@ function HomePage() {
         </div>
       </div>
       <div className="homepage_activities">
-      <div className="homepage_clip_info">
+        <div className="homepage_clip_info">
           <div className="activity-title">
             <p>Available Content Clips</p>
           </div>
-          <div className="df">
-            {clips.length > 0 && (
+          <div>
+            {/* {clips.length > 0 && (
               <div style={{ display: "flex" }}>
                 {clips.map((item) => (
                   <div className="text-center">
@@ -83,7 +107,22 @@ function HomePage() {
                   </div>
                 ))}
               </div>
-            )}
+            )} */}
+            <Slider {...settings}>
+        {clips.map((item, index) => (
+          <div key={index} className="text-center">
+            <video
+              style={{ height: "100px", width: "auto" }}
+              src={item.location}
+              controls
+              onClick={() => handleClipClick(item)}
+            ></video>
+            <button type="button" className="btn btn-secondary" onClick={() => handleClipClick(item)}>
+              Send to Editor
+            </button>
+          </div>
+        ))}
+      </Slider>
           </div>
         </div>
         <div className="homepage_clip_info">
@@ -122,7 +161,7 @@ function HomePage() {
             <p>Cleared Invoices: 89</p>
           </div>
         </div>
-        
+
         <div className="homepage_clip_info_next">
           <div className="activity-title">
             <p>What's next</p>
