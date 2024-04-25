@@ -4,7 +4,7 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import logo from '../img/logo.png'
 import { useNavigate } from 'react-router-dom'
-import { CookiesProvider, useCookies } from "react-cookie";
+import {useCookies } from "react-cookie";
 import './Checkout.css'
 import './Auth.css'
 
@@ -46,6 +46,7 @@ function LoginContainer() {
               src={logo}
               height="200px"
               width="200px"
+              alt=""
             />
           </div>
           <div>

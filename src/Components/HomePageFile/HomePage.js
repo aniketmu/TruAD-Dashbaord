@@ -5,6 +5,7 @@ import greenDot from "../../Assets/greenDot.jpg";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { Margin } from "@mui/icons-material";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -70,53 +71,19 @@ function HomePage() {
             {clips.length > 0 && (
               <div style={{ display: "flex" }}>
                 {clips.map((item) => (
+                  <div className="text-center">
                   <video
                     style={{ height: "150px", width: "200px" }}
                     src={item.location}
                     controls
                     onClick={() => handleClipClick(item)}
-                    // title="YouTube video player"
-                    // frameborder="0"
-                    // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    // referrerpolicy="strict-origin-when-cross-origin"
-                    // allowfullscreen
+                    
                   ></video>
+                  <button type="button" className="btn btn-secondary">send to Editer</button>
+                  </div>
                 ))}
               </div>
             )}
-            {/* <div>
-              <iframe
-                src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
-              <h5>video name</h5>
-            </div>
-            <div>
-              <iframe
-                src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
-              <h5>video name</h5>
-            </div>
-            <div>
-              <iframe
-                src="https://www.youtube.com/embed/Wbs6pPJgBnA?si=tqdU6aGztepmEQcb"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
-              <h5>video name</h5>
-            </div> */}
           </div>
         </div>
         <div className="homepage_clip_info">

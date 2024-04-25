@@ -10,8 +10,13 @@ import { DialogActions } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { Chip, Stack, CardActionArea, CardActions } from "@mui/material";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import {
+  Chip,
+  Stack,
+  CardActionArea,
+  CardActions,
+} from "@mui/material";
 import img from "../../image/imageofmovie.png";
 import "../MCard.css";
 
@@ -71,11 +76,7 @@ const MCard1 = ({ id }) => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      const data = await response.json();
-      console.log("data", data);
-      console.log("datalocations", data.locations);
-      // const locations = data.locations.map((elem) => elem.location.split("?AWS")[0])
-      // console.log("locations", locations)
+      const data = await response.json()
 
       const data2 = data.locations.map((elem) => ({
         ...elem,
@@ -107,9 +108,6 @@ const MCard1 = ({ id }) => {
       const data = await response.json();
       console.log(data);
 
-      // const data2 = [];
-      // data.video_urls.map((elem) => data2.push(elem.location.split("?AWS")[0]))
-
       const data2 = data.video_urls.map((elem) => ({
         ...elem,
         location: elem.location.split("?AWS")[0],
@@ -130,13 +128,11 @@ const MCard1 = ({ id }) => {
   };
   return (
     <>
-      <Grid
-        item
-        // container
-        // spacing={0}
+
+      <Grid item
         direction="row"
         alignItems="center"
-        // justifyContent="center"
+
       >
         <Card
           sx={{
@@ -155,8 +151,7 @@ const MCard1 = ({ id }) => {
             <CardMedia
               component="img"
               height="260"
-              image={movies.Poster == "N/A" ? img : movies.Poster}
-              onMouseLeave={() => console.log(29)}
+              image={movies.Poster === "N/A" ? img : movies.Poster}
               style={{ objectFit: "fill" }}
               alt="green iguana"
             />
@@ -187,13 +182,13 @@ const MCard1 = ({ id }) => {
             >
               <Typography
                 gutterBottom
-                sx={{ fontSize: "16px", color: "white" }}
+                sx={{ fontSize: "16px", color: "white",}}
                 component="div"
               >
                 {movies?.Plot?.split(" ").slice(0, 15).join(" ")}
                 {movies?.Plot?.split(" ").length > 15 ? " ...." : ""}
               </Typography>
-              <Stack direction="row" spacing={1}>
+              <Stack direction="row" spacing={1} flexWrap={"wrap"}>
                 {movies?.Genre?.split(",").map((label, index) => (
                   <Chip
                     key={index}
@@ -248,17 +243,6 @@ const MCard1 = ({ id }) => {
         <DialogTitle id="alert-dialog-title">{movies.Title}</DialogTitle>
         <DialogContent>
           <div>
-            {/* <img src={"https://upload.wikimedia.org/wikipedia/en/3/3f/Tanu_weds_Manu_poster.jpg"} style={{ width: "100%", borderRadius: "7px" }} alt="Img Not Found" /> */}
-
-            {/* Origial */}
-            {/* {video ? <video src={video} style={{width: "100%"}} controls/> :  <iframe
-            style={{  width: "100%" }}
-            src="https://www.youtube.com/embed/ermJ-iPg9xA?si=TvTA9sm4kr-fp3tz"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>} */}
             {adVideo !== null ? (
               <div
                 style={{
@@ -302,26 +286,13 @@ const MCard1 = ({ id }) => {
                           justifyContent: "center",
                           flexDirection: "column",
                         }}
-                      >
-                        <video
-                          style={{
-                            height: "140px",
-                            width: "220px",
-                            margin: "10px",
-                            borderRadius: "7px",
-                          }}
-                          controls
-                          src={vid.location}
-                          title="Youtube Player"
-                          frameborder="0"
-                          // allowFullScreen
-                          onClick={(e) => handleClipClick(vid)}
-                        />
-                        <div style={{ backgroundColor: "red", width: "80%", display: "flex",
-                      justifyContent: "center", borderRadius: '8px', marginBottom: '5px'}}>
-                          AI edit
-                        </div>
-                      </div>
+
+                        controls
+                        src={vid.location}
+                        title="Youtube Player"
+                        frameborder="0"
+                        onClick={(e) => handleClipClick(vid)}
+                      />
                     );
                   })}
                 </div>

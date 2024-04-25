@@ -262,8 +262,6 @@ const Dashhboard = () => {
 
     const data = await response.json();
 
-    console.log(data);
-
     setMediaArray((prev) => [data.saveData, ...prev]);
 
     setMedia((prev) => [data.saveData, ...prev]);
