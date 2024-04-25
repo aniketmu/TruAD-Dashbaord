@@ -1,9 +1,9 @@
 import React from 'react';
-// import './Auth.css';
 import { useState } from 'react';
 import logo from '../img/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 export default function SignIn({ handleSwichPage }) {
@@ -13,6 +13,7 @@ export default function SignIn({ handleSwichPage }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState("");
   const [isChecked,setIsChecked]=useState(false)
+  const [loader, setloader]=useState(false);
 
   const handleForget = () => {
     navigate('/verifyotp')
@@ -29,14 +30,17 @@ export default function SignIn({ handleSwichPage }) {
       });
 
       if (response.status === 401) {
+        setloader(false)
         return setError("Invalid Password");
       }
 
       if (response.status === 404) {
+        setloader(false)
         return setError("User not found");
       }
 
       if (response.status === 403) {
+        setloader(false)
         return setError("User Email is not verified");
       }
 
@@ -49,6 +53,7 @@ export default function SignIn({ handleSwichPage }) {
         // });
         setCookie("user", data.token);
         setCookie("userdata", data);
+        setloader(false)
         navigate('/dashboard');
       }
     } catch (error) {
@@ -75,10 +80,14 @@ export default function SignIn({ handleSwichPage }) {
         <div style={{marginTop:"3px"}}>
           <input type="checkbox" id="pass" checked={isChecked} onChange={()=>{setIsChecked(!isChecked)}}  />
         <label for="pass" style={{marginLeft:"5px"}}> Show Password</label></div>
-
-        <button type="button" onClick={handleLogin} style={{ marginTop: "20px", borderRadius: "5px" }}>
+        {
+          loader? <CircularProgress color='inherit' sx={{margin:"auto"}}/> :   <button type="button" onClick={()=>{
+            handleLogin()
+            setloader(true)
+            }} style={{ marginTop: "20px", borderRadius: "5px" }}>
           Login
         </button>
+        }
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <div style={{ margin: '20px 0', display: "flex", justifyContent: 'space-between' }}>
           <span

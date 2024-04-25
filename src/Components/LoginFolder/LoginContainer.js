@@ -46,6 +46,7 @@ function LoginContainer() {
               src={logo}
               height="200px"
               width="200px"
+              alt=""
             />
           </div>
           <div>
