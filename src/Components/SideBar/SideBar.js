@@ -60,12 +60,6 @@ const list = [
     icon: <DataThresholdingIcon />,
     isActive: false,
   },
-  // {
-  //   name: "Data Report",
-  //   targetLink: "/dashboard/datareport/",
-  //   icon: <DataThresholdingIcon />,
-  //   isActive: false,
-  // },
 ];
 
 export default function SideBar({ removeCookie, navigate }) {
