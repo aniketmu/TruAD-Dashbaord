@@ -116,7 +116,7 @@ const MCard1 = ({ id }) => {
   };
 
   const handleClipClick = async (vid) => {
-    console.log("clicked")
+    console.log("clicked123")
     try {
       const response = await fetch("http://localhost:4000/blend-clip", {
           method: "POST",

@@ -38,8 +38,31 @@ function HomePage() {
     fetchVideos();
   }, []);
 
-  const handleClipClick = (location) => {
-    navigate("/dashboard/video", { state: { location } });
+  const handleClipClick = async (vid) => {
+    console.log("clicked123")
+    try {
+      const response = await fetch("http://localhost:4000/blend-clip", {
+          method: "POST",
+          body: JSON.stringify({
+              id: vid._id
+          }),
+          headers: {
+              "Content-Type" : "application/json"
+          }
+      })
+
+      if(response.status == 500){
+          console.log("Internal Server Error")
+          return
+      }
+
+      if(response.status == 200){
+          console.log("Success")
+          return
+      }
+  } catch (error) {
+      console.log(error)
+  }
   };
 
   return (
@@ -79,7 +102,7 @@ function HomePage() {
                     onClick={() => handleClipClick(item)}
                     
                   ></video>
-                  <button type="button" className="btn btn-secondary">Send for AI detection</button>
+                  <button type="button" className="btn btn-secondary" onClick={(e) => handleClipClick(item)}>Send for AI detection</button>
                   </div>
                 ))}
               </div>
