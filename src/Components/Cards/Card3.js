@@ -10,13 +10,8 @@ import { DialogActions } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import {
-  Chip,
-  Stack,
-  CardActionArea,
-  CardActions,
-} from "@mui/material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { Chip, Stack, CardActionArea, CardActions } from "@mui/material";
 import img from "../../image/imageofmovie.png";
 import "../MCard.css";
 
@@ -76,13 +71,14 @@ const MCard1 = ({ id }) => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      const data = await response.json()
+      const data = await response.json();
 
       const data2 = data.locations.map((elem) => ({
         ...elem,
         location: elem.location.split("?AWS")[0],
       }));
 
+      console.log("data", data2);
       setClips((prev) => [...prev, ...data2]);
     } catch (error) {
       console.error("Error:", error);
@@ -128,12 +124,7 @@ const MCard1 = ({ id }) => {
   };
   return (
     <>
-
-      <Grid item
-        direction="row"
-        alignItems="center"
-
-      >
+      <Grid item direction="row" alignItems="center">
         <Card
           sx={{
             maxWidth: 230,
@@ -182,7 +173,7 @@ const MCard1 = ({ id }) => {
             >
               <Typography
                 gutterBottom
-                sx={{ fontSize: "16px", color: "white",}}
+                sx={{ fontSize: "16px", color: "white" }}
                 component="div"
               >
                 {movies?.Plot?.split(" ").slice(0, 15).join(" ")}
@@ -286,13 +277,23 @@ const MCard1 = ({ id }) => {
                           justifyContent: "center",
                           flexDirection: "column",
                         }}
-
-                        controls
-                        src={vid.location}
-                        title="Youtube Player"
-                        frameborder="0"
-                        onClick={(e) => handleClipClick(vid)}
-                      />
+                      >
+                        <video
+                          style={{
+                            height: "140px",
+                            width: "220px",
+                            margin: "10px",
+                            borderRadius: "7px",
+                          }}
+                          controls
+                          src={vid.location}
+                          title="Youtube Player"
+                          frameborder="0"
+                          // allowFullScreen
+                          onClick={(e) => handleClipClick(vid)}
+                        />
+                         <button type="button" className="btn btn-secondary">Send for AI detection</button>
+                      </div>
                     );
                   })}
                 </div>
