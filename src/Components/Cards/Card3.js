@@ -10,14 +10,8 @@ import { DialogActions } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import {
-
-  Chip,
-  Stack,
-  CardActionArea,
-  CardActions,
-} from "@mui/material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { Chip, Stack, CardActionArea, CardActions } from "@mui/material";
 import img from "../../image/imageofmovie.png";
 import "../MCard.css";
 
@@ -44,7 +38,6 @@ const MCard1 = ({ id }) => {
     }
   };
 
-
   useEffect(() => {
     searchMovies();
     fetchClips();
@@ -56,32 +49,38 @@ const MCard1 = ({ id }) => {
 
   const openDialogBox = () => {
     setOpenDialog(true);
-    fetchVids()
+    fetchVids();
   };
 
   const fetchVids = async () => {
     try {
-      const response = await fetch("https://truad-dashboard-backend.onrender.com/get-existingItem", {
-        method: "POST",
-        body: JSON.stringify({
-          id
-        }),
-        headers: {
-          "Content-Type": "application/json"
+      const response = await fetch(
+        "https://truad-dashboard-backend.onrender.com/get-existingItem",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            id,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      });
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
       const data = await response.json();
-      console.log("data", data)
+      console.log("data", data);
       console.log("datalocations", data.locations);
       // const locations = data.locations.map((elem) => elem.location.split("?AWS")[0])
       // console.log("locations", locations)
 
-      const data2 = data.locations.map((elem) => ({...elem, location: elem.location.split("?AWS")[0]}))
+      const data2 = data.locations.map((elem) => ({
+        ...elem,
+        location: elem.location.split("?AWS")[0],
+      }));
 
       setClips((prev) => [...prev, ...data2]);
     } catch (error) {
@@ -98,7 +97,7 @@ const MCard1 = ({ id }) => {
 
       const response = await fetch("http://10.10.10.11:5000/stitch", {
         method: "POST",
-        body: form
+        body: form,
       });
 
       if (!response.ok) {
@@ -108,13 +107,15 @@ const MCard1 = ({ id }) => {
       const data = await response.json();
       console.log(data);
 
-  // const data2 = [];
-  // data.video_urls.map((elem) => data2.push(elem.location.split("?AWS")[0]))
+      // const data2 = [];
+      // data.video_urls.map((elem) => data2.push(elem.location.split("?AWS")[0]))
 
-  const data2 = data.video_urls.map((elem) => ({...elem, location: elem.location.split("?AWS")[0]}))
+      const data2 = data.video_urls.map((elem) => ({
+        ...elem,
+        location: elem.location.split("?AWS")[0],
+      }));
 
-
-      setClips(prev => [...prev, ...data2])
+      setClips((prev) => [...prev, ...data2]);
     } catch (error) {
       console.error("Error: ", error);
     }
@@ -129,19 +130,19 @@ const MCard1 = ({ id }) => {
   };
   return (
     <>
-      <Grid item
+      <Grid
+        item
         // container
         // spacing={0}
         direction="row"
         alignItems="center"
-      // justifyContent="center"
-
+        // justifyContent="center"
       >
         <Card
           sx={{
             maxWidth: 230,
             minWidth: 190,
-           
+
             background: "#616161",
             color: "white",
             position: "relative",
@@ -158,9 +159,14 @@ const MCard1 = ({ id }) => {
               onMouseLeave={() => console.log(29)}
               style={{ objectFit: "fill" }}
               alt="green iguana"
-
             />
-            {clips.length !== 0 ? <div style={{ position: "absolute", top: "5px", right: "5px" }}><CheckCircleIcon sx={{ color: 'green' }} /></div> : <></>}
+            {clips.length !== 0 ? (
+              <div style={{ position: "absolute", top: "5px", right: "5px" }}>
+                <CheckCircleIcon sx={{ color: "green" }} />
+              </div>
+            ) : (
+              <></>
+            )}
 
             <CardContent
               sx={{
@@ -224,7 +230,7 @@ const MCard1 = ({ id }) => {
                 color: "#d3d6da",
                 width: "100%",
                 backgroundColor: "black",
-                borderRadius: 1.5
+                borderRadius: 1.5,
               }}
             >
               {movies.Title.substring(0, 20) || "null"}
@@ -269,7 +275,13 @@ const MCard1 = ({ id }) => {
                 <button onClick={fetchClips}>Generate Clips</button>
               </div>
             ) : (
-              <div style={clips.length !== 0 ? { display: "none" } : { display: "block" }}>
+              <div
+                style={
+                  clips.length !== 0
+                    ? { display: "none" }
+                    : { display: "block" }
+                }
+              >
                 <label>Add a Video</label>
                 <input type="file" onChange={handleAdVideoChange} />
               </div>
@@ -282,20 +294,34 @@ const MCard1 = ({ id }) => {
                 <div style={{ display: "flex", overflow: "auto" }}>
                   {clips.map((vid) => {
                     return (
-                      <video
+                      <div
                         style={{
-                          height: "140px",
-                          width: "220px",
-                          margin: "10px",
-                          borderRadius: "7px",
+                          marginInline: "1rem",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexDirection: "column",
                         }}
-                        controls
-                        src={vid.location}
-                        title="Youtube Player"
-                        frameborder="0"
-                        // allowFullScreen
-                        onClick={(e) => handleClipClick(vid)}
-                      />
+                      >
+                        <video
+                          style={{
+                            height: "140px",
+                            width: "220px",
+                            margin: "10px",
+                            borderRadius: "7px",
+                          }}
+                          controls
+                          src={vid.location}
+                          title="Youtube Player"
+                          frameborder="0"
+                          // allowFullScreen
+                          onClick={(e) => handleClipClick(vid)}
+                        />
+                        <div style={{ backgroundColor: "red", width: "80%", display: "flex",
+                      justifyContent: "center", borderRadius: '8px', marginBottom: '5px'}}>
+                          AI edit
+                        </div>
+                      </div>
                     );
                   })}
                 </div>
