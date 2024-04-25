@@ -17,7 +17,7 @@ function HomePage() {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch("http://localhost:4000/allItems", {
+        const response = await fetch("https://truad-dashboard-backend.onrender.com/allItems", {
           method: "GET",
         });
 
@@ -36,6 +36,10 @@ function HomePage() {
 
     fetchVideos();
   }, []);
+
+  const handleClipClick = (location) => {
+    navigate("/dashboard/video", { state: { location } });
+  };
 
   return (
     <div className="homepage_container">
@@ -70,6 +74,7 @@ function HomePage() {
                     style={{ height: "150px", width: "200px" }}
                     src={item.location}
                     controls
+                    onClick={() => handleClipClick(item)}
                     // title="YouTube video player"
                     // frameborder="0"
                     // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

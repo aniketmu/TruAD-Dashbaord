@@ -16,6 +16,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import logomark from "../../Assets/Logomark.png"
 
 const list = [
   {
@@ -103,6 +104,7 @@ export default function SideBar({ removeCookie, navigate }) {
       <Toolbar sx={{ background: "black", width: "100%", display: "flex", justifyContent: "center" ,position:"relative" }}>
         <img
           src="https://www.truad.co/wp-content/uploads/2023/11/logo_transparent_1-150x150.png"
+          // src={logomark}
           style={{
             height: "100px",
             width: "100px",
