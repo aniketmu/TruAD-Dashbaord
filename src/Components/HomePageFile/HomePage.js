@@ -103,7 +103,7 @@ function HomePage() {
                     onClick={() => handleClipClick(item)}
                     
                   ></video>
-                  <button type="button" className="btn btn-secondary">send to Editer</button>
+                  <button type="button" className="btn btn-secondary">Send for AI detection</button>
                   </div>
                 ))}
               </div>
