@@ -126,7 +126,7 @@ const VideoClip = () => {
     console.log(location.state.location)
     console.log("image", image)
     try {
-        const response = await fetch("http://localhost:4001/blend-clip", {
+        const response = await fetch("https://truad-dashboard-backend.onrender.com/blend-clip", {
             method: "POST",
             body: JSON.stringify({
                 id: location.state.location._id

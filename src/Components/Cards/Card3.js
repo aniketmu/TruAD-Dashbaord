@@ -115,8 +115,31 @@ const MCard1 = ({ id }) => {
     }
   };
 
-  const handleClipClick = (location) => {
-    navigate("/dashboard/video", { state: { location } });
+  const handleClipClick = async (vid) => {
+    console.log("clicked")
+    try {
+      const response = await fetch("http://localhost:4000/blend-clip", {
+          method: "POST",
+          body: JSON.stringify({
+              id: vid._id
+          }),
+          headers: {
+              "Content-Type" : "application/json"
+          }
+      })
+
+      if(response.status == 500){
+          console.log("Internal Server Error")
+          return
+      }
+
+      if(response.status == 200){
+          console.log("Success")
+          return
+      }
+  } catch (error) {
+      console.log(error)
+  }
   };
 
   const handleAdVideoChange = (e) => {
@@ -290,9 +313,8 @@ const MCard1 = ({ id }) => {
                           title="Youtube Player"
                           frameborder="0"
                           // allowFullScreen
-                          onClick={(e) => handleClipClick(vid)}
                         />
-                         <button type="button" className="btn btn-secondary">Send for AI detection</button>
+                         <button type="button" className="btn btn-secondary" onClick={(e) => handleClipClick(vid)}>Send for AI detection</button>
                       </div>
                     );
                   })}
