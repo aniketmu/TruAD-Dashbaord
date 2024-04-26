@@ -8,6 +8,32 @@ import { useCookies } from "react-cookie";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import RaiseTicket from './../MaterialManagmentFolder/Raise Ticket/RaiseTicket';
+import RaiseDailog from './../MaterialManagmentFolder/Raise Ticket/RaiseDailog';
+import { Avatar } from "@mui/material";
+
+// const responsive = {
+//   superLargeDesktop: {
+//     // the naming can be any, depends on you.
+//     breakpoint: { max: 4000, min: 1024 },
+//     items: 5,
+//     slidesToSlide: 2,
+//   },
+//   desktop: {
+//     breakpoint: { max: 1024, min: 800 },
+//     items: 4,
+//   },
+//   tablet: {
+//     breakpoint: { max: 800, min: 464 },
+//     items: 2,
+//   },
+//   mobile: {
+//     breakpoint: { max: 464, min: 0 },
+//     items: 1,
+//   },
+// };
 
 function HomePage() {
   const navigate = useNavigate();
@@ -63,7 +89,6 @@ function HomePage() {
   }, []);
 
   const handleClipClick = async (vid) => {
-    console.log("clicked123");
     try {
       const response = await fetch("http://localhost:4000/blend-clip", {
         method: "POST",
@@ -91,7 +116,7 @@ function HomePage() {
 
   return (
     <div className="homepage_container">
-      <div className="homepage_navbar">
+      {/* <div className="homepage_navbar">
         <div className="homepage_navbar_info">
           <h2>Hi {cookies.userdata.username}!</h2>
           <h6>{cookies.userdata.email}</h6>
@@ -108,29 +133,16 @@ function HomePage() {
             <img src={greenDot} />
           </div>
         </div>
+      </div> */}
+      <div className="px-3 py-2">
+      <Avatar sx={{marginRight:0, marginLeft:"auto", p:3}}>{cookies.userdata.username.charAt(0).toUpperCase()}</Avatar>
       </div>
       <div className="homepage_activities">
         <div className="homepage_clip_info">
-          <div className="activity-title">
+          <div className="activity-title rounded-top-3">
             <p>Available Content Clips</p>
           </div>
-          <div>
-            {/* {clips.length > 0 && (
-              <div style={{ display: "flex" }}>
-                {clips.map((item) => (
-                  <div className="text-center">
-                  <video
-                    style={{ height: "150px", width: "200px" }}
-                    src={item.location}
-                    controls
-                    onClick={() => handleClipClick(item)}
-                    
-                  ></video>
-                  <button type="button" className="btn btn-secondary" onClick={(e) => handleClipClick(item)}>Send for AI detection</button>
-                  </div>
-                ))}
-              </div>
-            )} */}
+          <div className="rounded-bottom-3 py-1 bg-body-secondary">
             <Slider {...settings}>
               {clips.map((item, index) => (
                 <div key={index} className="text-center">
@@ -140,51 +152,17 @@ function HomePage() {
                     controls
                     onClick={() => handleClipClick(item)}
                   ></video>
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={() => handleClipClick(item)}
-                  >
-                    Send to Editor
-                  </button>
                 </div>
               ))}
             </Slider>
           </div>
         </div>
-        {/* <div className="homepage_clip_info">
-          <div className="activity-title">
-            <p>Clips Advertisement</p>
+
+        <div className="homepage_clip_info">
+          <div className="activity-title rounded-top-3">
+            <p>Processed Clips</p>
           </div>
-          <div className="activity_info">
-            <p>Clips Advertised: 2</p>
-            <div className="line"></div>
-            <p>Pending Clips Advertisment: 2</p>
-            <div className="line"></div>
-            <p>Processed Clips: 0</p>
-          </div>
-        </div> */}
-                <div className="homepage_clip_info">
-          <div className="activity-title">
-            <p>Available Content Clips</p>
-          </div>
-          <div>
-            {/* {clips.length > 0 && (
-              <div style={{ display: "flex" }}>
-                {clips.map((item) => (
-                  <div className="text-center">
-                  <video
-                    style={{ height: "150px", width: "200px" }}
-                    src={item.location}
-                    controls
-                    onClick={() => handleClipClick(item)}
-                    
-                  ></video>
-                  <button type="button" className="btn btn-secondary" onClick={(e) => handleClipClick(item)}>Send for AI detection</button>
-                  </div>
-                ))}
-              </div>
-            )} */}
+          <div className="rounded-bottom-3 py-1 bg-body-secondary">
             <Slider {...settings}>
               {clips.map((item, index) => (
                 <div key={index} className="text-center">
@@ -194,33 +172,65 @@ function HomePage() {
                     controls
                     onClick={() => handleClipClick(item)}
                   ></video>
-                  <button
+                  {/* <button
                     type="button"
                     className="btn btn-secondary"
                     onClick={() => handleClipClick(item)}
                   >
                     Send to Editor
-                  </button>
+                  </button> */}
+                </div>
+              ))}
+            </Slider>
+            {/* <Carousel showDots={true} responsive={responsive}>
+              {clips.map((item, index) => (
+                <div key={index} className="text-center">
+                  <video
+                    style={{ height: "100px", width: "auto" }}
+                    src={item.location}
+                    controls
+                    onClick={() => handleClipClick(item)}
+                  ></video>
+                  
+                </div>
+              ))}
+            </Carousel> */}
+          </div>
+        </div>
+        <div className="homepage_clip_info">
+          <div className="activity-title rounded-top-3">
+            <p>AI Detecttion Ongoing</p>
+          </div>
+          <div className="rounded-bottom-3 py-1 bg-body-secondary">
+            <Slider {...settings}>
+              {clips.map((item, index) => (
+                <div key={index} className="text-center">
+                  <video
+                    style={{ height: "100px", width: "auto" }}
+                    src={item.location}
+                    controls
+                    onClick={() => handleClipClick(item)}
+                  ></video>
                 </div>
               ))}
             </Slider>
           </div>
         </div>
         <div className="homepage_clip_info">
-          <div className="activity-title">
+          <div className="activity-title rounded-top-3">
             <p>Tickets</p>
           </div>
-          <div className="activity_info">
+          <div className="activity_info rounded-bottom-3 py-1 bg-body-secondary">
             <p>Tickets Raised: 4</p>
             <div className="line"></div>
             <p>Pending Tickets: 1</p>
             <div className="line"></div>
-            <p>Solved Tickets: 3</p>
+            {/* <p>Solved Tickets: 3</p> */}
           </div>
         </div>
         <div className="homepage_clip_info_invoice">
           <div className="activity-title">
-            <p>Invoices</p>
+            <p>Payment</p>
           </div>
           <div className="activity_info">
             <p>Total Invoices: 121</p>
@@ -230,7 +240,7 @@ function HomePage() {
             <p>Cleared Invoices: 89</p>
           </div>
         </div>
-
+        {/* 
         <div className="homepage_clip_info_next">
           <div className="activity-title">
             <p>What's next</p>
@@ -238,13 +248,13 @@ function HomePage() {
           <div className="activity_info">
             <p>We are soon going to be partnering up with Sony Liv</p>
           </div>
-        </div>
+        </div> */}
         <div className="homepage_clip_info_next">
           <div className="activity-title">
             <p>Links</p>
           </div>
           <div className="activity_info_button">
-            <button
+            {/* <button
               onClick={() => {
                 navigate("/dashboard/material/", { swap: true });
               }}
@@ -252,8 +262,38 @@ function HomePage() {
               Upload new Materials
             </button>
             <button onClick={() => navigate("/dashboard/raiseticket")}>
-              Have an issue? Raise a ticket
+              AI Editor
             </button>
+            <button onClick={() => navigate("/dashboard/raiseticket")}>
+              Analytics
+            </button> */}
+            <div
+              class="btn-group-vertical py-2"
+              role="group"
+              aria-label="Basic example"
+            >
+              <button type="button" class="btn btn-secondary p-2">
+                Upload new Materials
+              </button>
+              <button type="button" class="btn btn-secondary p-2">
+                AI Editor
+              </button>
+              <button type="button" class="btn btn-secondary p-2">
+                Analytics
+              </button>
+            </div>
+            <div
+              class="btn-group-vertical"
+              role="group"
+              aria-label="Basic example"
+            >
+              <button type="button" class="btn btn-secondary p-2">
+                RaiseTicket
+              </button>
+              <button type="button" class="btn btn-secondary p-2">
+                RaiseDailog
+              </button>
+            </div>
           </div>
         </div>
       </div>

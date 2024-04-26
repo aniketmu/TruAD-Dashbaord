@@ -17,6 +17,7 @@ import Toolbar from "@mui/material/Toolbar";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import logomark from "../../Assets/Logomark.png"
+import logo from "../img/Logomark.png"
 
 const list = [
   {
@@ -92,6 +93,7 @@ export default function SideBar({ removeCookie, navigate }) {
 
   return (
     <div
+    className="rounded-end-5 my-1"
       style={{
         width: collapsed ? "100px" : "20%",
         backgroundColor: "#191919",
@@ -99,15 +101,16 @@ export default function SideBar({ removeCookie, navigate }) {
         height: "100vh",
         position: "relative",
         transition: "width 0.5s ease",
+        overflow:"hidden"
       }}
     >
-      <Toolbar sx={{ background: "black", width: "100%", display: "flex", justifyContent: "center" ,position:"relative" }}>
+      <Toolbar className="p-3" sx={{ background: "black", width: "100%", display: "flex", justifyContent: "center" ,position:"relative", }}>
         <img
-          src="https://www.truad.co/wp-content/uploads/2023/11/logo_transparent_1-150x150.png"
-          // src={logomark}
+          // src="https://www.truad.co/wp-content/uploads/2023/11/logo_transparent_1-150x150.png"
+          src={logo}
           style={{
-            height: "100px",
-            width: "100px",
+            height: "50px",
+            width: "50px",
             margin: "0px",
             padding: "0px",
             zIndex: "1",
@@ -183,7 +186,7 @@ export default function SideBar({ removeCookie, navigate }) {
           removeCookie("user", { path: "/" });
           navigate("/");
         }}
-        className="signoutButton"
+        className="signoutButton pb-3"
       >
         SIGNOUT
       </button>

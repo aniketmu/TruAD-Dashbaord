@@ -18,7 +18,7 @@ function DashBoardContainer() {
   const navigate = useNavigate();
 
   return (
-    <div style={{ display: "flex", height: "100%", width: "100%" }}>
+    <div style={{ display: "flex", height: "100%", width: "100%", backgroundColor:"rgb(108, 117, 125)" }}>
       <SideBar removeCookie={removeCookie} navigate={navigate} />
       <Outlet />
 

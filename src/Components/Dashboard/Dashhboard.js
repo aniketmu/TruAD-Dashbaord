@@ -474,6 +474,8 @@ const Dashhboard = () => {
         onClose={handleClose}
         open={openDialog}
         PaperComponent={StyledPaper}
+        sx={{bgcolor:"#343a40",
+      color:"white"}}
       >
         <DialogTitle>Add a Media</DialogTitle>
 
