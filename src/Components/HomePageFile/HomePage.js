@@ -40,9 +40,16 @@ function HomePage() {
   const location = useLocation();
   const [cookies, setCookie] = useCookies(["userdata"]);
   const [clips, setClips] = useState([]);
+
   console.log(cookies.userdata);
+
+  const [processedClips, setProcessedClips] = useState([])
+  const [ongoing, setOngoing] = useState([])
+
+  console.log(processedClips);
+
   const settings = {
-    infinite: true,
+    // infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
     responsive: [
@@ -78,7 +85,12 @@ function HomePage() {
           location: elem.location.split("?AWS")[0],
         }));
         setClips(data2);
+        const processed = data2.filter((elem) => elem.blendFile)
+        const ongoingClips = data2.filter((elem) => elem.blend && !elem.blendFile)
+        setOngoing(ongoingClips)
+        setProcessedClips(processed)
         console.log("clip", clips);
+        console.log("processed", processedClips)
       } catch (error) {
         console.error("Error fetching videos:", error);
       }
@@ -88,29 +100,30 @@ function HomePage() {
   }, []);
 
   const handleClipClick = async (vid) => {
-    try {
-      const response = await fetch("http://localhost:4000/blend-clip", {
-        method: "POST",
-        body: JSON.stringify({
-          id: vid._id,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+    // try {
+    //   const response = await fetch("http://localhost:4000/blend-clip", {
+    //     method: "POST",
+    //     body: JSON.stringify({
+    //       id: vid._id,
+    //     }),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   });
 
-      if (response.status == 500) {
-        console.log("Internal Server Error");
-        return;
-      }
+    //   if (response.status == 500) {
+    //     console.log("Internal Server Error");
+    //     return;
+    //   }
 
-      if (response.status == 200) {
-        console.log("Success");
-        return;
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    //   if (response.status == 200) {
+    //     console.log("Success");
+    //     return;
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    navigate("/dashboard/video", {state: {location:vid}})
   };
   return (
     <div className="homepage_container">
@@ -141,9 +154,53 @@ function HomePage() {
             <p>Available Content Clips</p>
           </div>
           <div className="rounded-bottom-3 py-1 bg-body-secondary">
+{/* <<<<<<< HEAD */}
           <Carousel showDots={true} responsive={responsive}>
               {
               clips.map((item, index) => (
+// =======
+//             <Slider {...settings}>
+//               {clips.map((item, index) => (
+//                 <div key={index} className="text-center">
+//                   <video
+//                     style={{ height: "100px", width: "auto" }}
+//                     src={item.location}
+//                     controls
+//                     onClick={() => handleClipClick(item)}
+//                   ></video>
+//                 </div>
+//               ))}
+//             </Slider>
+//           </div>
+//         </div>
+
+//         <div className="homepage_clip_info">
+//           <div className="activity-title rounded-top-3">
+//             <p>Processed Clips</p>
+//           </div>
+//           <div className="rounded-bottom-3 py-1 bg-body-secondary">
+//             <Slider {...settings}>
+//               {processedClips.map((item, index) => (
+//                 <div key={index} className="text-center">
+//                   <video
+//                     style={{ height: "100px", width: "auto" }}
+//                     src={item.location}
+//                     controls
+//                     onClick={() => handleClipClick(item)}
+//                   ></video>
+//                   {/* <button
+//                     type="button"
+//                     className="btn btn-secondary"
+//                     onClick={() => handleClipClick(item)}
+//                   >
+//                     Send to Editor
+//                   </button> */}
+//                 </div>
+//               ))}
+//             </Slider>
+//             {/* <Carousel showDots={true} responsive={responsive}>
+//               {clips.map((item, index) => (
+// >>>>>>> 05bef3ae70e85f7c0111cfed0b47ab797dd163db
                 <div key={index} className="text-center">
                   <video
                     style={{ height: "100px", width: "auto" }}
@@ -163,9 +220,14 @@ function HomePage() {
             <p>Processed Clips</p>
           </div>
           <div className="rounded-bottom-3 py-1 bg-body-secondary">
+{/* <<<<<<< HEAD */}
             <Carousel showDots={true} responsive={responsive}>
               {
               clips.map((item, index) => (
+// =======
+//             <Slider {...settings}>
+//               {ongoing.map((item, index) => (
+// >>>>>>> 05bef3ae70e85f7c0111cfed0b47ab797dd163db
                 <div key={index} className="text-center">
                   <video
                     style={{ height: "100px", width: "auto" }}

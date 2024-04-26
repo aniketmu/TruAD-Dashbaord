@@ -92,7 +92,7 @@ const MCard1 = ({ id }) => {
       form.append("filename", adVideo.name);
       form.append("id", id);
 
-      const response = await fetch("http://10.10.10.11:5000/stitch", {
+      const response = await fetch("http://10.10.10.6:5000/stitch", {
         method: "POST",
         body: form,
       });
@@ -114,6 +114,10 @@ const MCard1 = ({ id }) => {
       console.error("Error: ", error);
     }
   };
+
+  const handleVideoClip = (vid) => {
+    navigate("/dashboard/video", {state: {location: vid}})
+  }
 
   const handleClipClick = async (vid) => {
     console.log("clicked123")
@@ -316,6 +320,7 @@ const MCard1 = ({ id }) => {
                             margin: "10px",
                             borderRadius: "7px",
                           }}
+                          onClick={() => handleVideoClip(vid)}
                           controls
                           src={vid.location}
                           title="Youtube Player"
