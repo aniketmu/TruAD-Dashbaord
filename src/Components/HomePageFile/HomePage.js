@@ -5,7 +5,9 @@ import greenDot from "../../Assets/greenDot.jpg";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { Margin } from "@mui/icons-material";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -14,13 +16,35 @@ function HomePage() {
   const [clips, setClips] = useState([]);
 
   console.log(cookies.userdata);
+  const settings = {
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
 
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch("https://truad-dashboard-backend.onrender.com/allItems", {
-          method: "GET",
-        });
+        const response = await fetch(
+          "https://truad-dashboard-backend.onrender.com/allItems",
+          {
+            method: "GET",
+          }
+        );
 
         const data = await response.json();
         // const data2 = data.items.map((item) => item.location.split("?AWS")[0]);
@@ -29,7 +53,7 @@ function HomePage() {
           location: elem.location.split("?AWS")[0],
         }));
         setClips(data2);
-        console.log(clips);
+        console.log("clip", clips);
       } catch (error) {
         console.error("Error fetching videos:", error);
       }
@@ -39,30 +63,30 @@ function HomePage() {
   }, []);
 
   const handleClipClick = async (vid) => {
-    console.log("clicked123")
+    console.log("clicked123");
     try {
       const response = await fetch("http://localhost:4000/blend-clip", {
-          method: "POST",
-          body: JSON.stringify({
-              id: vid._id
-          }),
-          headers: {
-              "Content-Type" : "application/json"
-          }
-      })
+        method: "POST",
+        body: JSON.stringify({
+          id: vid._id,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-      if(response.status == 500){
-          console.log("Internal Server Error")
-          return
+      if (response.status == 500) {
+        console.log("Internal Server Error");
+        return;
       }
 
-      if(response.status == 200){
-          console.log("Success")
-          return
+      if (response.status == 200) {
+        console.log("Success");
+        return;
       }
-  } catch (error) {
-      console.log(error)
-  }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -86,12 +110,12 @@ function HomePage() {
         </div>
       </div>
       <div className="homepage_activities">
-      <div className="homepage_clip_info">
+        <div className="homepage_clip_info">
           <div className="activity-title">
             <p>Available Content Clips</p>
           </div>
-          <div className="df">
-            {clips.length > 0 && (
+          <div>
+            {/* {clips.length > 0 && (
               <div style={{ display: "flex" }}>
                 {clips.map((item) => (
                   <div className="text-center">
@@ -106,10 +130,29 @@ function HomePage() {
                   </div>
                 ))}
               </div>
-            )}
+            )} */}
+            <Slider {...settings}>
+              {clips.map((item, index) => (
+                <div key={index} className="text-center">
+                  <video
+                    style={{ height: "100px", width: "auto" }}
+                    src={item.location}
+                    controls
+                    onClick={() => handleClipClick(item)}
+                  ></video>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => handleClipClick(item)}
+                  >
+                    Send to Editor
+                  </button>
+                </div>
+              ))}
+            </Slider>
           </div>
         </div>
-        <div className="homepage_clip_info">
+        {/* <div className="homepage_clip_info">
           <div className="activity-title">
             <p>Clips Advertisement</p>
           </div>
@@ -119,6 +162,48 @@ function HomePage() {
             <p>Pending Clips Advertisment: 2</p>
             <div className="line"></div>
             <p>Processed Clips: 0</p>
+          </div>
+        </div> */}
+                <div className="homepage_clip_info">
+          <div className="activity-title">
+            <p>Available Content Clips</p>
+          </div>
+          <div>
+            {/* {clips.length > 0 && (
+              <div style={{ display: "flex" }}>
+                {clips.map((item) => (
+                  <div className="text-center">
+                  <video
+                    style={{ height: "150px", width: "200px" }}
+                    src={item.location}
+                    controls
+                    onClick={() => handleClipClick(item)}
+                    
+                  ></video>
+                  <button type="button" className="btn btn-secondary" onClick={(e) => handleClipClick(item)}>Send for AI detection</button>
+                  </div>
+                ))}
+              </div>
+            )} */}
+            <Slider {...settings}>
+              {clips.map((item, index) => (
+                <div key={index} className="text-center">
+                  <video
+                    style={{ height: "100px", width: "auto" }}
+                    src={item.location}
+                    controls
+                    onClick={() => handleClipClick(item)}
+                  ></video>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => handleClipClick(item)}
+                  >
+                    Send to Editor
+                  </button>
+                </div>
+              ))}
+            </Slider>
           </div>
         </div>
         <div className="homepage_clip_info">
@@ -145,7 +230,7 @@ function HomePage() {
             <p>Cleared Invoices: 89</p>
           </div>
         </div>
-        
+
         <div className="homepage_clip_info_next">
           <div className="activity-title">
             <p>What's next</p>
