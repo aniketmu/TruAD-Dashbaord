@@ -258,8 +258,16 @@ const MCard1 = ({ id }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{movies.Title}</DialogTitle>
-        <DialogContent>
+        <DialogTitle id="alert-dialog-title"   sx={{
+          background:"rgb(25, 25, 25)",
+          color:"white"
+        }}>{movies.Title}</DialogTitle>
+        <DialogContent 
+          sx={{
+            backgroundColor:"#495057",
+            // background:"#212529",
+            color:"white"
+          }}>
           <div>
             {adVideo !== null ? (
               <div
@@ -328,12 +336,13 @@ const MCard1 = ({ id }) => {
             )}
           </div>
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{backgroundColor:"#343a40"}}>
           <button
+          className="rounded-pill m-auto"
             onClick={handleClose}
             variant="contained"
             disableElevation
-            style={{ width: "100%" }}
+            style={{ width: "80%" }}
           >
             Close
           </button>

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import logo from '../../img/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 export default function ConfirmNewPass({ handleSwichPage }) {
@@ -15,9 +16,11 @@ export default function ConfirmNewPass({ handleSwichPage }) {
     const [error, setError] = useState("");
     const [genrate, setGenrate] = useState(false);
     const [cookies, setCookie, removeCookie] = useCookies(["token"]);
-
+    const [loader, setloader]=useState(false);
     const handleGenrate = async() => {
+        setloader(true)
         if(password !== confirmPassword){
+            setloader(false)
             return setError("Please enter correct Password in both the fields")
         }
 
@@ -35,24 +38,28 @@ export default function ConfirmNewPass({ handleSwichPage }) {
 
             })
 
-            if(response.status == 403){
+            if(response.status === 403){
+                setloader(false)
                 return setError("Unauthorized")
             }
 
-            if(response.status == 404){
+            if(response.status === 404){
+                setloader(false)
                 return setError("User not found")
             }
 
-            if(response.status == 400){
+            if(response.status === 400){
+                setloader(false)
                 return setError("Password must be at least 8 characters long and contain at least one special character, one uppercase character, and one number.")
             }
-
+            setloader(false)
             setError("Password Updated")
             setTimeout(()=>{
                 navigate('/')
             },3000)
             
         } catch (error) {
+            setloader(false)
             console.log(error)
         }
     }
