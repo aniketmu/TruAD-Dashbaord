@@ -17,7 +17,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import './resposive.css'
+import "./resposive.css";
 
 const Dashhboard = () => {
   const [selectedType, setSelectedType] = useState("");
@@ -43,7 +43,8 @@ const Dashhboard = () => {
     const apiKey = "37f889dd"; // Replace with your OMDb API key
     try {
       const response = await axios.get(
-        `https://www.omdbapi.com/?s=${searchTerm ? searchTerm : "Comedy"
+        `https://www.omdbapi.com/?s=${
+          searchTerm ? searchTerm : "Comedy"
         }&apikey=${apiKey}`
       );
       setMovies(response.data.Search);
@@ -58,7 +59,8 @@ const Dashhboard = () => {
     const apiKey = "37f889dd"; // Replace with your OMDb API key
     try {
       const response = await axios.get(
-        `https://www.omdbapi.com/?s=${selectedCategory ? selectedCategory : "Top Movie"
+        `https://www.omdbapi.com/?s=${
+          selectedCategory ? selectedCategory : "Top Movie"
         }&apikey=${apiKey}`
       );
       setMovies(response.data.Search);
@@ -145,7 +147,7 @@ const Dashhboard = () => {
     fetchData();
   }, [openDialog]);
 
-  useEffect(() => { }, [mediaArray]);
+  useEffect(() => {}, [mediaArray]);
 
   const handleCategorySelect = (option) => {
     setSelectedCategory(option);
@@ -325,13 +327,9 @@ const Dashhboard = () => {
         }}
       >
         <CustomButton />
-        <div className={styles.search_container } id="searchContainer">
-
+        <div className={styles.search_container} id="searchContainer">
           <Stack direction={"row"} spacing={3} sx={{ paddingX: "2em" }}>
-            <FormControl
-              variant="standard"
-              sx={{ m: 1,  color: "white" }}
-            >
+            <FormControl variant="standard" sx={{ m: 1, color: "white" }}>
               <InputLabel
                 id="demo-simple-select-standard-label"
                 sx={{ color: "white" }}
@@ -357,10 +355,7 @@ const Dashhboard = () => {
                 })}
               </Select>
             </FormControl>
-            <FormControl
-              variant="standard"
-              sx={{ m: 1, color: "white" }}
-            >
+            <FormControl variant="standard" sx={{ m: 1, color: "white" }}>
               <InputLabel
                 id="demo-simple-select-standard-label"
                 sx={{ color: "white" }}
@@ -386,10 +381,7 @@ const Dashhboard = () => {
                 })}
               </Select>
             </FormControl>
-            <FormControl
-              variant="standard"
-              sx={{ m: 1,  color: "white" }}
-            >
+            <FormControl variant="standard" sx={{ m: 1, color: "white" }}>
               <InputLabel
                 id="demo-simple-select-standard-label"
                 sx={{ color: "white" }}
@@ -414,14 +406,20 @@ const Dashhboard = () => {
               </Select>
             </FormControl>
           </Stack>
-          <Box sx={{ paddingInline: 3 ,display:"flex" }}>
-            <input style={{width:"75%"}}
+          <Box sx={{ paddingInline: 3, display: "flex" }}>
+            <input
+              style={{ width: "75%" }}
               type="text"
               placeholder="Please enter the resource name, actors, production company and placement client"
               onChange={(e) => setSearchTerm(e.target.value)}
               value={searchTerm}
             />
-            <button style={{ width:"25%" ,fontSize:'12px' ,textAlign:"center"}} onClick={handleSearch}>Search</button>
+            <button
+              style={{ width: "25%", fontSize: "12px", textAlign: "center" }}
+              onClick={handleSearch}
+            >
+              Search
+            </button>
           </Box>
         </div>
         <div className={styles.dashboard}>
@@ -434,7 +432,7 @@ const Dashhboard = () => {
               Add
             </button>
           </div>
-          
+
           <div style={{ padding: "5px" }}>
             {/* Card */}
             <Box sx={{ flexGrow: 1 }}>
@@ -442,24 +440,12 @@ const Dashhboard = () => {
                 container
                 spacing={2}
                 columns={{ xs: 4, sm: 8, md: 12 }}
-
                 direction="row"
                 justifyContent="center"
                 alignItems="center"
-
-
               >
-                {/* <<<<<<< HEAD
-                {movies.map(({ imdbID }) => {
-======= */}
-                {/* {Array.from(Array(20)).map((_, index) => (
-          <Grid item xs={2} sm={4} md={4} key={index}>
-            <Item>xs=2</Item>
-          </Grid>
-        ))} */}
                 {movies ? (
                   movies.map(({ imdbID }) => {
-                    // >>>>>>> a84f766f5c8bd8bd01c515329839669f745bca10
                     return <MCard1 key={imdbID} id={imdbID} />;
                   })
                 ) : (
@@ -474,12 +460,24 @@ const Dashhboard = () => {
         onClose={handleClose}
         open={openDialog}
         PaperComponent={StyledPaper}
-        sx={{bgcolor:"#343a40",
-      color:"white"}}
+        sx={{'.css-1t1j96h-MuiPaper-root-MuiDialog-paper':{
+          backgroundColor:"#495057",
+          color:"white",
+        },
+      
+      }}
       >
-        <DialogTitle>Add a Media</DialogTitle>
+        <DialogTitle sx={{backgroundColor:"#000", borderRadius:"4rem", padding:1, paddingLeft:"4rem"}}>
+          Add a Media
+        </DialogTitle>
 
-        <form style={{ maxWidth: "600px", margin: "0 auto" }}>
+        <form
+        className="mt-3"
+          style={{
+            maxWidth: "600px",
+            margin: "0 auto",
+          }}
+        >
           <div style={{ marginBottom: "1rem" }}>
             <label htmlFor="mediaName">Media Name:</label>
             <input
@@ -676,13 +674,14 @@ const Dashhboard = () => {
           </div>
         </form>
 
-        <button onClick={handleClose} color="primary">
+        <button onClick={handleClose} color="primary" className="rounded-pill m-auto" style={{width:"50%"}}>
           Cancel
         </button>
         <button
           onClick={handleAdd}
           color="primary"
-          style={{ marginTop: "50px" }}
+          style={{ width: '50%' }}
+          className="rounded-pill mx-auto mt-3"
         >
           Save
         </button>

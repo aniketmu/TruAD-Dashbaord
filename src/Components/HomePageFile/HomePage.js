@@ -14,33 +14,32 @@ import RaiseTicket from './../MaterialManagmentFolder/Raise Ticket/RaiseTicket';
 import RaiseDailog from './../MaterialManagmentFolder/Raise Ticket/RaiseDailog';
 import { Avatar } from "@mui/material";
 
-// const responsive = {
-//   superLargeDesktop: {
-//     // the naming can be any, depends on you.
-//     breakpoint: { max: 4000, min: 1024 },
-//     items: 5,
-//     slidesToSlide: 2,
-//   },
-//   desktop: {
-//     breakpoint: { max: 1024, min: 800 },
-//     items: 4,
-//   },
-//   tablet: {
-//     breakpoint: { max: 800, min: 464 },
-//     items: 2,
-//   },
-//   mobile: {
-//     breakpoint: { max: 464, min: 0 },
-//     items: 1,
-//   },
-// };
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 1024 },
+    items: 3,
+    slidesToSlide: 2,
+  },
+  desktop: {
+    breakpoint: { max: 1024, min: 800 },
+    items: 2,
+  },
+  tablet: {
+    breakpoint: { max: 800, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
 
 function HomePage() {
   const navigate = useNavigate();
   const location = useLocation();
   const [cookies, setCookie] = useCookies(["userdata"]);
   const [clips, setClips] = useState([]);
-
   console.log(cookies.userdata);
   const settings = {
     infinite: true,
@@ -113,7 +112,6 @@ function HomePage() {
       console.log(error);
     }
   };
-
   return (
     <div className="homepage_container">
       {/* <div className="homepage_navbar">
@@ -143,47 +141,9 @@ function HomePage() {
             <p>Available Content Clips</p>
           </div>
           <div className="rounded-bottom-3 py-1 bg-body-secondary">
-            <Slider {...settings}>
-              {clips.map((item, index) => (
-                <div key={index} className="text-center">
-                  <video
-                    style={{ height: "100px", width: "auto" }}
-                    src={item.location}
-                    controls
-                    onClick={() => handleClipClick(item)}
-                  ></video>
-                </div>
-              ))}
-            </Slider>
-          </div>
-        </div>
-
-        <div className="homepage_clip_info">
-          <div className="activity-title rounded-top-3">
-            <p>Processed Clips</p>
-          </div>
-          <div className="rounded-bottom-3 py-1 bg-body-secondary">
-            <Slider {...settings}>
-              {clips.map((item, index) => (
-                <div key={index} className="text-center">
-                  <video
-                    style={{ height: "100px", width: "auto" }}
-                    src={item.location}
-                    controls
-                    onClick={() => handleClipClick(item)}
-                  ></video>
-                  {/* <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={() => handleClipClick(item)}
-                  >
-                    Send to Editor
-                  </button> */}
-                </div>
-              ))}
-            </Slider>
-            {/* <Carousel showDots={true} responsive={responsive}>
-              {clips.map((item, index) => (
+          <Carousel showDots={true} responsive={responsive}>
+              {
+              clips.map((item, index) => (
                 <div key={index} className="text-center">
                   <video
                     style={{ height: "100px", width: "auto" }}
@@ -194,16 +154,18 @@ function HomePage() {
                   
                 </div>
               ))}
-            </Carousel> */}
+            </Carousel>
           </div>
         </div>
+
         <div className="homepage_clip_info">
           <div className="activity-title rounded-top-3">
-            <p>AI Detecttion Ongoing</p>
+            <p>Processed Clips</p>
           </div>
           <div className="rounded-bottom-3 py-1 bg-body-secondary">
-            <Slider {...settings}>
-              {clips.map((item, index) => (
+            <Carousel showDots={true} responsive={responsive}>
+              {
+              clips.map((item, index) => (
                 <div key={index} className="text-center">
                   <video
                     style={{ height: "100px", width: "auto" }}
@@ -211,9 +173,31 @@ function HomePage() {
                     controls
                     onClick={() => handleClipClick(item)}
                   ></video>
+                  
                 </div>
               ))}
-            </Slider>
+            </Carousel>
+          </div>
+        </div>
+        <div className="homepage_clip_info">
+          <div className="activity-title rounded-top-3">
+            <p>AI Detecttion Ongoing</p>
+          </div>
+          <div className="rounded-bottom-3 py-1 bg-body-secondary">
+          <Carousel showDots={true} responsive={responsive}>
+              {
+              clips.map((item, index) => (
+                <div key={index} className="text-center">
+                  <video
+                    style={{ height: "100px", width: "auto" }}
+                    src={item.location}
+                    controls
+                    onClick={() => handleClipClick(item)}
+                  ></video>
+                  
+                </div>
+              ))}
+            </Carousel>
           </div>
         </div>
         <div className="homepage_clip_info">
@@ -275,10 +259,10 @@ function HomePage() {
               <button type="button" class="btn btn-secondary p-2">
                 Upload new Materials
               </button>
-              <button type="button" class="btn btn-secondary p-2">
+              <button type="button" class="btn btn-secondary p-2" >
                 AI Editor
               </button>
-              <button type="button" class="btn btn-secondary p-2">
+              <button type="button" class="btn btn-secondary p-2" >
                 Analytics
               </button>
             </div>
