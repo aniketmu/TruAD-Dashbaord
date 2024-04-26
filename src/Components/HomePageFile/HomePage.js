@@ -14,10 +14,11 @@ function HomePage() {
   const location = useLocation();
   const [cookies, setCookie] = useCookies(["userdata"]);
   const [clips, setClips] = useState([]);
+  const [processedClips, setProcessedClips] = useState([])
 
-  console.log(cookies.userdata);
+  console.log(processedClips);
   const settings = {
-    infinite: true,
+    // infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
     responsive: [
@@ -53,7 +54,10 @@ function HomePage() {
           location: elem.location.split("?AWS")[0],
         }));
         setClips(data2);
+        const processed = data2.filter((elem) => elem.blendFile)
+        setProcessedClips(processed)
         console.log("clip", clips);
+        console.log("processed", processedClips)
       } catch (error) {
         console.error("Error fetching videos:", error);
       }
