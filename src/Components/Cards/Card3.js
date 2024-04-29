@@ -14,6 +14,29 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Chip, Stack, CardActionArea, CardActions } from "@mui/material";
 import img from "../../image/imageofmovie.png";
 import "../MCard.css";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 1024 },
+    items: 2,
+    slidesToSlide: 2,
+  },
+  desktop: {
+    breakpoint: { max: 1024, min: 800 },
+    items: 2,
+  },
+  tablet: {
+    breakpoint: { max: 800, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
 
 const MCard1 = ({ id }) => {
   const [openDialog, setOpenDialog] = useState(false);
@@ -132,12 +155,12 @@ const MCard1 = ({ id }) => {
           }
       })
 
-      if(response.status == 500){
+      if(response.status === 500){
           console.log("Internal Server Error")
           return
       }
 
-      if(response.status == 200){
+      if(response.status === 200){
           console.log("Success")
           return
       }
@@ -301,7 +324,37 @@ const MCard1 = ({ id }) => {
                 <DialogTitle id="alert-dialog-title">
                   {"Available Clips"}
                 </DialogTitle>
-                <div style={{ display: "flex", overflow: "auto" }}>
+                <Carousel showDots={true} responsive={responsive}>
+              {
+              clips.map((vid, index) => {return(
+                <div
+                        style={{
+                          marginInline: "1rem",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <video
+                        className="rounded-3"
+                          style={{
+                            // height: "140px",
+                            width: "220px",
+                            margin: "10px",
+                          }}
+                          onClick={() => handleVideoClip(vid)}
+                          controls
+                          src={vid.location}
+                          title="Youtube Player"
+                          frameborder="0"
+                          // allowFullScreen
+                        />
+                         <button type="button" className="btn btn-secondary" onClick={(e) => handleClipClick(vid)}>Send for AI detection</button>
+                      </div>
+              )})}
+              </Carousel>
+                {/* <div style={{ display: "flex", overflow: "auto" }}>
                   {clips.map((vid) => {
                     return (
                       <div
@@ -331,7 +384,7 @@ const MCard1 = ({ id }) => {
                       </div>
                     );
                   })}
-                </div>
+                </div> */}
               </>
             )}
           </div>
