@@ -8,17 +8,77 @@ function ActionPage() {
   const location = useLocation();
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  const [image, setimage] = useState(location.state.img);
+  const [image, setimage] = useState(location?.state?.img || '');
+
   useEffect(() => {
-    async function fetchurl() {
-      const data = await fetch(
-        "https://truad-dashboard-backend.onrender.com/api/getMaterial"
-      );
-      const data1 = await data.json();
-      setData(data1.materials);
-    }
-    fetchurl();
-  });
+    const fetchData = async () => {
+      const response = await fetch("https://truad-dashboard-backend.onrender.com/api/getMaterial");
+      const datar = await response.json();
+
+      const materials = datar.materials;
+
+      materials.forEach((element) => {
+        element["file"] = element.url;
+        delete element["url"];
+      });
+
+      console.log(materials);
+      setData(materials);
+
+      console.log("updated", data);
+    };
+
+    fetchData();
+  }, []);
+
+  const handleClipChange = async() => {
+    console.log(location.state.location)
+    console.log("image", image)
+    // try {
+    //     const response = await fetch("https://truad-dashboard-backend.onrender.com/blend-clip", {
+    //         method: "POST",
+    //         body: JSON.stringify({
+    //             id: location.state.location._id
+    //         }),
+    //         headers: {
+    //             "Content-Type" : "application/json"
+    //         }
+    //     })
+
+    //     if(response.status == 500){
+    //         console.log("Internal Server Error")
+    //         return
+    //     }
+
+    //     if(response.status == 200){
+    //         console.log("Success")
+    //         return
+    //     }
+    // } catch (error) {
+    //     console.log(error)
+    // }
+    try {
+        const response = await fetch ("http://127.0.0.1:5000/apply_material", {
+            method: 'POST',
+            body: JSON.stringify({
+                material_name: image.name,
+                video: location.state.location
+            }),
+            headers: {
+                'Content-Type' : "application/json"
+            }
+        })
+        if (!response.ok) {
+            throw new Error("Failed to fetch image");
+          }
+  
+          const blob = await response.blob();
+          const url = URL.createObjectURL(blob);
+          setimage(url);
+        } catch (error) {
+            console.error("Error fetching image:", error);
+          }
+  }
   return (
     <div style={{ width: "100%", backgroundColor: "#6c757d" }}>
       <div
@@ -99,7 +159,7 @@ function ActionPage() {
           >
             Resource
           </h6>
-          <video
+          {location?.state?.location && <video
             style={{
               width: "95%",
               margin: "0 auto",
@@ -111,9 +171,9 @@ function ActionPage() {
             title="Video Player"
             controls
           >
-            <source src={location.state.video} type="video/mp4" />
+            <source src={location.state.location.location} type="video/mp4" />
             Your browser does not support the video tag.
-          </video>
+          </video>}
 
           <div
             style={{
@@ -143,8 +203,8 @@ function ActionPage() {
               height: "40%",
             }}
           >
-            <img
-              src={image}
+            {image && <img
+              src={image.file}
               alt=""
               style={{
                 objectFit: "cover",
@@ -153,7 +213,7 @@ function ActionPage() {
                 borderRadius: "7px",
                 boxShadow: "rgba(0, 0, 0.5, 0.74) 0px 3px 8px",
               }}
-            />
+            />}
           </div>
           <Button
             component="div"
@@ -168,6 +228,7 @@ function ActionPage() {
                 bgcolor: "red",
               },
             }}
+            onClick={handleClipChange}
           >
             Blend
           </Button>
@@ -212,31 +273,30 @@ function ActionPage() {
                 maxHeight: "calc(100% - 20px)", // Adjusted to account for padding and prevent overflow
               }}
             >
-              {data.map((el, index) => {
-                return (
-                  <div
-                    key={index} // Moved the key here for proper list rendering
-                    style={{
-                      width: "100%", // Ensure this controls the size as intended
-                      height: "auto", // Adjusted for responsive height based on the content
-                    }}
-                  >
-                    <img
-                      src={el.url}
-                      onClick={({ target: { src } }) => setimage(src)}
-                      style={{
-                        objectFit: "cover",
-                        width: "100%",
-                        height: "auto", // Adjusted to maintain aspect ratio
-                        borderRadius: "7px",
-                        maxHeight: "200px", // Optional: limit image height if desired
-                        boxShadow: "rgba(0, 0, 1, 0.74) 0px 3px 8px",
-                      }}
-                      alt=""
-                    />
-                  </div>
-                );
-              })}
+              {data?.map(( elem , index) => {
+                              return (
+                                  <div
+                                      key={index} // Moved the key here for proper list rendering
+                                      style={{
+                                          width: "100%", // Ensure this controls the size as intended
+                                          height: 'auto', // Adjusted for responsive height based on the content
+                                      }}
+                                  >
+                                      <img
+                                          src={elem?.file}
+                                          onClick={() => setimage(elem)}
+                                          style={{
+                                              objectFit: "contain",
+                                              width: "100%",
+                                              height: "auto", // Adjusted to maintain aspect ratio
+                                              borderRadius: "7px",
+                                              maxHeight: '200px', // Optional: limit image height if desired
+                                              boxShadow: "rgba(0, 0, 1, 0.74) 0px 3px 8px"
+                                          }}
+                                      />
+                                  </div>
+                              );
+                          })}
             </div>
           </div>
         </div>

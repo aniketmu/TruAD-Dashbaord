@@ -7,12 +7,12 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 
 export default function SignIn({ handleSwichPage }) {
-  const [cookies, setCookie] = useCookies(["user", "userdata"]);
   const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(["user", "userdata"]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState("");
-  const [isChecked,setIsChecked]=useState(false)
+  const [isChecked,setIsChecked]=useState(false);
   const [loader, setloader]=useState(false);
 
   const handleForget = () => {
@@ -79,7 +79,7 @@ export default function SignIn({ handleSwichPage }) {
         <input type={isChecked?"text":"password"} value={password} onChange={(e) => setPassword(e.target.value)} />
         <div style={{marginTop:"3px"}}>
           <input type="checkbox" id="pass" checked={isChecked} onChange={()=>{setIsChecked(!isChecked)}}  />
-        <label for="pass" style={{marginLeft:"5px"}}> Show Password</label></div>
+        <label htmlFor="pass" style={{marginLeft:"5px"}}> Show Password</label></div>
         {
           loader? <CircularProgress color='inherit' sx={{margin:"auto"}}/> :   <button type="button" onClick={()=>{
             handleLogin()

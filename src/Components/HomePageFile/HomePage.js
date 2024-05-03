@@ -123,7 +123,7 @@ function HomePage() {
     // } catch (error) {
     //   console.log(error);
     // }
-    navigate("/dashboard/video", {state: {location:vid}})
+    navigate("/dashboard/actionpage/", {state: {location:vid}})
   };
   return (
     <div className="homepage_container">
@@ -206,7 +206,7 @@ function HomePage() {
                     style={{ height: "100px", width: "auto" }}
                     src={item.location}
                     controls
-                    onClick={() => handleClipClick(item)}
+                    // onClick={() => handleClipClick(item)}
                   ></video>
                   
                 </div>
@@ -223,7 +223,7 @@ function HomePage() {
 {/* <<<<<<< HEAD */}
             <Carousel showDots={true} responsive={responsive}>
               {
-              clips.map((item, index) => (
+              processedClips.map((item, index) => (
 // =======
 //             <Slider {...settings}>
 //               {ongoing.map((item, index) => (
@@ -248,13 +248,13 @@ function HomePage() {
           <div className="rounded-bottom-3 py-1 bg-body-secondary">
           <Carousel showDots={true} responsive={responsive}>
               {
-              clips.map((item, index) => (
+              ongoing.map((item, index) => (
                 <div key={index} className="text-center">
                   <video
                     style={{ height: "100px", width: "auto" }}
                     src={item.location}
                     controls
-                    onClick={() => handleClipClick(item)}
+                    // onClick={() => handleClipClick(item)}
                   ></video>
                   
                 </div>
