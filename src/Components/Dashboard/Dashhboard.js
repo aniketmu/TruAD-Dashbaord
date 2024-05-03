@@ -92,6 +92,8 @@ const Dashhboard = () => {
   const categories = [];
   const certifications = [];
 
+  console.log("cat", certifications)
+
   const filterCategories = () => {
     mediaArray.forEach((media) => {
       media.category.forEach((category) => {
